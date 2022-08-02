@@ -3,3 +3,5 @@ def jas(a):
         print("Engineering")
     else:
         print("Any Other Degree")
+
+jas("pain")
