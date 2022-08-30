@@ -28,39 +28,46 @@ div.mdl-layout__drawer-button i.material-icons{
     height: 90%;
 }
 
-/**/
+/* PRODUCT BACKLOG PAGE STYLING*/
 /*size of the PBI list*/
 div.content-grid.mdl-grid{
     height: 95%;
 }
 
+/*green rectangle containing PBIs*/
 .PBI-container{
     background-color: #006A6A;
     border-radius: 15px;
     opacity: 80%;
 }
 
+/*individual PBI*/
 .PBI{
     background-color: #FFFCF6;
     border-radius: 12px;
 }
 
+/*for the edit and delete buttons for each PBI*/
 span button.mdl-button--colored i.material-icons{
     color: black;
 }
 
+/*vertically aligning edit and delete buttons*/
 li.PBI span.mdl-list__item-secondary-content{
     height: auto;
 }
 
+/*spacing for each PBI*/
 ul.mdl-list{
     margin: 20px 30px;
 }
 
+/*aligning fab to add PBI*/
 div.add_circle-container{
     text-align: center;
 }
 
+/*colour adding PBIs fab*/
 button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--colored{
     background-color: #60D3AA;
 }

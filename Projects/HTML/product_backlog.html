@@ -68,6 +68,29 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- dialog box for adding/editing PBIs -->
+                <dialog class="mdl-dialog">
+                    <div class="mdl-dialog__content">
+                        <div>
+                            <div class="mdl-textfield">
+                                <label class="mdl-typography--title">Product Backlog Item</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="pbiName">
+                                <label class="mdl-textfield__label" for="pbiName">Name...</label>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- TODO: put in all input fields -->
+
+                            <div>
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="saveToLS()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </dialog>
             </div>
             <div class="add_circle-container">
                 <!-- Colored FAB button -->
