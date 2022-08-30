@@ -18,3 +18,42 @@ div.mdl-layout__drawer-button i.material-icons{
     color: white;
     transform: scale(1.5, 1.5);
 }
+
+div.content-grid.mdl-grid{
+    height: 95%;
+}
+
+.page-content{
+    height: 90%;
+}
+
+.PBI-container{
+    background-color: #006A6A;
+    border-radius: 15px;
+    opacity: 80%;
+}
+
+.PBI{
+    background-color: #FFFCF6;
+    border-radius: 12px;
+}
+
+span button.mdl-button--colored i.material-icons{
+    color: black;
+}
+
+li.PBI span.mdl-list__item-secondary-content{
+    height: auto;
+}
+
+ul.mdl-list{
+    margin: 20px 30px;
+}
+
+div.add_circle-container{
+    text-align: center;
+}
+
+button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--colored{
+    background-color: #60D3AA;
+}

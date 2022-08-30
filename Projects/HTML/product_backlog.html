@@ -41,9 +41,43 @@
     <main class="mdl-layout__content">
         <!-- PAGE CONTENT -->
         <div class="page-content">
+            <div class="content-grid mdl-grid">
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet">
+                </div>
+                <!-- The PBI container (green rectangle) -->
+                <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet">
+                    <ul class="mdl-list">
+                        <!-- li is one PBI item -->
+                        <!-- TODO: Add story points and tags to PBI display -->
+                        <li class="PBI mdl-list__item mdl-list__item--three-line">
+                            <span class="mdl-list__item-primary-content">
+                                <span>Product Backlog Item 1</span>
+                                <span class="mdl-list__item-text-body">This is the description for product backlog item 1</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <!-- Colored icon button -->
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <!-- Colored icon button -->
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                  <i class="material-icons">delete</i>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="add_circle-container">
+                <!-- Colored FAB button -->
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                    <i class="material-icons">add</i>
+                </button>
 
+            </div>
         </div>
-
     </main>
 </div>
 
