@@ -1,0 +1,20 @@
+header.mdl-layout__header{
+    background-color: #006A6A;
+    color: white;
+    opacity: 80%;
+}
+
+span.mdl-layout-title{
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.mdl-layout__drawer span.mdl-layout-title{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+div.mdl-layout__drawer-button i.material-icons{
+    color: white;
+    transform: scale(1.5, 1.5);
+}
