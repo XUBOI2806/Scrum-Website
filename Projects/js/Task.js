@@ -74,8 +74,6 @@ class Task{
         this._timeTracking = value;
     }
 
-
-
     editTask(title,description,status,priority,assigned, tags,timeTracking){
         this._title = title ;
         this._description = description;
