@@ -7,11 +7,11 @@ class Backlog {
         }
     }
     addTask(newTask){
-        this.taskArray.push(newTask);
+        throw new Error("Method addTask must be implemented")
     }
 
     deleteTask(taskIndex){
-        this.taskArray.splice(taskIndex, 1)
+        throw new Error("Method deleteTask must be implemented")
     }
 
 }
