@@ -18,3 +18,12 @@ div.mdl-layout__drawer-button i.material-icons{
     color: white;
     transform: scale(1.5, 1.5);
 }
+
+.home-title{
+    text-align: center;
+}
+
+.home-buttons{
+    display: flex;
+    justify-content: space-around;
+}
