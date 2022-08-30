@@ -74,16 +74,17 @@ class Task{
         this._timeTracking = value;
     }
 
-    
 
-    editClass(title,description,status,priority,assigned, tags,timeTracking){
-        this._title = title 
-        this._description = description
-        this._status = status
-        this._priority = priority
-        this._assigned = assigned
-        this._tags = tags
-        this._timeTracking
+
+    editTask(title,description,status,priority,assigned, tags,timeTracking){
+        this._title = title ;
+        this._description = description;
+        this._status = status;
+        this._priority = priority;
+        this._assigned = assigned;
+        this._tags = tags;
+        this._timeTracking = timeTracking;
     }
+
 
 }
