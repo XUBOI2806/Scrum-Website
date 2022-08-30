@@ -1,30 +1,37 @@
+/*headers*/
 header.mdl-layout__header{
     background-color: #006A6A;
     color: white;
     opacity: 80%;
 }
 
+/*title in the header*/
 span.mdl-layout-title{
     font-size: 35px;
     font-weight: 600;
 }
 
+/*title in the nav drawer*/
 .mdl-layout__drawer span.mdl-layout-title{
     font-size: 20px;
     font-weight: 400;
 }
 
+/*icon for nav drawer*/
 div.mdl-layout__drawer-button i.material-icons{
     color: white;
     transform: scale(1.5, 1.5);
 }
 
-div.content-grid.mdl-grid{
-    height: 95%;
-}
-
+/*page size*/
 .page-content{
     height: 90%;
+}
+
+/**/
+/*size of the PBI list*/
+div.content-grid.mdl-grid{
+    height: 95%;
 }
 
 .PBI-container{
@@ -56,4 +63,13 @@ div.add_circle-container{
 
 button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--colored{
     background-color: #60D3AA;
+}
+
+.home-title{
+    text-align: center;
+}
+
+.home-buttons{
+    display: flex;
+    justify-content: space-around;
 }
