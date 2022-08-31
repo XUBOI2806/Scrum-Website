@@ -152,6 +152,34 @@ class Backlog {
     }
 }
 
+class SprintBacklog extends Backlog{
+    constructor() {
+        super();
+    }
+
+    addTask(newTask){
+        this._taskArray.push(newTask);
+    }
+
+    deleteTask(taskIndex){
+        this._taskArray.splice(taskIndex, 1)
+    }
+}
+
+class ProductBacklog extends Backlog{
+    constructor() {
+        super();
+    }
+
+    addTask(newTask){
+        this._taskArray.push(newTask);
+    }
+
+    deleteTask(taskIndex){
+        this._taskArray.splice(taskIndex, 1)
+    }
+}
+
 export { Task, Person, Backlog };
 
 
