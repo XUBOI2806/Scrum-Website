@@ -1,14 +1,5 @@
 class Task{
-    constructor(
-        title,
-        description,
-        status,
-        priority,
-        assigned, 
-        tags = [],
-        timeTracking = 0
-    ){
-        this.assigned = Person();
+    constructor(title, description, status, priority, assigned, tags = [], timeTracking = 0){
         this._title = title;
         this._description = description;
         this._status = status;
@@ -86,3 +77,39 @@ class Task{
 
 
 }
+
+
+class Person {
+    constructor(name, email) {
+      this._name = name;
+      this._email = email;
+    }
+  
+    get name() {
+      return this._name;
+    }
+  
+    get email() {
+      return this._email;
+    }
+  }
+
+
+  class Backlog {
+    constructor() {
+        this.taskArray = []
+
+        if (this.constructor === Backlog) {
+            throw new Error("Abstract class cannot be instantiated")
+        }
+    }
+    addTask(newTask){
+        this._taskArray.push(newTask)
+    }
+
+    deleteTask(taskIndex){
+        throw new Error("Method deleteTask must be implemented")
+    }
+
+}
+  
