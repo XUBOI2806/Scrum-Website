@@ -1,4 +1,6 @@
-class productBacklog extends Backlog{
+import { Backlog } from "./classes.js"
+
+export default class productBacklog extends Backlog{
     constructor() {
         super();
     }
