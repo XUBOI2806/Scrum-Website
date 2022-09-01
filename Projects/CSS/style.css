@@ -72,6 +72,23 @@ button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--colored{
     background-color: #60D3AA;
 }
 
+dialog.mdl-dialog{
+    width: 40%;
+}
+div.pbi-line{
+    display: grid;
+    max-width: none;
+}
+
+div.pbi-line.mdl-textfield{
+    min-width: 200px;
+    width: 100%;
+}
+
+div.mdl-textfield.mdl-js-textfield.is-upgraded{
+    width: auto;
+}
+
 .home-title{
     text-align: center;
 }

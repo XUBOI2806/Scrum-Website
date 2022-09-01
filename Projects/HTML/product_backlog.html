@@ -9,6 +9,8 @@
     <!-- Linking css stylesheet -->
     <link rel="stylesheet" href="../CSS/style.css" />
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css">
+    <link rel="stylesheet" href="https://creativeit.github.io/getmdl-select/getmdl-select.min.css">
+    <script defer src="https://creativeit.github.io/getmdl-select/getmdl-select.min.js"></script>
 
     <!-- Linking fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,17 +73,73 @@
                 <!-- dialog box for adding/editing PBIs -->
                 <dialog class="mdl-dialog">
                     <div class="mdl-dialog__content">
-                        <div>
-                            <div class="mdl-textfield">
-                                <label class="mdl-typography--title">Product Backlog Item</label>
-                            </div>
+                        <div class="pbi-line mdl-textfield">
+                            <label class="mdl-typography--title">Product Backlog Item</label>
+                        </div>
+                        <div class="pbi-line mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="pbiName">
+                            <label class="mdl-textfield__label" for="pbiName">Name...</label>
+                        </div>
+                        <div class="pbi-line mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="pbiDesc">
+                            <label class="mdl-textfield__label" for="pbiDesc">Description...</label>
+                        </div>
+                        <div style="display: inline-block">
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="pbiName">
-                                <label class="mdl-textfield__label" for="pbiName">Name...</label>
+                                <input class="mdl-textfield__input" type="text" id="pbiType">
+                                <label class="mdl-textfield__label" for="pbiType">Type of Task...</label>
+                            </div>
+                            <!-- Assigning Person Input -->
+                            <!-- Simple Select with arrow -->
+                            <div class="mdl-textfield mdl-js-textfield getmdl-select">
+                                <input type="text" value="" class="mdl-textfield__input" id="person">
+                                <input type="hidden" value="" name="person">
+                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                <label for="person" class="mdl-textfield__label">Assigning Person</label>
+                                <ul for="person" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                    <li class="mdl-menu__item">Maily Butel</li>
+                                </ul>
                             </div>
                         </div>
                         <div>
-                            <!-- TODO: put in all input fields -->
+                            <!-- Priority Input -->
+                            <!-- Simple Select with arrow -->
+                            <div class="mdl-textfield mdl-js-textfield getmdl-select">
+                                <input type="text" value="" class="mdl-textfield__input" id="priority">
+                                <input type="hidden" value="" name="priority">
+                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                <label for="priority" class="mdl-textfield__label">Priority</label>
+                                <ul for="priority" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                    <li class="mdl-menu__item">Low</li>
+                                    <li class="mdl-menu__item">Medium</li>
+                                    <li class="mdl-menu__item">High</li>
+                                </ul>
+                            </div>
+
+                            <!-- Status Input -->
+                            <!-- Simple Select with arrow -->
+                            <div class="mdl-textfield mdl-js-textfield getmdl-select">
+                                <input type="text" value="" class="mdl-textfield__input" id="status">
+                                <input type="hidden" value="" name="status">
+                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                <label for="status" class="mdl-textfield__label">Status</label>
+                                <ul for="status" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                    <li class="mdl-menu__item">Not Started</li>
+                                    <li class="mdl-menu__item">In Progress</li>
+                                    <li class="mdl-menu__item">Completed</li>
+                                </ul>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="pbiEffort">
+                                <label class="mdl-textfield__label" for="pbiEffort">Effort...</label>
+                            </div>
+                        </div>
+                        <div class="pbi-line mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="pbiTags">
+                            <label class="mdl-textfield__label" for="pbiTags">Tags...</label>
+                        </div>
+                        <div>
 
                             <div>
                                 <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
