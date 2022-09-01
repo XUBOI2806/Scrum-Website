@@ -1,6 +1,6 @@
 //import { Person, Task, Backlog } from "../shared.js";
 //import productBacklog from "../Classes/ProductBacklog.js";
-
+let backlog = null
 function createTask() {
   // take in user inputs
   let name = document.getElementById("pbiName").value;
@@ -14,10 +14,16 @@ function createTask() {
 
   let persons = new Person(person, "asfda");
   let task = new Task(name, des, status, priority, persons, tags, effort);
-  let newBacklog = productBacklog;
-  newBacklog.addTask(task);
-  backlogStatus(newBacklog._taskArray);
+  productBacklog.addTask(task);
+  backlogStatus(productBacklog._taskArray);
   closeDialog();
+}
+
+
+
+function deleteTask(index){
+    productBacklog.deleteTask(index)
+    backlogStatus(productBacklog._taskArray)
 }
 
 function backlogStatus(data) {
@@ -37,7 +43,7 @@ function backlogStatus(data) {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
                             <i class="material-icons">delete</i>
                         </button>
                     </span>
