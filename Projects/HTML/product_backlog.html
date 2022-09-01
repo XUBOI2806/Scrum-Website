@@ -16,6 +16,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <script src="../js/shared.js"></script>
+    <script src="../js/Backlog/Backlog.js"></script>
 </head>
 
 <body>
@@ -45,7 +47,7 @@
                 <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet">
                 </div>
                 <!-- The PBI container (green rectangle) -->
-                <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet">
+                <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
                     <ul class="mdl-list">
                         <!-- li is one PBI item -->
                         <!-- TODO: Add story points and tags to PBI display -->
@@ -143,7 +145,7 @@
 
                             <div>
                                 <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
-                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="saveToLS()">Save</button>
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="createTask()">Save</button>
                             </div>
                         </div>
                     </div>
@@ -170,5 +172,4 @@
 </div>
 
 </body>
-<script src="../js/Classes/classes.js"></script>
 </html>

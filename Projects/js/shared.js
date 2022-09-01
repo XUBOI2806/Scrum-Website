@@ -180,7 +180,7 @@ class ProductBacklog extends Backlog{
     }
 }
 
-export { Task, Person, Backlog };
+
 
 
 /**
