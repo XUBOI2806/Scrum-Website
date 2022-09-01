@@ -21,7 +21,7 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {} tags
+     * @param {List} tags
      * @param {Number} timeTracking
      */
     constructor(
@@ -106,6 +106,16 @@ class Task {
         this._tags = tags;
         this._timeTracking = timeTracking;
     }
+
+    fromData(data) {
+        this._title = data._title;
+        this._description = data._description;
+        this._status = data._status;
+        this._priority = data._priority;
+        this._assigned = data._assigned;
+        this._tags = data._tags;
+        this._timeTracking = data._timeTracking;
+    }
 }
 
 class Person {
@@ -133,6 +143,11 @@ class Person {
     set email(value) {
         this._email = value;
     }
+
+    fromData(data) {
+        this._name = data._name;
+        this._email = data._email;
+    }
 }
 
 class Backlog {
@@ -150,6 +165,9 @@ class Backlog {
     deleteTask(taskIndex) {
         throw new Error("Method deleteTask must be implemented");
     }
+
+    fromData(data) {
+    }
 }
 
 class SprintBacklog extends Backlog{
@@ -164,6 +182,15 @@ class SprintBacklog extends Backlog{
     deleteTask(taskIndex){
         this._taskArray.splice(taskIndex, 1)
     }
+
+    // fromData(data) {
+    //     this._array = [];
+    //     for (let i = 0; i < data._array.length; i++) {
+    //         let sprint = new Sprint();
+    //         sprint.fromData(data._array[i]);
+    //         this._array.push(sprint);
+    //     }
+    // }
 }
 
 class ProductBacklog extends Backlog{
@@ -177,6 +204,19 @@ class ProductBacklog extends Backlog{
 
     deleteTask(taskIndex){
         this._taskArray.splice(taskIndex, 1)
+    }
+
+    getTask(taskIndex) {
+        return this._taskArray[taskIndex];
+    }
+
+    fromData(data) {
+        this._taskArray = [];
+        for (let i = 0; i < data._taskArray.length; i++) {
+            let task = new Task();
+            task.fromData(data._taskArray[i]);
+            this._taskArray.push(task);
+        }
     }
 }
 
