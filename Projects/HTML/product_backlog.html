@@ -94,13 +94,22 @@
             </div>
             <div class="add_circle-container">
                 <!-- Colored FAB button -->
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <button id="add-pbi" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="add_pbi()">
                     <i class="material-icons">add</i>
                 </button>
 
             </div>
         </div>
     </main>
+    <script>
+        let dialog = document.querySelector('dialog');
+        function add_pbi(){
+            if (!dialog.showModal()){
+                dialogPolyfill.registerDialog(dialog);
+            }
+        }
+        function closeDialog(){dialog.close();}
+    </script>
 </div>
 
 </body>
