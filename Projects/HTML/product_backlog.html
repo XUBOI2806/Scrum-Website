@@ -67,16 +67,48 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- dialog box for adding/editing PBIs -->
+                <dialog class="mdl-dialog">
+                    <div class="mdl-dialog__content">
+                        <div>
+                            <div class="mdl-textfield">
+                                <label class="mdl-typography--title">Product Backlog Item</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="pbiName">
+                                <label class="mdl-textfield__label" for="pbiName">Name...</label>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- TODO: put in all input fields -->
+
+                            <div>
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="saveToLS()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </dialog>
             </div>
             <div class="add_circle-container">
                 <!-- Colored FAB button -->
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                <button id="add-pbi" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="add_pbi()">
                     <i class="material-icons">add</i>
                 </button>
 
             </div>
         </div>
     </main>
+    <script>
+        let dialog = document.querySelector('dialog');
+        function add_pbi(){
+            if (!dialog.showModal()){
+                dialogPolyfill.registerDialog(dialog);
+            }
+        }
+        function closeDialog(){dialog.close();}
+    </script>
 </div>
 
 </body>
