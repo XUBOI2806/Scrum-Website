@@ -1,26 +1,32 @@
 //import { Person, Task, Backlog } from "../shared.js";
 //import productBacklog from "../Classes/ProductBacklog.js";
 
-function createTask(){
-    // take in user inputs
-    let name  = document.getElementById("pbiName").value;
-    let persons = new Person("hi", "asfda");
-    let task = new Task("Title", name, "Progress", "High", persons, ["hi", "gat"], 10 )
-    let newBacklog = productBacklog
-    newBacklog.addTask(task)
-    backlogStatus(newBacklog._taskArray)
-    closeDialog();
-};
+function createTask() {
+  // take in user inputs
+  let name = document.getElementById("pbiName").value;
+  let des = document.getElementById("pbiDesc").value;
+  let taskType = document.getElementById("pbiType").value;
+  let person = document.getElementById("person").value;
+  let priority = document.getElementById("priority").value;
+  let status = document.getElementById("status").value;
+  let effort = document.getElementById("pbiEffort").value;
+  let tags = [document.getElementById("pbiTags").value];
 
+  let persons = new Person(person, "asfda");
+  let task = new Task(name, des, status, priority, persons, tags, effort);
+  let newBacklog = productBacklog;
+  newBacklog.addTask(task);
+  backlogStatus(newBacklog._taskArray);
+  closeDialog();
+}
 
-function backlogStatus(data){
-    let output = ""
-    for (let i = 0; i<data.length; i++){
-        let item =
-            `<ul class="mdl-list">
+function backlogStatus(data) {
+  let output = "";
+  for (let i = 0; i < data.length; i++) {
+    let item = `<ul class="mdl-list">
                 <li class="PBI mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content">
-                        <span>Product Backlog Item ${i} </span>
+                        <span>${data[i]._title}</span>
                         <span class="mdl-list__item-text-body">${data[i]._description}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
@@ -36,8 +42,8 @@ function backlogStatus(data){
                         </button>
                     </span>
                 </li>
-            </ul>`
-        output += item
-    }
-    document.getElementById("content").innerHTML = output;
+            </ul>`;
+    output += item;
+  }
+  document.getElementById("content").innerHTML = output;
 }
