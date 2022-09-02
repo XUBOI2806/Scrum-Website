@@ -12,8 +12,8 @@ const TASK_KEY = "currentTaskIndex";
 const SPRINT_KEY = "currentSprintIndex";
 const PRODUCTBACKLOG_KEY = "productBacklogData";
 const SPRINTBACKLOG_KEY = "sprintBacklogData";
-const TEAMMEMBER_KEY = "teamMemberIndex";
-const TEAM_KEY = "teamData";
+const PERSON_KEY = "personIndex";
+const TEAMBACKLOG_KEY = "teamBacklogData";
 
 
 class Task {
@@ -217,7 +217,28 @@ class ProductBacklog extends Backlog{
     }
 }
 
-export { Task, Person, Backlog };
+class TeamBacklog extends Backlog{
+    constructor() {
+        super();
+    }
+
+    addTask(newTask){
+        this._array.push(newTask);
+    }
+
+    deleteTask(taskIndex){
+        this._array.splice(taskIndex, 1)
+    }
+
+    fromData(data) {
+        this._array = [];
+        for (let i = 0; i < data._array.length; i++) {
+            let person = new Person();
+            person.fromData(data._array[i]);
+            this._array.push(person);
+        }
+    }
+}
 
 
 /**
@@ -263,6 +284,7 @@ function updateLSData(key, data) {
 // Global productBacklog and sprintBacklog variable
 let productBacklog = new ProductBacklog();
 let sprintBacklog = new SprintBacklog();
+let teamBacklog = new TeamBacklog();
 
 // Check if data available in LS before continuing
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
@@ -278,3 +300,8 @@ if (checkLSData(SPRINTBACKLOG_KEY)) {
     sprintBacklog.fromData(data);
 }
 
+if (checkLSData(TEAMBACKLOG_KEY)) {
+    let data = retrieveLSData(TEAMBACKLOG_KEY);
+    // Restore data into vacationList
+    teamBacklog.fromData(data);
+}
