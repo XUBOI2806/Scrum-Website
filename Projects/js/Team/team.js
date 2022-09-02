@@ -1,5 +1,7 @@
 "use strict";
 
+import { Person } from "../shared";
+
 function createTeamMember() {
     // Take in use inputs
     let name = document.getElementById("memberName").value;
