@@ -21,12 +21,13 @@ function deleteTeamMember(index){
 
 function displayTeamBacklog() {
     let output = "";
+    console.log(teamBacklog);
     for (let i = 0; i < teamBacklog._array.length; i++) {
         let item = `<ul class="mdl-list">
                 <li class="PBI mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content">
-                        <span>${productBacklog.tasks[i].assigned.name}</span>
-                        <span class="mdl-list__item-text-body">${productBacklog._array[i]._description}</span>
+                        <span>${teamBacklog._array[i].name}</span>
+                        <span class="mdl-list__item-text-body">${teamBacklog._array[i].email}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
@@ -47,5 +48,3 @@ function displayTeamBacklog() {
     document.getElementById("content").innerHTML = output;
 }
 
-// Displays the list of vacations when the page loads
-displayTeamBacklog();
