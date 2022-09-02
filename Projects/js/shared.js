@@ -159,6 +159,8 @@ class Backlog {
         }
     }
 
+    get tasks(){ return this._array; }
+
     addTask(newTask) {
         this._array.push(newTask);
     }

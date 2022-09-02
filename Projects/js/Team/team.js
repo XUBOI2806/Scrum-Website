@@ -25,7 +25,7 @@ function displayTeamBacklog() {
         let item = `<ul class="mdl-list">
                 <li class="PBI mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content">
-                        <span>${productBacklog._array[i]._title}</span>
+                        <span>${productBacklog.tasks[i].assigned.name}</span>
                         <span class="mdl-list__item-text-body">${productBacklog._array[i]._description}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
