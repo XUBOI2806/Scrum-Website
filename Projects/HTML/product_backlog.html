@@ -49,7 +49,7 @@
                 </div>
                 <!-- The PBI container (green rectangle) -->
                 <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
-                    <ul class="mdl-list">
+                    <ul class="mdl-list" id="pbi-list">
                         <!-- li is one PBI item -->
                         <!-- TODO: Add story points and tags to PBI display -->
                         <li class="PBI mdl-list__item mdl-list__item--three-line">
@@ -59,6 +59,10 @@
                                     <span style="padding-right: 15px">Priority: Low</span>
                                     <span>Story Points: 3</span><br>
                                     <span>Tags:</span>
+                                    <!-- Basic Chip -->
+                                    <span class="mdl-chip">
+                                        <span class="mdl-chip__text">Basic Chip</span>
+                                    </span>
                                 </span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
@@ -148,15 +152,15 @@
                             <div class="tag-checkboxes">
                                 <h5 class="dialog-label">Tags: </h5>
                                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="tag-ui">
-                                    <input type="checkbox" id="tag-ui" class="mdl-checkbox__input">
+                                    <input type="checkbox" id="tag-ui" name="tag" value="UI" class="mdl-checkbox__input">
                                     <span class="mdl-checkbox__label">UI</span>
                                 </label>
                                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="tag-dev">
-                                    <input type="checkbox" id="tag-dev" class="mdl-checkbox__input">
+                                    <input type="checkbox" id="tag-dev" name="tag" value="Development" class="mdl-checkbox__input">
                                     <span class="mdl-checkbox__label">Development</span>
                                 </label>
                                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="tag-test">
-                                    <input type="checkbox" id="tag-test" class="mdl-checkbox__input">
+                                    <input type="checkbox" id="tag-test" name="tag" value="Testing" class="mdl-checkbox__input">
                                     <span class="mdl-checkbox__label">Testing</span>
                                 </label>
                             </div>

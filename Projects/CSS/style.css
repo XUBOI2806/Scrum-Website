@@ -47,6 +47,7 @@ div.content-grid.mdl-grid{
 .PBI{
     background-color: #FFFCF6;
     border-radius: 12px;
+    margin: 15px 0;
 }
 
 /*for the edit and delete buttons for each PBI*/
@@ -61,7 +62,7 @@ li.PBI span.mdl-list__item-secondary-content{
 
 /*spacing for each PBI*/
 ul.mdl-list{
-    margin: 5px 30px;
+    margin: 0 30px;
 }
 
 /*aligning fab to add PBI*/
@@ -73,6 +74,12 @@ div.add_circle-container{
 button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--colored{
     background-color: #60D3AA;
 }
+
+span.mdl-chip{
+    scale: 80%;
+}
+
+/* DIALOG STYLING */
 
 dialog.mdl-dialog{
     width: 30%;

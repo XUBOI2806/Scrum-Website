@@ -13,13 +13,26 @@ function createTask() {
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
   let effort = document.getElementById("pbiEffort").value;
-  let tags = [document.getElementById("pbiTags").value];
+  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
 
   let persons = new Person(person, "asfda");
   let task = new Task(name, des, status, priority, person, effort);
-  // for (let i = 0; i < tags.length; i++){
-  //   task.addTags(tags[i]);
-  // }
+  tagCheckboxes.forEach((checkbox) => {
+    switch (checkbox.value){
+      case "UI":
+        task.addTag(checkbox.value, "#d966ff");
+        break;
+      case "Development":
+        task.addTag(checkbox.value, "#1affc6");
+        break;
+      case "Testing":
+        task.addTag(checkbox.value, "#ff6666");
+        break;
+      default:
+        task.addTag(checkbox.value);
+    }
+  });
+
   updateLSData(TASK_KEY, task)
   productBacklog.addTask(task);
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
@@ -35,29 +48,47 @@ function deleteTask(index){
 function displayProductBacklog() {
   let output = "";
   for (let i = 0; i < productBacklog._taskArray.length; i++) {
-    let item = `<ul class="mdl-list">
+
+    // Get tags
+    let tagsOutput = "";
+    productBacklog._taskArray[i].tags.forEach((tag) => {
+      tagsOutput += `
+      <span class="mdl-chip" style="background-color: ${tag[1]}">
+          <span class="mdl-chip__text">${tag[0]}</span>
+      </span>
+      `;
+    })
+
+
+    let item = `
                 <li class="PBI mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content">
-                        <span>${productBacklog._taskArray[i]._title}</span>
-                        <span class="mdl-list__item-text-body">${productBacklog._taskArray[i]._description}</span>
+                        <span>${productBacklog._taskArray[i].title}</span>
+                        <span class="mdl-list__item-text-body">
+                            <span style="padding-right: 15px">Priority: ${productBacklog._taskArray[i].priority}</span>
+                            <span>Story Points: ${productBacklog._taskArray[i].timeTracking}</span><br>
+                            <span>Tags:
+                              <span class="tag-chips">${tagsOutput}</span>
+                            </span>
+                        </span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-                            <i class="material-icons">edit</i>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi()">
+                          <i class="material-icons">edit</i>
                         </button>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
-                            <i class="material-icons">delete</i>
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(0)">
+                          <i class="material-icons">delete</i>
                         </button>
                     </span>
-                </li>
-            </ul>`;
+              </li>`;
     output += item;
   }
-  document.getElementById("content").innerHTML = output;
+  document.getElementById("pbi-list").innerHTML = output;
+
 }
 
 function editTask(index) {

@@ -85,8 +85,8 @@ class Task {
         return this._tags;
     }
 
-    set addTags(tag) {
-        this._tags.push(tag);
+    addTag(tagName, tagColour = "#dedede") {
+        this._tags.push([tagName, tagColour]);
     }
 
     get timeTracking() {
