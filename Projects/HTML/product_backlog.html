@@ -61,13 +61,13 @@
                                     <span>Tags:</span>
                                 </span>
                             </span>
-                                <span class="mdl-list__item-secondary-content">
+                            <span class="mdl-list__item-secondary-content">
                                 <!-- Colored icon button -->
-                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi()">
                                   <i class="material-icons">edit</i>
                                 </button>
                             </span>
-                                <span class="mdl-list__item-secondary-content">
+                            <span class="mdl-list__item-secondary-content">
                                 <!-- Colored icon button -->
                                 <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(0)">
                                   <i class="material-icons">delete</i>
@@ -188,6 +188,13 @@
             }
         }
         function closeDialog(){dialog.close();}
+
+        function edit_pbi(){
+            if (!dialog.showModal()){
+                dialogPolyfill.registerDialog(dialog);
+            }
+            editTask(0);
+        }
     </script>
 </div>
 
