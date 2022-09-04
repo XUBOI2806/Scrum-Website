@@ -28,7 +28,7 @@ function createTask() {
 }
 
 function deleteTask(index){
-    productBacklog.deleteTask(index)
+    productBacklog.delete(index)
     displayProductBacklog()
 }
 
