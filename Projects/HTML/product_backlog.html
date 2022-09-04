@@ -16,9 +16,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
-    <script src="../js/shared.js"></script>
-    <script src="../js/dialog-polyfill.js"></script>
-    <script src="../js/Backlog/Backlog.js"></script>
 </head>
 
 <body>
@@ -184,22 +181,9 @@
             </div>
         </div>
     </main>
-    <script>
-        let dialog = document.querySelector('dialog');
-        function add_pbi(){
-            if (!dialog.showModal()){
-                dialogPolyfill.registerDialog(dialog);
-            }
-        }
-        function closeDialog(){dialog.close();}
-
-        function edit_pbi(){
-            if (!dialog.showModal()){
-                dialogPolyfill.registerDialog(dialog);
-            }
-            editTask(0);
-        }
-    </script>
+    <script src="../js/shared.js"></script>
+    <script src="../js/dialog-polyfill.js"></script>
+    <script src="../js/Backlog/Backlog.js"></script>
 </div>
 
 </body>

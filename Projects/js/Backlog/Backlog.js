@@ -87,6 +87,7 @@ function displayProductBacklog() {
               </li>`;
     output += item;
   }
+  console.log(output);
   document.getElementById("pbi-list").innerHTML = output;
 
 }
@@ -127,6 +128,25 @@ function saveEditTask(index){
 }
 
 
+function add_pbi(){
+  let dialog = document.querySelector('dialog');
+  if (!dialog.showModal()){
+    dialogPolyfill.registerDialog(dialog);
+  }
+}
+
+function closeDialog(){
+  let dialog = document.querySelector('dialog');
+  dialog.close();
+}
+
+function edit_pbi(){
+  let dialog = document.querySelector('dialog');
+  if (!dialog.showModal()){
+    dialogPolyfill.registerDialog(dialog);
+  }
+  editTask(0);
+}
 
 // Displays the list of vacations when the page loads
 displayProductBacklog();

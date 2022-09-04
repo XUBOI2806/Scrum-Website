@@ -271,6 +271,7 @@ if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
     // Restore data into vacationList
     productBacklog.fromData(data);
+    console.log(productBacklog);
 }
 
 if (checkLSData(SPRINTBACKLOG_KEY)) {
