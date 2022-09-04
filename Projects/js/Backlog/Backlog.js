@@ -16,7 +16,7 @@ function createTask() {
   let tags = [document.getElementById("pbiTags").value];
 
   let persons = new Person(person, "asfda");
-  let task = new Task(name, des, status, priority, persons, effort);
+  let task = new Task(name, des, status, priority, person, effort);
   // for (let i = 0; i < tags.length; i++){
   //   task.addTags(tags[i]);
   // }
@@ -59,6 +59,43 @@ function displayProductBacklog() {
   }
   document.getElementById("content").innerHTML = output;
 }
+
+function editTask(index) {
+  let name = document.getElementById("editName");
+  name.value = productBacklog._taskArray[index]._name;
+  let description = document.getElementById("editDescription");
+  description.value = productBacklog._taskArray[index]._description;
+  let status = document.getElementById("editStatus");
+  status.value = productBacklog._taskArray[index]._status;
+  let priority = document.getElementById("editPriority");
+  priority.value = productBacklog._taskArray[index]._priority;
+  let assigned = document.getElementById("editAssigned");
+  assigned.value = productBacklog._taskArray[index]._assigned;
+  let timeTracking = document.getElementById("editTimeTracking");
+  timeTracking.value = productBacklog._taskArray[index]._timeTracking;
+  let tags = document.getElementById("editTags");
+  tags.value = productBacklog._taskArray[index]._tags;
+}
+
+function saveEditTask(index){
+  let name = document.getElementById("editName").value;
+  let description = document.getElementById("editDescription").value;
+  let status = document.getElementById("editStatus").value;
+  let priority = document.getElementById("editPriority").value;
+  let assigned = document.getElementById("editAssigned").value;
+  let tags = document.getElementById("editTags").value;
+  let person = document.getElementById("editPerson").value;
+  let effort = document.getElementById("editEffort").value;
+
+  let task = new Task(name, description, status, priority, person, effort);
+  // Overwrite the old values by replacing it with the new values
+  productBacklog._taskArray[index] = task
+  updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
+  displayProductBacklog();
+  closeDialog();
+}
+
+
 
 // Displays the list of vacations when the page loads
 displayProductBacklog();
