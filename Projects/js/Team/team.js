@@ -15,7 +15,7 @@ function createTeamMember() {
 }
 
 function deleteTeamMember(index){
-    teamBacklog.deleteTask(index);
+    teamBacklog.delete(index);
     displayTeamBacklog();
 }
 
@@ -37,7 +37,7 @@ function displayTeamBacklog() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTeamMember(${i})">
                             <i class="material-icons">delete</i>
                         </button>
                     </span>
