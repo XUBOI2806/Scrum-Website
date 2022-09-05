@@ -37,6 +37,13 @@ function createTask() {
   productBacklog.addTask(task);
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
   displayProductBacklog();
+  document.getElementById("pbiName").value = "";
+  document.getElementById("pbiDesc").value = "";
+  document.getElementById("pbiType").value = "";
+  document.getElementById("person").value = "";
+  document.getElementById("priority").value = "";
+  document.getElementById("status").value = "";
+  document.getElementById("pbiEffort").value = "";
   closeDialog();
 }
 
