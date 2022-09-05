@@ -37,6 +37,7 @@ function createTask() {
   productBacklog.addTask(task);
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
   displayProductBacklog();
+  // reset the input field to empty
   document.getElementById("pbiName").value = "";
   document.getElementById("pbiDesc").value = "";
   document.getElementById("pbiType").value = "";
