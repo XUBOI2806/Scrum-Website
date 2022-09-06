@@ -114,6 +114,10 @@ h5.dialog-label{
     padding-right: 10px;
 }
 
+span.mdl-textfield__error{
+    align-self: end;
+}
+
 .home-title{
     text-align: center;
 }

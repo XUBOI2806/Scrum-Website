@@ -48,9 +48,8 @@
                 <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
                     <ul class="mdl-list" id="pbi-list">
                         <!-- li is one PBI item -->
-                        <!-- TODO: Add story points and tags to PBI display -->
                         <li class="PBI mdl-list__item mdl-list__item--three-line">
-                            <span class="mdl-list__item-primary-content">
+                            <span class="mdl-list__item-primary-content" onclick="showTask()">
                                 <span>PBI Name</span>
                                 <span class="mdl-list__item-text-body">
                                     <span style="padding-right: 15px">Priority: Low</span>
@@ -87,26 +86,30 @@
                         <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiName">
                             <label class="mdl-textfield__label" for="pbiName">Name...</label>
+                            <span id="pbiNameError" class="mdl-textfield__error">Name required</span>
                         </div>
                         <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiDesc">
                             <label class="mdl-textfield__label" for="pbiDesc">Description...</label>
+                            <span id="pbiDescError" class="mdl-textfield__error">Description required</span>
                         </div>
                         <div style="display: inline-block">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="pbiType">
+                                <input class="mdl-textfield__input" type="text" id="pbiType" pattern=".{1,}">
                                 <label class="mdl-textfield__label" for="pbiType">Type of Task...</label>
+                                <span id="pbiTypeError" class="mdl-textfield__error">Task type required</span>
                             </div>
                             <!-- Assigning Person Input -->
                             <!-- Simple Select with arrow -->
                             <div class="mdl-textfield mdl-js-textfield getmdl-select mdl-textfield--floating-label">
-                                <input type="text" value="" class="mdl-textfield__input" id="person" readonly="readonly">
+                                <input type="text" value="" class="mdl-textfield__input" id="person" readonly="readonly" required>
                                 <input type="hidden" value="" name="person">
                                 <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
                                 <label for="person" class="mdl-textfield__label">Assigning Person</label>
                                 <ul for="person" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                                     <li class="mdl-menu__item">Maily Butel</li>
                                 </ul>
+                                <span id="pbiPersonError" class="mdl-textfield__error">Person required</span>
                             </div>
                         </div>
                         <div>
@@ -122,6 +125,7 @@
                                     <li class="mdl-menu__item">Medium</li>
                                     <li class="mdl-menu__item">High</li>
                                 </ul>
+                                <span id="pbiPriorityError" class="mdl-textfield__error">Priority required</span>
                             </div>
 
                             <!-- Status Input -->
@@ -138,12 +142,14 @@
                                     <li class="mdl-menu__item">Testing Phase</li>
                                     <li class="mdl-menu__item">Completed</li>
                                 </ul>
+                                <span id="pbiStatusError" class="mdl-textfield__error">Status required</span>
                             </div>
                         </div>
                         <div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="pbiEffort">
+                                <input class="mdl-textfield__input" type="text" id="pbiEffort" pattern="-?[0-9]*(\.[0-9]+)?">
                                 <label class="mdl-textfield__label" for="pbiEffort">Effort...</label>
+                                <span id="pbiEffortError" class="mdl-textfield__error">Integer Effort Estimation required</span>
                             </div>
                             <!-- Tag checkboxes -->
                             <div class="tag-checkboxes">
