@@ -94,63 +94,59 @@
                             <span id="pbiDescError" class="mdl-textfield__error">Description required</span>
                         </div>
                         <div style="display: inline-block">
+                            <!-- Task Type -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" id="pbiType" pattern=".{1,}">
                                 <label class="mdl-textfield__label" for="pbiType">Type of Task...</label>
                                 <span id="pbiTypeError" class="mdl-textfield__error">Task type required</span>
                             </div>
-                            <!-- Assigning Person Input -->
-                            <!-- Simple Select with arrow -->
-                            <div class="mdl-textfield mdl-js-textfield getmdl-select mdl-textfield--floating-label">
-                                <input type="text" value="" class="mdl-textfield__input" id="person" readonly="readonly" required>
-                                <input type="hidden" value="" name="person">
-                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-                                <label for="person" class="mdl-textfield__label">Assigning Person</label>
-                                <ul for="person" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                    <li class="mdl-menu__item">Maily Butel</li>
-                                </ul>
-                                <span id="pbiPersonError" class="mdl-textfield__error">Person required</span>
-                            </div>
-                        </div>
-                        <div>
-                            <!-- Priority Input -->
-                            <!-- Simple Select with arrow -->
-                            <div class="mdl-textfield mdl-js-textfield getmdl-select mdl-textfield--floating-label">
-                                <input type="text" value="" class="mdl-textfield__input" id="priority" readonly="readonly">
-                                <input type="hidden" value="" name="priority">
-                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-                                <label for="priority" class="mdl-textfield__label">Priority</label>
-                                <ul for="priority" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                    <li class="mdl-menu__item">Low</li>
-                                    <li class="mdl-menu__item">Medium</li>
-                                    <li class="mdl-menu__item">High</li>
-                                </ul>
-                                <span id="pbiPriorityError" class="mdl-textfield__error">Priority required</span>
-                            </div>
-
-                            <!-- Status Input -->
-                            <!-- Simple Select with arrow -->
-                            <div class="mdl-textfield mdl-js-textfield getmdl-select mdl-textfield--floating-label">
-                                <input type="text" value="" class="mdl-textfield__input" id="status" readonly="readonly">
-                                <input type="hidden" value="" name="status">
-                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-                                <label for="status" class="mdl-textfield__label">Status</label>
-                                <ul for="status" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                    <li class="mdl-menu__item">Not Started</li>
-                                    <li class="mdl-menu__item">In Progress</li>
-                                    <li class="mdl-menu__item">Developing Phase</li>
-                                    <li class="mdl-menu__item">Testing Phase</li>
-                                    <li class="mdl-menu__item">Completed</li>
-                                </ul>
-                                <span id="pbiStatusError" class="mdl-textfield__error">Status required</span>
-                            </div>
-                        </div>
-                        <div>
+                            <!-- Effort Estimation -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" id="pbiEffort" pattern="-?[0-9]*(\.[0-9]+)?">
                                 <label class="mdl-textfield__label" for="pbiEffort">Effort...</label>
                                 <span id="pbiEffortError" class="mdl-textfield__error">Integer Effort Estimation required</span>
                             </div>
+                        </div>
+                        <div>
+                            <!-- Assigning Person Input -->
+                            <!-- Simple Select with arrow -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select class="mdl-textfield__input" id="person">
+                                    <option value="0" hidden></option>
+                                    <option value="1">Maily Butel</option>
+                                </select>
+                                <label class="mdl-textfield__label" for="person">Person</label>
+                                <span id="pbiPersonError" class="mdl-textfield__error">Person required</span>
+                            </div>
+                            <!-- Priority Input -->
+                            <!-- Simple Select with arrow -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select class="mdl-textfield__input" id="priority">
+                                    <option value="0" hidden></option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                </select>
+                                <label class="mdl-textfield__label" for="priority">Priority</label>
+                                <span id="pbiPriorityError" class="mdl-textfield__error">Priority required</span>
+                            </div>
+
+                            <!-- Status Input -->
+                            <!-- Simple Select with arrow -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <select class="mdl-textfield__input" id="status">
+                                    <option value="0" hidden></option>
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Developing Phase">Developing Phase</option>
+                                    <option value="Testing Phase">Testing Phase</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                                <label class="mdl-textfield__label" for="status">Status</label>
+                                <span id="pbiStatusError" class="mdl-textfield__error">Status required</span>
+                            </div>
+                        </div>
+                        <div>
                             <!-- Tag checkboxes -->
                             <div class="tag-checkboxes">
                                 <h5 class="dialog-label">Tags: </h5>

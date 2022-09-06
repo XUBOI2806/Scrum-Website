@@ -46,20 +46,6 @@ function createTask() {
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
     // Update Task list
     displayProductBacklog();
-    // reset the input field to empty
-    document.getElementById("pbiName").value = "";
-    document.getElementById("pbiDesc").value = "";
-    document.getElementById("pbiType").value = "";
-    document.getElementById("person").value = "";
-    document.getElementById("priority").value = "";
-    document.getElementById("status").value = "";
-    document.getElementById("pbiEffort").value = "";
-    document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
-    document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
-    document.getElementById("tag-test").parentElement.classList.remove("is-checked");
-    tagCheckboxes.forEach((checkbox) => {
-      checkbox.checked = false;
-    });
 
     // close dialog
     document.getElementById("saveTask").removeEventListener("click", createTask);
@@ -234,6 +220,19 @@ function add_pbi(){
 function closeDialog(){
   let dialog = document.querySelector('dialog');
   dialog.close();
+
+  // clear all fields
+  document.getElementById("pbiName").value = "";
+  document.getElementById("pbiDesc").value = "";
+  document.getElementById("pbiType").value = "";
+  document.getElementById("pbiEffort").value = "";
+  document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
+  document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
+  document.getElementById("tag-test").parentElement.classList.remove("is-checked");
+  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  tagCheckboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
 }
 
 /**
