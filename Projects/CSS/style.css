@@ -45,6 +45,7 @@ div.content-grid.mdl-grid{
 .PBI{
     background-color: #FFFCF6;
     border-radius: 12px;
+    margin: 15px 0;
 }
 
 /*for the edit and delete buttons for each PBI*/

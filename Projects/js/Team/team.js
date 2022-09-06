@@ -23,7 +23,7 @@ function displayTeamBacklog() {
     let output = "";
     console.log(teamBacklog);
     for (let i = 0; i < teamBacklog._array.length; i++) {
-        let item = `<ul class="mdl-list">
+        let item = `
                 <li class="PBI mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content">
                         <span>${teamBacklog._array[i].name}</span>
@@ -31,20 +31,15 @@ function displayTeamBacklog() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-                            <i class="material-icons">edit</i>
-                        </button>
-                    </span>
-                    <span class="mdl-list__item-secondary-content">
-                        <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTeamMember(${i})">
                             <i class="material-icons">delete</i>
                         </button>
                     </span>
-                </li>
-            </ul>`;
+                </li>`;
         output += item;
     }
-    document.getElementById("content").innerHTML = output;
+    document.getElementById("team-list").innerHTML = output;
 }
+
+displayTeamBacklog();
 

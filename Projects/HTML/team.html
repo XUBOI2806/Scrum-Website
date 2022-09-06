@@ -14,9 +14,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
-    <script src="../js/shared.js"></script>
-    <script src="../js/dialog-polyfill.js"></script>
-    <script src="../js/Team/team.js"></script>
 
 </head>
 
@@ -49,7 +46,20 @@
                 </div>
                 <!-- The PBI container (green rectangle) -->
                 <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
-                    <ul class="mdl-list"></ul>
+                    <ul class="mdl-list" id="team-list">
+                        <li class="PBI mdl-list__item mdl-list__item--three-line">
+                    <span class="mdl-list__item-primary-content">
+                        <span>Name</span>
+                        <span class="mdl-list__item-text-body">Email</span>
+                    </span>
+                            <span class="mdl-list__item-secondary-content">
+                        <!-- Colored icon button -->
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTeamMember(${i})">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </span>
+                        </li>
+                    </ul>
                 </div>
                 <dialog class="mdl-dialog">
                     <div class="mdl-dialog__content">
@@ -87,8 +97,13 @@
             }
         }
         function closeDialog(){dialog.close();}
+
     </script>
+    <script src="../js/shared.js"></script>
+    <script src="../js/dialog-polyfill.js"></script>
+    <script src="../js/Team/team.js"></script>
 </div>
+
 
 </body>
 </html>
