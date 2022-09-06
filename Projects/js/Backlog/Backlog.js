@@ -45,6 +45,8 @@ function createTask() {
   document.getElementById("priority").value = "";
   document.getElementById("status").value = "";
   document.getElementById("pbiEffort").value = "";
+
+  document.getElementById("saveTask").removeEventListener("click", createTask);
   closeDialog();
 }
 
@@ -95,26 +97,24 @@ function displayProductBacklog() {
               </li>`;
     output += item;
   }
-  console.log(output);
   document.getElementById("pbi-list").innerHTML = output;
 
 }
 
 function editTask(index) {
-  let name = document.getElementById("editName");
+  let name = document.getElementById("pbiName");
   name.value = productBacklog._taskArray[index]._name;
-  let description = document.getElementById("editDescription");
+  let description = document.getElementById("pbiDesc");
   description.value = productBacklog._taskArray[index]._description;
-  let status = document.getElementById("editStatus");
+  let status = document.getElementById("status");
   status.value = productBacklog._taskArray[index]._status;
-  let priority = document.getElementById("editPriority");
+  let priority = document.getElementById("priority");
   priority.value = productBacklog._taskArray[index]._priority;
-  let assigned = document.getElementById("editAssigned");
+  let assigned = document.getElementById("person");
   assigned.value = productBacklog._taskArray[index]._assigned;
-  let timeTracking = document.getElementById("editTimeTracking");
+  let timeTracking = document.getElementById("pbiEffort");
   timeTracking.value = productBacklog._taskArray[index]._timeTracking;
-  let tags = document.getElementById("editTags");
-  tags.value = productBacklog._taskArray[index]._tags;
+
 }
 
 function saveEditTask(index){
@@ -127,11 +127,7 @@ function saveEditTask(index){
   let person = document.getElementById("editPerson").value;
   let effort = document.getElementById("editEffort").value;
 
-  let task = new Task(name, description, status, priority, person, effort);
-  // Overwrite the old values by replacing it with the new values
-  productBacklog._taskArray[index] = task
-  updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
-  displayProductBacklog();
+  document.getElementById("saveTask").removeEventListener("click", saveEditTask);
   closeDialog();
 }
 
@@ -140,6 +136,7 @@ function add_pbi(){
   let dialog = document.querySelector('dialog');
   if (!dialog.showModal()){
     dialogPolyfill.registerDialog(dialog);
+    document.getElementById("saveTask").addEventListener("click", createTask);
   }
 }
 
@@ -152,6 +149,7 @@ function edit_pbi(){
   let dialog = document.querySelector('dialog');
   if (!dialog.showModal()){
     dialogPolyfill.registerDialog(dialog);
+    document.getElementById("saveTask").addEventListener("click", saveEditTask);
   }
   editTask(0);
 }
