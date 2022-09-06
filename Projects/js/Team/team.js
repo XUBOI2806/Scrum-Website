@@ -9,13 +9,14 @@ function createTeamMember() {
     let person = new Person(name, email);
     updateLSData(PERSON_KEY, person)
     teamBacklog.addTask(person);
-    updateLSData(TEAMBACKLOG_KEY, teamBacklog)
+    updateLSData(TEAMBACKLOG_KEY, teamBacklog);
     displayTeamBacklog();
     closeDialog();
 }
 
 function deleteTeamMember(index){
-    teamBacklog.delete(index);
+    teamBacklog.deleteTask(index);
+    updateLSData(TEAMBACKLOG_KEY, teamBacklog);
     displayTeamBacklog();
 }
 
