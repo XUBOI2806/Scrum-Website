@@ -81,6 +81,20 @@ function displayProductBacklog() {
       `;
     });
 
+    let temp = "";
+    for (let i = 0; i < productBacklog._taskArray.length; i++) {
+      for (let j = i + 1; j < productBacklog._taskArray.length; j++) {
+        if (
+          parseInt(productBacklog._taskArray[i]._timeTracking) <
+            parseInt(productBacklog._taskArray[j]._timeTracking)
+        ) {
+          temp = productBacklog._taskArray[i];
+          productBacklog._taskArray[i] = productBacklog._taskArray[j];
+          productBacklog._taskArray[j] = temp;
+        }
+      }
+    }
+
     // Create html to display the task info
     let item = `
                 <li class="PBI mdl-list__item mdl-list__item--three-line">
