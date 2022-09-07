@@ -134,14 +134,15 @@ function editTask(index) {
  * Update the modified task
  */
 function saveEditTask(index){
-  let name = document.getElementById("editName").value;
-  let description = document.getElementById("editDescription").value;
-  let status = document.getElementById("editStatus").value;
-  let priority = document.getElementById("editPriority").value;
-  let assigned = document.getElementById("editAssigned").value;
-  let tags = document.getElementById("editTags").value;
-  let person = document.getElementById("editPerson").value;
-  let effort = document.getElementById("editEffort").value;
+  let index = indexs;
+  let name = document.getElementById("pbiName").value;
+  let description = document.getElementById("pbiDesc").value;
+  let status = document.getElementById("status").value;
+  let priority = document.getElementById("priority").value;
+  let tags = "test";
+  let person = document.getElementById("person").value;
+  let effort = document.getElementById("pbiEffort").value;
+  let taskType = document.getElementById("pbiType").value;
 
   document.getElementById("saveTask").removeEventListener("click", saveEditTask);
   closeDialog();
