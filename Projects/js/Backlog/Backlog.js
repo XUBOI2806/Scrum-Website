@@ -145,20 +145,16 @@ function editTask(index) {
   parent = effort.parentElement.classList.add("is-dirty");
   effort.value = productBacklog._taskArray[index]._timeTracking;
 
-
-  // let name = document.getElementById("pbiName");
-  // name.value = productBacklog._taskArray[index]._title;
-  // let description = document.getElementById("pbiDesc");
-  // description.value = productBacklog._taskArray[index]._description;
-  // let status = document.getElementById("status");
-  // status.value = productBacklog._taskArray[index]._status;
-  // let priority = document.getElementById("priority");
-  // priority.value = productBacklog._taskArray[index]._priority;
-  // let assigned = document.getElementById("person");
-  // assigned.value = productBacklog._taskArray[index]._assigned;
-  // let timeTracking = document.getElementById("pbiEffort");
-  // timeTracking.value = productBacklog._taskArray[index]._timeTracking;
-  let tags = document.getElementById("")
+  let tags = document.querySelectorAll('input[name="tag"]');
+  let storgedTags = productBacklog._taskArray[index]._tags;
+  for (let i = 0; i < storgedTags.length; i++) {
+    tags.forEach((checkBox) => {
+      if (storgedTags[i][0] == checkBox.value) {
+        checkBox.parentElement.classList.add("is-checked");
+        checkBox.checked = true
+      }
+    });
+  }
   indexs = index;
 }
 
@@ -171,10 +167,10 @@ function saveEditTask() {
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
   let priority = document.getElementById("priority").value;
-  let tags = "test";
   let person = document.getElementById("person").value;
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
+  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
 
   let task = new Task(
     name,
@@ -185,6 +181,27 @@ function saveEditTask() {
     effort,
     taskType
   );
+  
+  console.log(tagCheckboxes)
+  tagCheckboxes.forEach((checkbox) => {
+    switch (checkbox.value) {
+      case "UI":
+        task.addTag(checkbox.value, "#d966ff");
+        break;
+      case "Development":
+        task.addTag(checkbox.value, "#1affc6");
+        break;
+      case "Testing":
+        task.addTag(checkbox.value, "#ff6666");
+        break;
+      default:
+        task.addTag(checkbox.value);
+    }
+  });
+
+
+
+
   // Overwrite the old values by replacing it with the new values
   productBacklog._taskArray[index] = task;
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
