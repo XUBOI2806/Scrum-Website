@@ -30,7 +30,8 @@ class Task {
         status,
         priority,
         assigned,
-        timeTracking = 0
+        timeTracking = 0,
+        taskType
     ) {
         this._title = title;
         this._description = description;
@@ -39,6 +40,7 @@ class Task {
         this._assigned = assigned;
         this._tags = [];
         this._timeTracking = timeTracking;
+        this._taskType = taskType
     }
 
     get title() {
@@ -77,6 +79,10 @@ class Task {
         return this._assigned;
     }
 
+    get taskType() {
+        return this._taskType;
+    }
+
     set assigned(value) {
         this._assigned = value;
     }
@@ -105,6 +111,7 @@ class Task {
         this._assigned = assigned;
         this._tags = tags;
         this._timeTracking = timeTracking;
+        this._taskType = taskType;
     }
 
     fromData(data) {
@@ -115,6 +122,7 @@ class Task {
         this._assigned = data._assigned;
         this._tags = data._tags;
         this._timeTracking = data._timeTracking;
+        this._taskType = data._taskType
     }
 }
 

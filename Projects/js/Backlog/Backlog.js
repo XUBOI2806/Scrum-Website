@@ -20,7 +20,7 @@ function createTask() {
 
   // Create task
   let persons = new Person(person, "asfda");
-  let task = new Task(name, des, status, priority, person, effort);
+  let task = new Task(name, des, status, priority, person, effort, taskType);
   // Get the checked tags
   tagCheckboxes.forEach((checkbox) => {
     switch (checkbox.value) {
@@ -102,7 +102,7 @@ function displayProductBacklog() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(0)">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
                           <i class="material-icons">delete</i>
                         </button>
                     </span>
@@ -118,19 +118,48 @@ function displayProductBacklog() {
  */
 function editTask(index) {
   let name = document.getElementById("pbiName");
+  parent = name.parentElement.classList.add("is-dirty");
   name.value = productBacklog._taskArray[index]._title;
-  let description = document.getElementById("pbiDesc");
-  description.value = productBacklog._taskArray[index]._description;
-  let status = document.getElementById("status");
-  status.value = productBacklog._taskArray[index]._status;
-  let priority = document.getElementById("priority");
-  priority.value = productBacklog._taskArray[index]._priority;
+
+  let des = document.getElementById("pbiDesc");
+  parent = des.parentElement.classList.add("is-dirty");
+  des.value = productBacklog._taskArray[index]._description;
+
+  let taskType = document.getElementById("pbiType");
+  parent = taskType.parentElement.classList.add("is-dirty");
+  taskType.value = productBacklog._taskArray[index]._taskType;
+
   let assigned = document.getElementById("person");
+  parent = assigned.parentElement.classList.add("is-dirty");
   assigned.value = productBacklog._taskArray[index]._assigned;
-  let timeTracking = document.getElementById("pbiEffort");
-  timeTracking.value = productBacklog._taskArray[index]._timeTracking;
+
+  let priority = document.getElementById("priority");
+  parent = priority.parentElement.classList.add("is-dirty");
+  priority.value = productBacklog._taskArray[index]._priority;
+
+  let status = document.getElementById("status");
+  parent = status.parentElement.classList.add("is-dirty");
+  status.value = productBacklog._taskArray[index]._status;
+
+  let effort = document.getElementById("pbiEffort");
+  parent = effort.parentElement.classList.add("is-dirty");
+  effort.value = productBacklog._taskArray[index]._timeTracking;
+
+
+  // let name = document.getElementById("pbiName");
+  // name.value = productBacklog._taskArray[index]._title;
+  // let description = document.getElementById("pbiDesc");
+  // description.value = productBacklog._taskArray[index]._description;
+  // let status = document.getElementById("status");
+  // status.value = productBacklog._taskArray[index]._status;
+  // let priority = document.getElementById("priority");
+  // priority.value = productBacklog._taskArray[index]._priority;
+  // let assigned = document.getElementById("person");
+  // assigned.value = productBacklog._taskArray[index]._assigned;
+  // let timeTracking = document.getElementById("pbiEffort");
+  // timeTracking.value = productBacklog._taskArray[index]._timeTracking;
   let tags = document.getElementById("")
-  indexs = inedx;
+  indexs = index;
 }
 
 /**
