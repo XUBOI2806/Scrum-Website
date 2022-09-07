@@ -60,6 +60,7 @@ function createTask() {
  */
 function deleteTask(index) {
   productBacklog.deleteTask(index);
+  updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
   displayProductBacklog();
 }
 
