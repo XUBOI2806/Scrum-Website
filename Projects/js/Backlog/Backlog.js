@@ -1,4 +1,3 @@
-
 "use strict";
 
 // let taskIndex = localStorage.getItem(TASK_KEY);
@@ -7,6 +6,7 @@
 /**
  * Create a new task and add it to local storage
  */
+let indexs = 0;
 function createTask() {
   // take in user inputs
   let name = document.getElementById("pbiName").value;
@@ -23,7 +23,7 @@ function createTask() {
   let task = new Task(name, des, status, priority, person, effort);
   // Get the checked tags
   tagCheckboxes.forEach((checkbox) => {
-    switch (checkbox.value){
+    switch (checkbox.value) {
       case "UI":
         task.addTag(checkbox.value, "#d966ff");
         break;
@@ -39,16 +39,18 @@ function createTask() {
   });
 
   // Check that all inputs are valid
-  if(validateInputs(name, des, taskType, person, priority, status, effort)){
+  if (validateInputs(name, des, taskType, person, priority, status, effort)) {
     // Add to local storage
-    updateLSData(TASK_KEY, task)
+    updateLSData(TASK_KEY, task);
     productBacklog.addTask(task);
-    updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     // Update Task list
     displayProductBacklog();
 
     // close dialog
-    document.getElementById("saveTask").removeEventListener("click", createTask);
+    document
+      .getElementById("saveTask")
+      .removeEventListener("click", createTask);
     closeDialog();
   }
 }
@@ -56,9 +58,9 @@ function createTask() {
 /**
  * Delete a task
  */
-function deleteTask(index){
-    productBacklog.deleteTask(index)
-    displayProductBacklog()
+function deleteTask(index) {
+  productBacklog.deleteTask(index);
+  displayProductBacklog();
 }
 
 /**
@@ -77,7 +79,7 @@ function displayProductBacklog() {
           <span class="mdl-chip__text">${tag[0]}</span>
       </span>
       `;
-    })
+    });
 
     // Create html to display the task info
     let item = `
@@ -109,7 +111,6 @@ function displayProductBacklog() {
   }
   // Add to the UI list
   document.getElementById("pbi-list").innerHTML = output;
-
 }
 
 /**
@@ -117,7 +118,7 @@ function displayProductBacklog() {
  */
 function editTask(index) {
   let name = document.getElementById("pbiName");
-  name.value = productBacklog._taskArray[index]._name;
+  name.value = productBacklog._taskArray[index]._title;
   let description = document.getElementById("pbiDesc");
   description.value = productBacklog._taskArray[index]._description;
   let status = document.getElementById("status");
@@ -128,12 +129,14 @@ function editTask(index) {
   assigned.value = productBacklog._taskArray[index]._assigned;
   let timeTracking = document.getElementById("pbiEffort");
   timeTracking.value = productBacklog._taskArray[index]._timeTracking;
+  let tags = document.getElementById("")
+  indexs = inedx;
 }
 
 /**
  * Update the modified task
  */
-function saveEditTask(index){
+function saveEditTask() {
   let index = indexs;
   let name = document.getElementById("pbiName").value;
   let description = document.getElementById("pbiDesc").value;
@@ -144,14 +147,31 @@ function saveEditTask(index){
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
 
-  document.getElementById("saveTask").removeEventListener("click", saveEditTask);
+  let task = new Task(
+    name,
+    description,
+    status,
+    priority,
+    person,
+    effort,
+    taskType
+  );
+  // Overwrite the old values by replacing it with the new values
+  productBacklog._taskArray[index] = task;
+  updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+  displayProductBacklog();
+  closeDialog();
+
+  document
+    .getElementById("saveTask")
+    .removeEventListener("click", saveEditTask);
   closeDialog();
 }
 
 /**
  * Show a task in the dialog container with uneditable inputs
  */
-function showTask(){
+function showTask() {
   let name = document.getElementById("pbiName");
   name.value = productBacklog._taskArray[index]._name;
   let description = document.getElementById("pbiDesc");
@@ -169,35 +189,45 @@ function showTask(){
 /**
  * Check that all inputs are valid, otherwise show error messages
  */
-function validateInputs(name, desc, type, person, priority, status, effort){
+function validateInputs(name, desc, type, person, priority, status, effort) {
   let retVal = true;
 
-  if(name === ''){
-    document.getElementById("pbiName").parentElement.classList.add("is-invalid");
+  if (name === "") {
+    document
+      .getElementById("pbiName")
+      .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if(desc === ''){
-    document.getElementById("pbiDesc").parentElement.classList.add("is-invalid");
+  if (desc === "") {
+    document
+      .getElementById("pbiDesc")
+      .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if(type === ''){
-    document.getElementById("pbiType").parentElement.classList.add("is-invalid");
+  if (type === "") {
+    document
+      .getElementById("pbiType")
+      .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if(person === ''){
+  if (person === "") {
     document.getElementById("person").parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if(priority === ''){
-    document.getElementById("priority").parentElement.classList.add("is-invalid");
+  if (priority === "") {
+    document
+      .getElementById("priority")
+      .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if(status === ''){
+  if (status === "") {
     document.getElementById("status").parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if(effort === ''){
-    document.getElementById("pbiEffort").parentElement.classList.add("is-invalid");
+  if (effort === "") {
+    document
+      .getElementById("pbiEffort")
+      .parentElement.classList.add("is-invalid");
     retVal = false;
   }
 
@@ -207,9 +237,9 @@ function validateInputs(name, desc, type, person, priority, status, effort){
 /**
  * Open up the dialog so that a new task can be created
  */
-function add_pbi(){
-  let dialog = document.querySelector('dialog');
-  if (!dialog.showModal()){
+function add_pbi() {
+  let dialog = document.querySelector("dialog");
+  if (!dialog.showModal()) {
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask").addEventListener("click", createTask);
   }
@@ -218,8 +248,8 @@ function add_pbi(){
 /**
  * Close the dialog
  */
-function closeDialog(){
-  let dialog = document.querySelector('dialog');
+function closeDialog() {
+  let dialog = document.querySelector("dialog");
   dialog.close();
 
   // clear all fields
@@ -227,9 +257,15 @@ function closeDialog(){
   document.getElementById("pbiDesc").value = "";
   document.getElementById("pbiType").value = "";
   document.getElementById("pbiEffort").value = "";
-  document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
-  document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
-  document.getElementById("tag-test").parentElement.classList.remove("is-checked");
+  document
+    .getElementById("tag-ui")
+    .parentElement.classList.remove("is-checked");
+  document
+    .getElementById("tag-dev")
+    .parentElement.classList.remove("is-checked");
+  document
+    .getElementById("tag-test")
+    .parentElement.classList.remove("is-checked");
   let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
   tagCheckboxes.forEach((checkbox) => {
     checkbox.checked = false;
@@ -239,9 +275,9 @@ function closeDialog(){
 /**
  * Open the dialog so that a task can be edited
  */
-function edit_pbi(index){
-  let dialog = document.querySelector('dialog');
-  if (!dialog.showModal()){
+function edit_pbi(index) {
+  let dialog = document.querySelector("dialog");
+  if (!dialog.showModal()) {
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask").addEventListener("click", saveEditTask);
   }
