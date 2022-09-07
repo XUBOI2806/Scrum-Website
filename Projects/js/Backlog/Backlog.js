@@ -57,7 +57,7 @@ function createTask() {
  * Delete a task
  */
 function deleteTask(index){
-    productBacklog.delete(index)
+    productBacklog.deleteTask(index)
     displayProductBacklog()
 }
 
@@ -94,7 +94,7 @@ function displayProductBacklog() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi()">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(${i})">
                           <i class="material-icons">edit</i>
                         </button>
                     </span>
@@ -238,13 +238,13 @@ function closeDialog(){
 /**
  * Open the dialog so that a task can be edited
  */
-function edit_pbi(){
+function edit_pbi(index){
   let dialog = document.querySelector('dialog');
   if (!dialog.showModal()){
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask").addEventListener("click", saveEditTask);
   }
-  editTask(0);
+  editTask(index);
 }
 
 // Displays the list of vacations when the page loads
