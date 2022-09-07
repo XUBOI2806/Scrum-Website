@@ -23,6 +23,7 @@ class Task {
      * @param {Object} assigned
      * @param {List} tags
      * @param {Number} timeTracking
+     * @param {String} taskType
      */
     constructor(
         title,
