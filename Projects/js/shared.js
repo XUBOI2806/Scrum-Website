@@ -23,8 +23,9 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {} tags
+     * @param {List} tags
      * @param {Number} timeTracking
+     * @param {String} taskType
      */
     constructor(
         title,
@@ -32,7 +33,8 @@ class Task {
         status,
         priority,
         assigned,
-        timeTracking = 0
+        timeTracking = 0,
+        taskType
     ) {
         this._title = title;
         this._description = description;
@@ -41,6 +43,7 @@ class Task {
         this._assigned = assigned;
         this._tags = [];
         this._timeTracking = timeTracking;
+        this._taskType = taskType
     }
 
     get title() {
@@ -79,6 +82,10 @@ class Task {
         return this._assigned;
     }
 
+    get taskType() {
+        return this._taskType;
+    }
+
     set assigned(value) {
         this._assigned = value;
     }
@@ -87,8 +94,8 @@ class Task {
         return this._tags;
     }
 
-    set addTags(tag) {
-        this._tags.push(tag);
+    addTag(tagName, tagColour = "#dedede") {
+        this._tags.push([tagName, tagColour]);
     }
 
     get timeTracking() {
@@ -107,6 +114,7 @@ class Task {
         this._assigned = assigned;
         this._tags = tags;
         this._timeTracking = timeTracking;
+        this._taskType = taskType;
     }
 
     fromData(data) {
@@ -117,6 +125,7 @@ class Task {
         this._assigned = data._assigned;
         this._tags = data._tags;
         this._timeTracking = data._timeTracking;
+        this._taskType = data._taskType
     }
 }
 
@@ -145,6 +154,7 @@ class Person {
     set email(value) {
         this._email = value;
     }
+
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
@@ -153,7 +163,7 @@ class Person {
 
 class Backlog {
     constructor() {
-        this._array = [];
+        this._taskArray = [];
         if (this.constructor === Backlog) {
             throw new Error("Abstract class cannot be instantiated");
         }
@@ -162,7 +172,7 @@ class Backlog {
     get tasks(){ return this._array; }
 
     addTask(newTask) {
-        this._array.push(newTask);
+        this._taskArray.push(newTask);
     }
 
     deleteTask(taskIndex) {
@@ -179,11 +189,11 @@ class SprintBacklog extends Backlog{
     }
 
     addTask(newTask){
-        this._array.push(newTask);
+        this._taskArray.push(newTask);
     }
 
     deleteTask(taskIndex){
-        this._array.splice(taskIndex, 1)
+        this._taskArray.splice(taskIndex, 1)
     }
 
     // fromData(data) {
@@ -202,22 +212,28 @@ class TeamBacklog extends Backlog{
     }
 
     addTask(newTask){
-        this._array.push(newTask);
+        this._taskArray.push(newTask);
     }
 
     deleteTask(taskIndex){
-        this._array.splice(taskIndex, 1)
+        this._taskArray.splice(taskIndex, 1)
+    }
+
+    getTask(taskIndex) {
+        return this._taskArray[taskIndex];
     }
 
     fromData(data) {
-        this._array = [];
-        for (let i = 0; i < data._array.length; i++) {
-            let person = new Person();
-            person.fromData(data._array[i]);
-            this._array.push(person);
+        this._taskArray = [];
+        for (let i = 0; i < data._taskArray.length; i++) {
+            let task = new Task();
+            task.fromData(data._taskArray[i]);
+            this._taskArray.push(task);
         }
     }
 }
+
+
 
 
 /**
@@ -232,7 +248,6 @@ function checkLSData(key) {
     }
     return false;
 }
-
 /**
  * retrieveLSData function
  * Used to retrieve data from LS at a specific key.

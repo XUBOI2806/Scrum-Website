@@ -32,6 +32,7 @@ div.mdl-layout__drawer-button i.material-icons{
 /*size of the PBI list*/
 div.content-grid.mdl-grid{
     height: 95%;
+    overflow: scroll;
 }
 
 /*green rectangle containing PBIs*/
@@ -39,6 +40,7 @@ div.content-grid.mdl-grid{
     background-color: #006A6A;
     border-radius: 15px;
     opacity: 80%;
+    padding: 15px 0;
 }
 
 /*individual PBI*/
@@ -60,7 +62,7 @@ li.PBI span.mdl-list__item-secondary-content{
 
 /*spacing for each PBI*/
 ul.mdl-list{
-    margin: 20px 30px;
+    margin: 0 30px;
 }
 
 /*aligning fab to add PBI*/
@@ -71,6 +73,49 @@ div.add_circle-container{
 /*colour adding PBIs fab*/
 button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--colored{
     background-color: #60D3AA;
+}
+
+span.mdl-chip{
+    scale: 80%;
+}
+
+/* DIALOG STYLING */
+
+dialog.mdl-dialog{
+    width: 30%;
+}
+div.pbi-line{
+    display: grid;
+    max-width: none;
+}
+
+div.pbi-line.mdl-textfield{
+    min-width: 200px;
+    width: 100%;
+}
+
+div.mdl-textfield.mdl-js-textfield.is-upgraded{
+    width: auto;
+}
+
+div.tag-checkboxes{
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+label.mdl-checkbox{
+    width: auto;
+    padding-right: 15px;
+}
+
+h5.dialog-label{
+    margin: 0;
+    padding-right: 10px;
+}
+
+span.mdl-textfield__error{
+    align-self: end;
 }
 
 .home-title{
