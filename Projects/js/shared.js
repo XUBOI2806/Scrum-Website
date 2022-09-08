@@ -206,6 +206,33 @@ class SprintBacklog extends Backlog{
     // }
 }
 
+class ProductBacklog extends Backlog {
+    constructor() {
+        super();
+    }
+
+    addTask(newTask) {
+        this._taskArray.push(newTask);
+    }
+
+    deleteTask(taskIndex) {
+        this._taskArray.splice(taskIndex, 1)
+    }
+
+    getTask(taskIndex) {
+        return this._taskArray[taskIndex];
+    }
+
+    fromData(data) {
+        this._taskArray = [];
+        for (let i = 0; i < data._taskArray.length; i++) {
+            let task = new Task();
+            task.fromData(data._taskArray[i]);
+            this._taskArray.push(task);
+        }
+    }
+}
+
 class TeamBacklog extends Backlog{
     constructor() {
         super();
@@ -232,8 +259,6 @@ class TeamBacklog extends Backlog{
         }
     }
 }
-
-
 
 
 /**
@@ -277,7 +302,13 @@ function updateLSData(key, data) {
 
 // Global productBacklog and sprintBacklog variable
 let teamBacklog = new TeamBacklog();
+let productBacklog = new ProductBacklog();
 
+if (checkLSData(PRODUCTBACKLOG_KEY)) {
+    let data = retrieveLSData(PRODUCTBACKLOG_KEY);
+    // Restore data into vacationList
+    productBacklog.fromData(data);
+}
 
 if (checkLSData(TEAMBACKLOG_KEY)) {
     let data = retrieveLSData(TEAMBACKLOG_KEY);
