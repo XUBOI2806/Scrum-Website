@@ -358,19 +358,26 @@ function closeDialog() {
 
   // clear all fields
   document.getElementById("pbiName").value = '';
+  document.getElementById("pbiName").parentElement.classList.remove("is-dirty");
   document.getElementById("pbiName").disabled = false;
   document.getElementById("pbiDesc").value = '';
   document.getElementById("pbiDesc").disabled = false;
+  document.getElementById("pbiDesc").parentElement.classList.remove("is-dirty");
   document.getElementById("pbiType").value = "";
   document.getElementById("pbiType").disabled = false;
+  document.getElementById("pbiType").parentElement.classList.remove("is-dirty");
   document.getElementById("pbiEffort").value = "";
   document.getElementById("pbiEffort").disabled = false;
+  document.getElementById("pbiEffort").parentElement.classList.remove("is-dirty");
   document.getElementById("person").value = "0";
   document.getElementById("person").disabled = false;
+  document.getElementById("person").parentElement.classList.remove("is-dirty");
   document.getElementById("priority").value = "0";
   document.getElementById("priority").disabled = false;
+  document.getElementById("priority").parentElement.classList.remove("is-dirty");
   document.getElementById("status").value = "0";
   document.getElementById("status").disabled = false;
+  document.getElementById("status").parentElement.classList.remove("is-dirty");
   document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
   document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
   document.getElementById("tag-test").parentElement.classList.remove("is-checked");
