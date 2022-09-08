@@ -98,7 +98,7 @@ function displayProductBacklog() {
 
     // Create html to display the task info
     let item = `
-                <li class="PBI mdl-list__item mdl-list__item--three-line">
+                <li class="PBI mdl-list__item mdl-list__item--three-line" onclick="showTask(${i})">
                     <span class="mdl-list__item-primary-content">
                         <span>${productBacklog._taskArray[i].title}</span>
                         <span class="mdl-list__item-text-body">
@@ -232,19 +232,60 @@ function saveEditTask() {
 /**
  * Show a task in the dialog container with uneditable inputs
  */
-function showTask() {
+function showTask(index) {
+  let dialog = document.querySelector("dialog");
+  if (!dialog.showModal()) {
+    dialogPolyfill.registerDialog(dialog);
+    document.getElementById("saveTask");
+  }
+
   let name = document.getElementById("pbiName");
-  name.value = productBacklog._taskArray[index]._name;
-  let description = document.getElementById("pbiDesc");
-  description.value = productBacklog._taskArray[index]._description;
-  let status = document.getElementById("status");
-  status.value = productBacklog._taskArray[index]._status;
-  let priority = document.getElementById("priority");
-  priority.value = productBacklog._taskArray[index]._priority;
+  name.parentElement.classList.add("is-dirty");
+  name.disabled = true;
+  name.value = productBacklog._taskArray[index]._title;
+
+  let des = document.getElementById("pbiDesc");
+  des.parentElement.classList.add("is-dirty");
+  des.disabled = true;
+  des.value = productBacklog._taskArray[index]._description;
+
+  let taskType = document.getElementById("pbiType");
+  taskType.parentElement.classList.add("is-dirty");
+  taskType.disabled = true;
+  taskType.value = productBacklog._taskArray[index]._taskType;
+
   let assigned = document.getElementById("person");
+  assigned.parentElement.classList.add("is-dirty");
+  assigned.disabled = true;
   assigned.value = productBacklog._taskArray[index]._assigned;
-  let timeTracking = document.getElementById("pbiEffort");
-  timeTracking.value = productBacklog._taskArray[index]._timeTracking;
+
+  let priority = document.getElementById("priority");
+  priority.parentElement.classList.add("is-dirty");
+  priority.disabled = true;
+  priority.value = productBacklog._taskArray[index]._priority;
+
+  let status = document.getElementById("status");
+  status.parentElement.classList.add("is-dirty");
+  status.disabled = true;
+  status.value = productBacklog._taskArray[index]._status;
+
+  let effort = document.getElementById("pbiEffort");
+  effort.parentElement.classList.add("is-dirty");
+  effort.disabled = true;
+  effort.value = productBacklog._taskArray[index]._timeTracking;
+
+  let tags = document.querySelectorAll('input[name="tag"]');
+  let storedTags = productBacklog._taskArray[index]._tags;
+  for (let i = 0; i < storedTags.length; i++) {
+    tags.forEach((checkBox) => {
+      if (storedTags[i][0] == checkBox.value) {
+        checkBox.parentElement.classList.add("is-checked");
+        checkBox.checked = true;
+      }
+      checkBox.disabled = true;
+    });
+  }
+  indexs = index;
 }
 
 /**
