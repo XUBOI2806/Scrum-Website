@@ -161,10 +161,10 @@ function editTask(index) {
   effort.value = productBacklog._taskArray[index]._timeTracking;
 
   let tags = document.querySelectorAll('input[name="tag"]');
-  let storgedTags = productBacklog._taskArray[index]._tags;
-  for (let i = 0; i < storgedTags.length; i++) {
+  let storedTags = productBacklog._taskArray[index]._tags;
+  for (let i = 0; i < storedTags.length; i++) {
     tags.forEach((checkBox) => {
-      if (storgedTags[i][0] == checkBox.value) {
+      if (storedTags[i][0] == checkBox.value) {
         checkBox.parentElement.classList.add("is-checked");
         checkBox.checked = true
       }
