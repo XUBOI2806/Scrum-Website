@@ -136,6 +136,11 @@ span.mdl-textfield__error{
     align-self: end;
 }
 
+/**/
+#person{
+    min-width: 100px;
+}
+
 /* HOME PAGE STYLING */
 .home-title{
     text-align: center;

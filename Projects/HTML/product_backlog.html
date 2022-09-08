@@ -86,26 +86,26 @@
                         <!-- Name input -->
                         <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiName">
-                            <label class="mdl-textfield__label" for="pbiName">Name...</label>
+                            <label class="mdl-textfield__label" for="pbiName">Name*...</label>
                             <span id="pbiNameError" class="mdl-textfield__error">Name required</span>
                         </div>
                         <!-- Description input -->
                         <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiDesc">
-                            <label class="mdl-textfield__label" for="pbiDesc">Description...</label>
+                            <label class="mdl-textfield__label" for="pbiDesc">Description*...</label>
                             <span id="pbiDescError" class="mdl-textfield__error">Description required</span>
                         </div>
                         <div style="display: inline-block">
                             <!-- Task Type -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" id="pbiType" pattern=".{1,}">
-                                <label class="mdl-textfield__label" for="pbiType">Type of Task...</label>
+                                <label class="mdl-textfield__label" for="pbiType">Type of Task*...</label>
                                 <span id="pbiTypeError" class="mdl-textfield__error">Task type required</span>
                             </div>
                             <!-- Effort Estimation -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" id="pbiEffort" pattern="-?[0-9]*(\.[0-9]+)?">
-                                <label class="mdl-textfield__label" for="pbiEffort">Effort...</label>
+                                <label class="mdl-textfield__label" for="pbiEffort">Effort*...</label>
                                 <span id="pbiEffortError" class="mdl-textfield__error">Integer Effort Estimation required</span>
                             </div>
                         </div>
@@ -114,10 +114,8 @@
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <select class="mdl-textfield__input" id="person">
                                     <option value="0" hidden></option>
-                                    <option value="1">Maily Butel</option>
                                 </select>
                                 <label class="mdl-textfield__label" for="person">Person</label>
-                                <span id="pbiPersonError" class="mdl-textfield__error">Person required</span>
                             </div>
                             <!-- Priority Input -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -142,7 +140,6 @@
                                     <option value="Completed">Completed</option>
                                 </select>
                                 <label class="mdl-textfield__label" for="status">Status</label>
-                                <span id="pbiStatusError" class="mdl-textfield__error">Status required</span>
                             </div>
                         </div>
                         <div>

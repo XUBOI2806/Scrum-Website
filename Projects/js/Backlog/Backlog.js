@@ -15,6 +15,9 @@ function createTask() {
   let person = document.getElementById("person").value;
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
+  if(status === '0'){
+    status = "In Progress";
+  }
   let effort = document.getElementById("pbiEffort").value;
   let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
 
@@ -133,38 +136,38 @@ function displayProductBacklog() {
 function editTask(index) {
 
   let name = document.getElementById("pbiName");
-  parent = name.parentElement.classList.add("is-dirty");
+  name.parentElement.classList.add("is-dirty");
   name.value = productBacklog._taskArray[index]._title;
 
   let des = document.getElementById("pbiDesc");
-  parent = des.parentElement.classList.add("is-dirty");
+  des.parentElement.classList.add("is-dirty");
   des.value = productBacklog._taskArray[index]._description;
 
   let taskType = document.getElementById("pbiType");
-  parent = taskType.parentElement.classList.add("is-dirty");
+  taskType.parentElement.classList.add("is-dirty");
   taskType.value = productBacklog._taskArray[index]._taskType;
 
   let assigned = document.getElementById("person");
-  parent = assigned.parentElement.classList.add("is-dirty");
+  assigned.parentElement.classList.add("is-dirty");
   assigned.value = productBacklog._taskArray[index]._assigned;
 
   let priority = document.getElementById("priority");
-  parent = priority.parentElement.classList.add("is-dirty");
+  priority.parentElement.classList.add("is-dirty");
   priority.value = productBacklog._taskArray[index]._priority;
 
   let status = document.getElementById("status");
-  parent = status.parentElement.classList.add("is-dirty");
+  status.parentElement.classList.add("is-dirty");
   status.value = productBacklog._taskArray[index]._status;
 
   let effort = document.getElementById("pbiEffort");
-  parent = effort.parentElement.classList.add("is-dirty");
+  effort.parentElement.classList.add("is-dirty");
   effort.value = productBacklog._taskArray[index]._timeTracking;
 
   let tags = document.querySelectorAll('input[name="tag"]');
   let storedTags = productBacklog._taskArray[index]._tags;
   for (let i = 0; i < storedTags.length; i++) {
     tags.forEach((checkBox) => {
-      if (storedTags[i][0] == checkBox.value) {
+      if (storedTags[i][0] === checkBox.value) {
         checkBox.parentElement.classList.add("is-checked");
         checkBox.checked = true
       }
@@ -180,6 +183,9 @@ function saveEditTask() {
   let name = document.getElementById("pbiName").value;
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
+  if(status === '0'){
+    status = "In Progress";
+  }
   let priority = document.getElementById("priority").value;
   let person = document.getElementById("person").value;
   let effort = document.getElementById("pbiEffort").value;
@@ -188,7 +194,6 @@ function saveEditTask() {
 
   // Creating a task with the information
   let task = new Task(name, description, status, priority, person, effort, taskType);
-  console.log(tagCheckboxes)
 
   tagCheckboxes.forEach((checkbox) => {
     switch (checkbox.value) {
@@ -276,7 +281,6 @@ function showTask(index) {
   }
 
   document.getElementById("saveTask").disabled = true;
-  indexs = index;
 }
 
 /**
@@ -303,18 +307,10 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
       .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if (person === "0") {
-    document.getElementById("person").parentElement.classList.add("is-invalid");
-    retVal = false;
-  }
   if (priority === "0") {
     document
       .getElementById("priority")
       .parentElement.classList.add("is-invalid");
-    retVal = false;
-  }
-  if (status === "0") {
-    document.getElementById("status").parentElement.classList.add("is-invalid");
     retVal = false;
   }
   if (effort === "") {
@@ -339,6 +335,13 @@ function add_pbi() {
   list_members();
 }
 
+function clearInput(id){
+  document.getElementById(id).value = '';
+  document.getElementById(id).parentElement.classList.remove("is-dirty");
+  document.getElementById(id).disabled = false;
+  document.getElementById(id).parentElement.classList.remove("is-invalid");
+}
+
 /**
  * Close the dialog
  */
@@ -347,27 +350,16 @@ function closeDialog() {
   dialog.close();
 
   // clear all fields
-  document.getElementById("pbiName").value = '';
-  document.getElementById("pbiName").parentElement.classList.remove("is-dirty");
-  document.getElementById("pbiName").disabled = false;
-  document.getElementById("pbiDesc").value = '';
-  document.getElementById("pbiDesc").disabled = false;
-  document.getElementById("pbiDesc").parentElement.classList.remove("is-dirty");
-  document.getElementById("pbiType").value = "";
-  document.getElementById("pbiType").disabled = false;
-  document.getElementById("pbiType").parentElement.classList.remove("is-dirty");
-  document.getElementById("pbiEffort").value = "";
-  document.getElementById("pbiEffort").disabled = false;
-  document.getElementById("pbiEffort").parentElement.classList.remove("is-dirty");
+  clearInput("pbiName");
+  clearInput("pbiDesc");
+  clearInput("pbiType");
+  clearInput("pbiEffort");
+  clearInput("person");
   document.getElementById("person").value = "0";
-  document.getElementById("person").disabled = false;
-  document.getElementById("person").parentElement.classList.remove("is-dirty");
+  clearInput("priority");
   document.getElementById("priority").value = "0";
-  document.getElementById("priority").disabled = false;
-  document.getElementById("priority").parentElement.classList.remove("is-dirty");
+  clearInput("status");
   document.getElementById("status").value = "0";
-  document.getElementById("status").disabled = false;
-  document.getElementById("status").parentElement.classList.remove("is-dirty");
   document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
   document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
   document.getElementById("tag-test").parentElement.classList.remove("is-checked");
@@ -398,7 +390,6 @@ function edit_pbi(index) {
 function list_members() {
   let output = "<option value=\"0\" hidden></option>"
   for (let i = 0; i < teamBacklog._taskArray.length; i++) {
-    console.log(teamBacklog._taskArray[i]._name)
     output += `<option value="${i + 1}">${teamBacklog._taskArray[i]._name}</option>`
   }
   document.getElementById("person").innerHTML = output
