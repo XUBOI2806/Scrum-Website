@@ -1,6 +1,9 @@
 
 "use strict";
 
+/**
+ * Adds a new team member to local storage and display it in the list
+ */
 function createTeamMember() {
     // Take in user inputs
     let name = document.getElementById("memberName").value;
@@ -41,16 +44,21 @@ function validateInputs(name, email) {
     return retVal;
 }
 
-
+/**
+ * Delete a team member from local storage and remove it from the list
+ */
 function deleteTeamMember(index){
     teamBacklog.deleteTask(index);
     updateLSData(TEAMBACKLOG_KEY, teamBacklog);
     displayTeamBacklog();
 }
 
+/**
+ * Show each saved team member in the list
+ */
 function displayTeamBacklog() {
     let output = "";
-    console.log(teamBacklog);
+    // Go through each team member and create a list item for it
     for (let i = 0; i < teamBacklog._taskArray.length; i++) {
         let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line">
@@ -70,38 +78,61 @@ function displayTeamBacklog() {
     document.getElementById("team-list").innerHTML = output;
 }
 
+/**
+ * Display a member's information in the dialog modal
+ */
 function showTeamMember(index){
+    // Open the dialog
     let dialog = document.querySelector('dialog');
     if (!dialog.showModal()){
         dialogPolyfill.registerDialog(dialog);
     }
 
+    // Disable the save button
+    document.getElementById("saveMember").disabled = true;
+
+    // Put the member's name in the input box and disable it
     let name = document.getElementById("memberName");
     name.parentElement.classList.add("is-dirty");
     name.disabled = true;
     name.value = teamBacklog._taskArray[index].name;
 
+    // Put the member's email in the input box and disable it
     let email = document.getElementById("memberEmail");
     email.parentElement.classList.add("is-dirty");
     email.disabled = true;
     email.value = teamBacklog._taskArray[index].email;
-
 }
 
+/**
+ * Open the dialog to add a new team member
+ */
 function add_team_member(){
     let dialog = document.querySelector('dialog');
     if (!dialog.showModal()){
         dialogPolyfill.registerDialog(dialog);
     }
+    // Add functionality to the Save button
+    document.getElementById("saveMember").addEventListener('click', createTeamMember);
 }
+
+/**
+ * Close the dialog
+ */
 function closeDialog(){
+    // Close the dialog
     let dialog = document.querySelector('dialog');
     dialog.close();
-    // clear all fields
+
+    // Return the Save button to its initial state
+    document.getElementById("saveMember").removeEventListener('click', createTeamMember);
+    document.getElementById("saveMember").disabled = false;
+
+    // Clear all fields and enable them
     document.getElementById("memberName").value = "";
+    document.getElementById("memberName").disabled = false;
     document.getElementById("memberEmail").value = "";
+    document.getElementById("memberEmail").disabled = false;
 }
 
-
 displayTeamBacklog();
-
