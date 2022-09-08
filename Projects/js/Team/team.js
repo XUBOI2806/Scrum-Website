@@ -2,17 +2,46 @@
 "use strict";
 
 function createTeamMember() {
-    // take in user inputs
+    // Take in user inputs
     let name = document.getElementById("memberName").value;
     let email = document.getElementById("memberEmail").value;
 
+    // Create person
     let person = new Person(name, email);
-    updateLSData(PERSON_KEY, person)
-    teamBacklog.addTask(person);
-    updateLSData(TEAMBACKLOG_KEY, teamBacklog);
-    displayTeamBacklog();
-    closeDialog();
+
+    // Check that all inputs are valid
+    if (validateInputs(name, email)) {
+        // Add to local storage
+        updateLSData(PERSON_KEY, person)
+        teamBacklog.addTask(person);
+        updateLSData(TEAMBACKLOG_KEY, teamBacklog);
+        // Display the updated Team Backlog
+        displayTeamBacklog();
+        closeDialog();
+    }
 }
+
+/**
+ * Check that all inputs are valid, otherwise show error messages
+ */
+function validateInputs(name, email) {
+    let retVal = true;
+
+    if (name === "") {
+        document
+            .getElementById("pbiName")
+            .parentElement.classList.add("is-invalid");
+        retVal = false;
+    }
+    if (email === "") {
+        document
+            .getElementById("pbiDesc")
+            .parentElement.classList.add("is-invalid");
+        retVal = false;
+    }
+    return retVal;
+}
+
 
 function deleteTeamMember(index){
     teamBacklog.deleteTask(index);
