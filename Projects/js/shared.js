@@ -12,6 +12,7 @@ const TASK_KEY = "currentTaskIndex";
 const SPRINT_KEY = "currentSprintIndex";
 const PRODUCTBACKLOG_KEY = "productBacklogData";
 const SPRINTBACKLOG_KEY = "sprintBacklogData";
+const TEAMBACKLOG_KEY = "teamBacklogData";
 
 
 class Task {
@@ -202,21 +203,17 @@ class SprintBacklog extends Backlog{
     // }
 }
 
-class ProductBacklog extends Backlog{
+class ProductBacklog extends Backlog {
     constructor() {
         super();
     }
 
-    addTask(newTask){
+    addTask(newTask) {
         this._taskArray.push(newTask);
     }
 
-    deleteTask(taskIndex){
+    deleteTask(taskIndex) {
         this._taskArray.splice(taskIndex, 1)
-    }
-
-    getTask(taskIndex) {
-        return this._taskArray[taskIndex];
     }
 
     fromData(data) {
@@ -229,7 +226,28 @@ class ProductBacklog extends Backlog{
     }
 }
 
+class TeamBacklog extends Backlog{
+    constructor() {
+        super();
+    }
 
+    addTask(newTask){
+        this._taskArray.push(newTask);
+    }
+
+    deleteTask(taskIndex){
+        this._taskArray.splice(taskIndex, 1)
+    }
+
+    fromData(data) {
+        this._taskArray = [];
+        for (let i = 0; i < data._taskArray.length; i++) {
+            let person = new Person();
+            person.fromData(data._taskArray[i]);
+            this._taskArray.push(person);
+        }
+    }
+}
 
 
 /**
@@ -272,20 +290,17 @@ function updateLSData(key, data) {
 }
 
 // Global productBacklog and sprintBacklog variable
+let teamBacklog = new TeamBacklog();
 let productBacklog = new ProductBacklog();
-let sprintBacklog = new SprintBacklog();
 
-// Check if data available in LS before continuing
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
-    // If data exists, retrieve it
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
     // Restore data into vacationList
     productBacklog.fromData(data);
 }
 
-if (checkLSData(SPRINTBACKLOG_KEY)) {
-    let data = retrieveLSData(SPRINTBACKLOG_KEY);
+if (checkLSData(TEAMBACKLOG_KEY)) {
+    let data = retrieveLSData(TEAMBACKLOG_KEY);
     // Restore data into vacationList
-    sprintBacklog.fromData(data);
+    teamBacklog.fromData(data);
 }
-
