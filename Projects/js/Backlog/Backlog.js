@@ -6,7 +6,7 @@
 /**
  * Create a new task and add it to local storage
  */
-let indexs = 0;
+
 function createTask() {
   // take in user inputs
   let name = document.getElementById("pbiName").value;
@@ -41,7 +41,6 @@ function createTask() {
   // Check that all inputs are valid
   if (validateInputs(name, des, taskType, person, priority, status, effort)) {
     // Add to local storage
-    updateLSData(TASK_KEY, task);
     productBacklog.addTask(task);
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     // Update Task list
@@ -170,14 +169,13 @@ function editTask(index) {
       }
     });
   }
-  indexs = index;
+  updateLSData(TASK_KEY, index)
 }
 
 /**
  * Update the modified task
  */
 function saveEditTask() {
-  let index = indexs;
   let name = document.getElementById("pbiName").value;
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
@@ -187,17 +185,10 @@ function saveEditTask() {
   let taskType = document.getElementById("pbiType").value;
   let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
 
-  let task = new Task(
-    name,
-    description,
-    status,
-    priority,
-    person,
-    effort,
-    taskType
-  );
-  
+  // Creating a task with the information
+  let task = new Task(name, description, status, priority, person, effort, taskType);
   console.log(tagCheckboxes)
+
   tagCheckboxes.forEach((checkbox) => {
     switch (checkbox.value) {
       case "UI":
@@ -214,15 +205,12 @@ function saveEditTask() {
     }
   });
 
-
-
-
   // Overwrite the old values by replacing it with the new values
+  let index = retrieveLSData(TASK_KEY)
   productBacklog._taskArray[index] = task;
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
   displayProductBacklog();
   closeDialog();
-
   document
     .getElementById("saveTask")
     .removeEventListener("click", saveEditTask);

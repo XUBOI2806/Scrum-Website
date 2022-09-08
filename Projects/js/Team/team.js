@@ -12,7 +12,6 @@ function createTeamMember() {
     // Check that all inputs are valid
     if (validateInputs(name, email)) {
         // Add to local storage
-        updateLSData(PERSON_KEY, person)
         teamBacklog.addTask(person);
         updateLSData(TEAMBACKLOG_KEY, teamBacklog);
         // Display the updated Team Backlog

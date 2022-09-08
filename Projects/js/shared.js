@@ -12,7 +12,6 @@ const TASK_KEY = "currentTaskIndex";
 const SPRINT_KEY = "currentSprintIndex";
 const PRODUCTBACKLOG_KEY = "productBacklogData";
 const SPRINTBACKLOG_KEY = "sprintBacklogData";
-const PERSON_KEY = "personIndex";
 const TEAMBACKLOG_KEY = "teamBacklogData";
 
 
