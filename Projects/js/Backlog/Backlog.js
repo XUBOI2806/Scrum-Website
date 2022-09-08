@@ -314,10 +314,10 @@ function closeDialog() {
   dialog.close();
 
   // clear all fields
-  document.getElementById("pbiName").value = undefined;
-  document.getElementById("pbiDesc").value = undefined;
-  document.getElementById("pbiType").value = undefined;
-  document.getElementById("pbiEffort").value = undefined;
+  document.getElementById("pbiName").value = "";
+  document.getElementById("pbiDesc").value = "";
+  document.getElementById("pbiType").value = "";
+  document.getElementById("pbiEffort").value = "";
   document
     .getElementById("tag-ui")
     .parentElement.classList.remove("is-checked");
