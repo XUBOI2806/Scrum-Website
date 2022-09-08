@@ -312,17 +312,17 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
       .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if (person === "") {
+  if (person === "0") {
     document.getElementById("person").parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if (priority === "") {
+  if (priority === "0") {
     document
       .getElementById("priority")
       .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if (status === "") {
+  if (status === "0") {
     document.getElementById("status").parentElement.classList.add("is-invalid");
     retVal = false;
   }
@@ -355,22 +355,27 @@ function closeDialog() {
   dialog.close();
 
   // clear all fields
-  document.getElementById("pbiName").value = "";
-  document.getElementById("pbiDesc").value = "";
+  document.getElementById("pbiName").value = '';
+  document.getElementById("pbiName").disabled = false;
+  document.getElementById("pbiDesc").value = '';
+  document.getElementById("pbiDesc").disabled = false;
   document.getElementById("pbiType").value = "";
+  document.getElementById("pbiType").disabled = false;
   document.getElementById("pbiEffort").value = "";
-  document
-    .getElementById("tag-ui")
-    .parentElement.classList.remove("is-checked");
-  document
-    .getElementById("tag-dev")
-    .parentElement.classList.remove("is-checked");
-  document
-    .getElementById("tag-test")
-    .parentElement.classList.remove("is-checked");
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  document.getElementById("pbiEffort").disabled = false;
+  document.getElementById("person").value = "0";
+  document.getElementById("person").disabled = false;
+  document.getElementById("priority").value = "0";
+  document.getElementById("priority").disabled = false;
+  document.getElementById("status").value = "0";
+  document.getElementById("status").disabled = false;
+  document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
+  document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
+  document.getElementById("tag-test").parentElement.classList.remove("is-checked");
+  let tagCheckboxes = document.querySelectorAll('input[name="tag"]');
   tagCheckboxes.forEach((checkbox) => {
     checkbox.checked = false;
+    checkbox.disabled = false;
   });
 }
 

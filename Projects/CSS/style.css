@@ -48,6 +48,13 @@ div.content-grid.mdl-grid{
     background-color: #FFFCF6;
     border-radius: 12px;
     margin: 15px 0;
+    border: 0 solid #FFFCF6;
+    transition: border ease-in-out 0.5s;
+}
+
+.PBI:hover{
+    border: 3px solid #60D3AA;
+    transition: border ease-in-out 0.5s;
 }
 
 /*for the edit and delete buttons for each PBI*/
@@ -112,6 +119,12 @@ label.mdl-checkbox{
 h5.dialog-label{
     margin: 0;
     padding-right: 10px;
+}
+
+input[disabled]{
+    pointer-events: none;
+    opacity: 0.6;
+    background: #e6e6e6;
 }
 
 span.mdl-textfield__error{
