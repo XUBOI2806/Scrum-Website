@@ -100,7 +100,7 @@ function displayProductBacklog() {
 
     // Create html to display the task info
     let item = `
-                <li class="PBI mdl-list__item mdl-list__item--three-line">
+                <li class="list-item mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content" onclick="showTask(${i})">
                         <span>${productBacklog._taskArray[i].title}</span>
                         <span class="mdl-list__item-text-body">
