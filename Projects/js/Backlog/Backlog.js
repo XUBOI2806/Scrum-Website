@@ -285,6 +285,8 @@ function showTask(index) {
       checkBox.disabled = true;
     });
   }
+
+  document.getElementById("saveTask").disabled = true;
   indexs = index;
 }
 
@@ -377,6 +379,7 @@ function closeDialog() {
     checkbox.checked = false;
     checkbox.disabled = false;
   });
+  document.getElementById("saveTask").disabled = false;
 }
 
 /**
