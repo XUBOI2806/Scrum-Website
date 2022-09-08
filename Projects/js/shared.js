@@ -168,8 +168,6 @@ class Backlog {
         }
     }
 
-    get tasks(){ return this._array; }
-
     addTask(newTask) {
         this._taskArray.push(newTask);
     }
@@ -218,10 +216,6 @@ class ProductBacklog extends Backlog {
         this._taskArray.splice(taskIndex, 1)
     }
 
-    getTask(taskIndex) {
-        return this._taskArray[taskIndex];
-    }
-
     fromData(data) {
         this._taskArray = [];
         for (let i = 0; i < data._taskArray.length; i++) {
@@ -245,16 +239,12 @@ class TeamBacklog extends Backlog{
         this._taskArray.splice(taskIndex, 1)
     }
 
-    getTask(taskIndex) {
-        return this._taskArray[taskIndex];
-    }
-
     fromData(data) {
         this._taskArray = [];
         for (let i = 0; i < data._taskArray.length; i++) {
-            let task = new Task();
-            task.fromData(data._taskArray[i]);
-            this._taskArray.push(task);
+            let person = new Person();
+            person.fromData(data._taskArray[i]);
+            this._taskArray.push(person);
         }
     }
 }

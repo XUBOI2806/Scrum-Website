@@ -131,6 +131,7 @@ function displayProductBacklog() {
  * Put saved values of task into the dialog container
  */
 function editTask(index) {
+
   let name = document.getElementById("pbiName");
   parent = name.parentElement.classList.add("is-dirty");
   name.value = productBacklog._taskArray[index]._title;
@@ -292,6 +293,7 @@ function add_pbi() {
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask").addEventListener("click", createTask);
   }
+  list_members();
 }
 
 /**
@@ -330,8 +332,22 @@ function edit_pbi(index) {
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask").addEventListener("click", saveEditTask);
   }
+  list_members();
   editTask(index);
 }
+
+/**
+ * Creates a list
+ */
+function list_members() {
+  let output = "<option value=\"0\" hidden></option>"
+  for (let i = 0; i < teamBacklog._taskArray.length; i++) {
+    console.log(teamBacklog._taskArray[i]._name)
+    output += `<option value="${i + 1}">${teamBacklog._taskArray[i]._name}</option>`
+  }
+  document.getElementById("person").innerHTML = output
+}
+
 
 // Displays the list of vacations when the page loads
 displayProductBacklog();

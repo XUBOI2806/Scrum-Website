@@ -55,8 +55,8 @@ function displayTeamBacklog() {
         let item = `
                 <li class="PBI mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content">
-                        <span>${teamBacklog._taskArray[i].name}</span>
-                        <span class="mdl-list__item-text-body">${teamBacklog._taskArray[i].email}</span>
+                        <span>${teamBacklog._taskArray[i]._name}</span>
+                        <span class="mdl-list__item-text-body">${teamBacklog._taskArray[i]._email}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
