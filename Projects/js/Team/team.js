@@ -29,13 +29,13 @@ function validateInputs(name, email) {
 
     if (name === "") {
         document
-            .getElementById("pbiName")
+            .getElementById("memberName")
             .parentElement.classList.add("is-invalid");
         retVal = false;
     }
     if (email === "") {
         document
-            .getElementById("pbiDesc")
+            .getElementById("memberEmail")
             .parentElement.classList.add("is-invalid");
         retVal = false;
     }
@@ -70,6 +70,22 @@ function displayTeamBacklog() {
     }
     document.getElementById("team-list").innerHTML = output;
 }
+
+
+function add_team_member(){
+    let dialog = document.querySelector('dialog');
+    if (!dialog.showModal()){
+        dialogPolyfill.registerDialog(dialog);
+    }
+}
+function closeDialog(){
+    let dialog = document.querySelector('dialog');
+    dialog.close();
+    // clear all fields
+    document.getElementById("memberName").value = "";
+    document.getElementById("memberEmail").value = "";
+}
+
 
 displayTeamBacklog();
 

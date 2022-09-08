@@ -196,29 +196,6 @@ class SprintBacklog extends Backlog{
     // }
 }
 
-class ProductBacklog extends Backlog{
-    constructor() {
-        super();
-    }
-
-    addTask(newTask){
-        this._array.push(newTask);
-    }
-
-    deleteTask(taskIndex){
-        this._array.splice(taskIndex, 1)
-    }
-
-    fromData(data) {
-        this._array = [];
-        for (let i = 0; i < data._array.length; i++) {
-            let task = new Task();
-            task.fromData(data._array[i]);
-            this._array.push(task);
-        }
-    }
-}
-
 class TeamBacklog extends Backlog{
     constructor() {
         super();
@@ -284,23 +261,8 @@ function updateLSData(key, data) {
 }
 
 // Global productBacklog and sprintBacklog variable
-let productBacklog = new ProductBacklog();
-let sprintBacklog = new SprintBacklog();
 let teamBacklog = new TeamBacklog();
 
-// Check if data available in LS before continuing
-if (checkLSData(PRODUCTBACKLOG_KEY)) {
-    // If data exists, retrieve it
-    let data = retrieveLSData(PRODUCTBACKLOG_KEY);
-    // Restore data into vacationList
-    productBacklog.fromData(data);
-}
-
-if (checkLSData(SPRINTBACKLOG_KEY)) {
-    let data = retrieveLSData(SPRINTBACKLOG_KEY);
-    // Restore data into vacationList
-    sprintBacklog.fromData(data);
-}
 
 if (checkLSData(TEAMBACKLOG_KEY)) {
     let data = retrieveLSData(TEAMBACKLOG_KEY);

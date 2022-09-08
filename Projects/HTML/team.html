@@ -66,13 +66,15 @@
                         <div class="pbi-line mdl-textfield">
                             <label class="mdl-typography--title">Team Member</label>
                         </div>
-                        <div class="pbi-line mdl-textfield mdl-js-textfield">
+                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="memberName">
                             <label class="mdl-textfield__label" for="memberName">Name</label>
+                            <span id="memberNameError" class="mdl-textfield__error">Name required</span>
                         </div>
-                        <div class="pbi-line mdl-textfield mdl-js-textfield">
+                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="memberEmail">
                             <label class="mdl-textfield__label" for="memberEmail">Email</label>
+                            <span id="memberEmailError" class="mdl-textfield__error">Email required</span>
                         </div>
                         <div>
                             <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
@@ -89,16 +91,6 @@
             </div>
         </div>
     </main>
-    <script>
-        let dialog = document.querySelector('dialog');
-        function add_team_member(){
-            if (!dialog.showModal()){
-                dialogPolyfill.registerDialog(dialog);
-            }
-        }
-        function closeDialog(){dialog.close();}
-
-    </script>
     <script src="../js/shared.js"></script>
     <script src="../js/dialog-polyfill.js"></script>
     <script src="../js/Team/team.js"></script>
