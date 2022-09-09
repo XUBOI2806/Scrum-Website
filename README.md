@@ -1,5 +1,15 @@
 # FIT2101 Semester 2 Group 2
 
+## Team members
+|Name | Student ID | 
+|---|---|
+|Ethan Owens |32514190|
+|Felix Xu |32498535|
+|Jas Bhasin |32522118|
+|Maily Butel| |
+|Zihua Huang |32542186 |
+
+
 ### Time and task tracking tools used: Trello
 Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
 
