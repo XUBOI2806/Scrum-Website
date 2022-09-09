@@ -48,7 +48,7 @@
                 <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
                     <ul class="mdl-list" id="pbi-list">
                         <!-- li is one PBI item -->
-                        <li class="PBI mdl-list__item mdl-list__item--three-line">
+                        <li class="list-item mdl-list__item mdl-list__item--three-line">
                             <span class="mdl-list__item-primary-content" onclick="showTask()">
                                 <span>PBI Name</span>
                                 <span class="mdl-list__item-text-body">
@@ -62,13 +62,13 @@
                                 </span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <!-- Colored icon button -->
+                                <!-- Edit button -->
                                 <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(0)">
                                   <i class="material-icons">edit</i>
                                 </button>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <!-- Colored icon button -->
+                                <!-- Delete button -->
                                 <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(0)">
                                   <i class="material-icons">delete</i>
                                 </button>
@@ -83,43 +83,41 @@
                         <div class="pbi-line mdl-textfield">
                             <label class="mdl-typography--title">Product Backlog Item</label>
                         </div>
+                        <!-- Name input -->
                         <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiName">
-                            <label class="mdl-textfield__label" for="pbiName">Name...</label>
+                            <label class="mdl-textfield__label" for="pbiName">Name*...</label>
                             <span id="pbiNameError" class="mdl-textfield__error">Name required</span>
                         </div>
+                        <!-- Description input -->
                         <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiDesc">
-                            <label class="mdl-textfield__label" for="pbiDesc">Description...</label>
+                            <label class="mdl-textfield__label" for="pbiDesc">Description*...</label>
                             <span id="pbiDescError" class="mdl-textfield__error">Description required</span>
                         </div>
                         <div style="display: inline-block">
                             <!-- Task Type -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" id="pbiType" pattern=".{1,}">
-                                <label class="mdl-textfield__label" for="pbiType">Type of Task...</label>
+                                <label class="mdl-textfield__label" for="pbiType">Type of Task*...</label>
                                 <span id="pbiTypeError" class="mdl-textfield__error">Task type required</span>
                             </div>
                             <!-- Effort Estimation -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" id="pbiEffort" pattern="-?[0-9]*(\.[0-9]+)?">
-                                <label class="mdl-textfield__label" for="pbiEffort">Effort...</label>
+                                <label class="mdl-textfield__label" for="pbiEffort">Effort*...</label>
                                 <span id="pbiEffortError" class="mdl-textfield__error">Integer Effort Estimation required</span>
                             </div>
                         </div>
                         <div>
                             <!-- Assigning Person Input -->
-                            <!-- Simple Select with arrow -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <select class="mdl-textfield__input" id="person">
                                     <option value="0" hidden></option>
-                                    <option value="1">Maily Butel</option>
                                 </select>
                                 <label class="mdl-textfield__label" for="person">Person</label>
-                                <span id="pbiPersonError" class="mdl-textfield__error">Person required</span>
                             </div>
                             <!-- Priority Input -->
-                            <!-- Simple Select with arrow -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <select class="mdl-textfield__input" id="priority">
                                     <option value="0" hidden></option>
@@ -132,7 +130,6 @@
                             </div>
 
                             <!-- Status Input -->
-                            <!-- Simple Select with arrow -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <select class="mdl-textfield__input" id="status">
                                     <option value="0" hidden></option>
@@ -143,7 +140,6 @@
                                     <option value="Completed">Completed</option>
                                 </select>
                                 <label class="mdl-textfield__label" for="status">Status</label>
-                                <span id="pbiStatusError" class="mdl-textfield__error">Status required</span>
                             </div>
                         </div>
                         <div>
@@ -165,7 +161,7 @@
                             </div>
                         </div>
                         <div>
-
+                            <!-- Buttons to cancel or save -->
                             <div>
                                 <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
                                 <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveTask">Save</button>
@@ -174,6 +170,7 @@
                     </div>
                 </dialog>
             </div>
+            <!-- Button to add task -->
             <div class="add_circle-container">
                 <!-- Colored FAB button -->
                 <button id="add-pbi" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="add_pbi()">
@@ -183,6 +180,8 @@
             </div>
         </div>
     </main>
+
+    <!-- Link js files -->
     <script src="../js/shared.js"></script>
     <script src="../js/dialog-polyfill.js"></script>
     <script src="../js/Backlog/Backlog.js"></script>

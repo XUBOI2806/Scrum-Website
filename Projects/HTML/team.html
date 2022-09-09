@@ -41,11 +41,61 @@
     <main class="mdl-layout__content">
         <!-- PAGE CONTENT -->
         <div class="page-content">
-
+            <div class="content-grid mdl-grid">
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet">
+                </div>
+                <!-- The Team container (green rectangle) -->
+                <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
+                    <ul class="mdl-list" id="team-list">
+                        <li class="list-item mdl-list__item mdl-list__item--three-line">
+                    <span class="mdl-list__item-primary-content">
+                        <span>Name</span>
+                        <span class="mdl-list__item-text-body">Email</span>
+                    </span>
+                            <span class="mdl-list__item-secondary-content">
+                        <!-- Colored icon button -->
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTeamMember(0)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </span>
+                        </li>
+                    </ul>
+                </div>
+                <dialog class="mdl-dialog">
+                    <div class="mdl-dialog__content">
+                        <div class="pbi-line mdl-textfield">
+                            <label class="mdl-typography--title">Team Member</label>
+                        </div>
+                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="memberName">
+                            <label class="mdl-textfield__label" for="memberName">Name</label>
+                            <span id="memberNameError" class="mdl-textfield__error">Name required</span>
+                        </div>
+                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="memberEmail">
+                            <label class="mdl-textfield__label" for="memberEmail">Email</label>
+                            <span id="memberEmailError" class="mdl-textfield__error">Email required</span>
+                        </div>
+                        <div>
+                            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
+                            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveMember">Save</button>
+                        </div>
+                    </div>
+                </dialog>
+            </div>
+            <div class="add_circle-container">
+                <!-- Colored FAB button -->
+                <button id="add-pbi" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="add_team_member()">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
         </div>
-
     </main>
+    <script src="../js/shared.js"></script>
+    <script src="../js/dialog-polyfill.js"></script>
+    <script src="../js/Team/team.js"></script>
 </div>
+
 
 </body>
 </html>
