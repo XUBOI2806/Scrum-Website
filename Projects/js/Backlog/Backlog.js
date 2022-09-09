@@ -61,8 +61,11 @@ function createTask() {
  * Delete a task
  */
 function deleteTask(index) {
+  //using function to delete at index
   productBacklog.deleteTask(index);
+  //updating local storage 
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+  //running the display function with changed PB
   displayProductBacklog();
 }
 
@@ -83,7 +86,7 @@ function displayProductBacklog() {
       </span>
       `;
     });
-
+    // sorting the product backlog list by story points in descending order
     let temp = "";
     for (let i = 0; i < productBacklog._taskArray.length; i++) {
       for (let j = i + 1; j < productBacklog._taskArray.length; j++) {
@@ -134,7 +137,7 @@ function displayProductBacklog() {
  * Put saved values of task into the dialog container
  */
 function editTask(index) {
-
+  //getting inputs from local storage and removing placeholders for every thing
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
   name.value = productBacklog._taskArray[index]._title;
@@ -163,6 +166,7 @@ function editTask(index) {
   effort.parentElement.classList.add("is-dirty");
   effort.value = productBacklog._taskArray[index]._timeTracking;
 
+  //getting user tag values and then only ticking the right ones present in LS
   let tags = document.querySelectorAll('input[name="tag"]');
   let storedTags = productBacklog._taskArray[index]._tags;
   for (let i = 0; i < storedTags.length; i++) {
@@ -173,6 +177,7 @@ function editTask(index) {
       }
     });
   }
+  //updating the index
   updateLSData(TASK_KEY, index)
 }
 
@@ -180,6 +185,7 @@ function editTask(index) {
  * Update the modified task
  */
 function saveEditTask() {
+  //getting all the elements from the inputs
   let name = document.getElementById("pbiName").value;
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
@@ -194,7 +200,7 @@ function saveEditTask() {
 
   // Creating a task with the information
   let task = new Task(name, description, status, priority, person, effort, taskType);
-
+  //saving checkbox values
   tagCheckboxes.forEach((checkbox) => {
     switch (checkbox.value) {
       case "UI":
@@ -227,12 +233,13 @@ function saveEditTask() {
  * Show a task in the dialog container with uneditable inputs
  */
 function showTask(index) {
+  //displaying necessary modal
   let dialog = document.querySelector("dialog");
   if (!dialog.showModal()) {
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask");
   }
-
+  //getting inputs from LS and displaying them, they cannot be manipulated
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
   name.disabled = true;
