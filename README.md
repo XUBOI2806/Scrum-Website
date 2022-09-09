@@ -21,7 +21,6 @@ Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
 - Missing links to Time Tracking and product management websites are now provided
 - Added **Contingency Plan** section in **Risk Management Plan**
 - Removed unnecessary risks in **Risk Management Plan**
-- 
 
 Link to [Google Drive](https://drive.google.com/drive/u/1/folders/0AMwyQkfk78-aUk9PVA)
 
