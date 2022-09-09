@@ -44,7 +44,7 @@ div.content-grid.mdl-grid{
 }
 
 /*individual PBI*/
-.PBI{
+.list-item{
     background-color: #FFFCF6;
     border-radius: 12px;
     margin: 15px 0;
@@ -53,7 +53,7 @@ div.content-grid.mdl-grid{
 }
 
 /*hover animation to tell user it can be clicked*/
-.PBI:hover{
+.list-item:hover{
     border: 3px solid #60D3AA;
     transition: border ease-in-out 0.5s;
 }
@@ -64,7 +64,7 @@ span button.mdl-button--colored i.material-icons{
 }
 
 /*vertically aligning edit and delete buttons*/
-li.PBI span.mdl-list__item-secondary-content{
+li.list-item span.mdl-list__item-secondary-content{
     height: auto;
 }
 
