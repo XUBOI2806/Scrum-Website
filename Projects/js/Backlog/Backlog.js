@@ -16,7 +16,7 @@ function createTask() {
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
   if(status === '0'){
-    status = "In Progress";
+    status = "Not Started";
   }
   let effort = document.getElementById("pbiEffort").value;
   let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
@@ -190,7 +190,7 @@ function saveEditTask() {
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
   if(status === '0'){
-    status = "In Progress";
+    status = "Not Started";
   }
   let priority = document.getElementById("priority").value;
   let person = document.getElementById("person").value;
@@ -217,16 +217,19 @@ function saveEditTask() {
     }
   });
 
-  // Overwrite the old values by replacing it with the new values
-  let index = retrieveLSData(TASK_KEY)
-  productBacklog._taskArray[index] = task;
-  updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
-  displayProductBacklog();
-  closeDialog();
-  document
-    .getElementById("saveTask")
-    .removeEventListener("click", saveEditTask);
-  closeDialog();
+  // Check that all inputs are valid
+  if (validateInputs(name, description, taskType, person, priority, status, effort)) {
+    // Overwrite the old values by replacing it with the new values
+    let index = retrieveLSData(TASK_KEY)
+    productBacklog._taskArray[index] = task;
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    displayProductBacklog();
+    document
+        .getElementById("saveTask")
+        .removeEventListener("click", saveEditTask);
+    closeDialog();
+  }
+
 }
 
 /**
@@ -385,8 +388,8 @@ function edit_pbi(index) {
   let dialog = document.querySelector("dialog");
   if (!dialog.showModal()) {
     dialogPolyfill.registerDialog(dialog);
-    document.getElementById("saveTask").addEventListener("click", saveEditTask);
   }
+  document.getElementById("saveTask").addEventListener("click", saveEditTask);
   list_members();
   editTask(index);
 }
