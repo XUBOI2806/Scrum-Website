@@ -406,5 +406,5 @@ function list_members() {
 }
 
 
-// Displays the list of vacations when the page loads
+// Displays the list of tasks when the page loads
 displayProductBacklog();
