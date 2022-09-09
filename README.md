@@ -6,14 +6,22 @@
 |Ethan Owens |32514190|
 |Felix Xu |32498535|
 |Jas Bhasin |32522118|
-|Maily Butel| |
+|Maily Butel|32469713|
 |Zihua Huang |32542186 |
 
 
 ### Time and task tracking tools used: Trello
 Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
 
-### Please check updated project plan in Google Drive.
+### Updated Project Plan
+####Updates
+- **Vision** updated
+- **Git Usage** updated
+- **Time Tracking** details and process clarified 
+- Missing links to Time Tracking and product management websites are now provided
+- Added **Contingency Plan** section in **Risk Management Plan**
+- Removed unnecessary risks in **Risk Management Plan**
+- 
 
 Link to [Google Drive](https://drive.google.com/drive/u/1/folders/0AMwyQkfk78-aUk9PVA)
 
