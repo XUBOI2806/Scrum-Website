@@ -41,21 +41,6 @@ function createTask() {
 
 
   }
-  // radio.forEach((checkbox) => {
-  //   switch (checkbox.value) {
-  //     case "UI":
-  //       task.addTag(checkbox.value, "#d966ff");
-  //       break;
-  //     case "Development":
-  //       task.addTag(checkbox.value, "#1affc6");
-  //       break;
-  //     case "Testing":
-  //       task.addTag(checkbox.value, "#ff6666");
-  //       break;
-  //     default:
-  //       task.addTag(checkbox.value);
-  //   }
-  // });
 
   // Check that all inputs are valid
   if (validateInputs(name, des, taskType, person, priority, status, effort, tag)) {
@@ -328,7 +313,7 @@ function validateInputs(name, desc, type, person, priority, status, effort, tag)
       .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if (type === "") {
+  if (type === "0") {
     document
       .getElementById("pbiType")
       .parentElement.classList.add("is-invalid");
@@ -364,6 +349,9 @@ function add_pbi() {
   if (!dialog.showModal()) {
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask").addEventListener("click", createTask);
+    document.getElementById("status").value = "Not Started";
+    document.getElementById("status").disabled = true;
+    document.getElementById("status").parentElement.classList.add("is-dirty");
   }
   list_members();
 }
