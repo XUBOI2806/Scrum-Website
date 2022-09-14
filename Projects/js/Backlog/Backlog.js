@@ -28,18 +28,16 @@ function createTask() {
   if(tag != null){
     switch (tag.value){
       case "UI":
-        task.addTag(tag.value, "#d966ff");
+        task.addTag(tag.value, "#AAC4FF");
         break;
       case "Development":
-        task.addTag(tag.value, "#1affc6");
+        task.addTag(tag.value, "#ACE7FF");
         break;
       case "Testing":
-        task.addTag(tag.value, "#ff6666");
+        task.addTag(tag.value, "#ECC5FB");
         break;
       default:
-  }
-
-
+    }
   }
 
   // Check that all inputs are valid
@@ -78,16 +76,6 @@ function displayProductBacklog() {
 
   // Iterate through saved tasks in the backlog
   for (let i = 0; i < productBacklog._taskArray.length; i++) {
-    // Get tags of each task
-    let tagsOutput = "";
-    productBacklog._taskArray[i].tags.forEach((tag) => {
-      tagsOutput += `
-      <span class="mdl-chip" style="background-color: ${tag[1]}">
-          <span class="mdl-chip__text">${tag[0]}</span>
-      </span>
-      `;
-    });
-    // sorting the product backlog list by story points in descending order
     let temp = "";
     for (let i = 0; i < productBacklog._taskArray.length; i++) {
       for (let j = i + 1; j < productBacklog._taskArray.length; j++) {
@@ -104,15 +92,14 @@ function displayProductBacklog() {
 
     // Create html to display the task info
     let item = `
-                <li class="list-item mdl-list__item mdl-list__item--three-line">
+                <li class="list-item mdl-list__item mdl-list__item--three-line" 
+                style="background-color: ${productBacklog._taskArray[i].tags[0][1]}">
                     <span class="mdl-list__item-primary-content" onclick="showTask(${i})">
                         <span>${productBacklog._taskArray[i].title}</span>
                         <span class="mdl-list__item-text-body">
                             <span style="padding-right: 15px">Priority: ${productBacklog._taskArray[i].priority}</span>
                             <span>Story Points: ${productBacklog._taskArray[i].timeTracking}</span><br>
-                            <span>Tags:
-                              <span class="tag-chips">${tagsOutput}</span>
-                            </span>
+                            <span>Tag: ${productBacklog._taskArray[i].tags[0][0]}</span>
                         </span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
@@ -197,29 +184,28 @@ function saveEditTask() {
   let person = document.getElementById("person").value;
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  let tag = document.querySelector('input[name="tag"]:checked');
 
   // Creating a task with the information
   let task = new Task(name, description, status, priority, person, effort, taskType);
   //saving checkbox values
-  tagCheckboxes.forEach((checkbox) => {
-    switch (checkbox.value) {
+  if(tag != null){
+    switch (tag.value){
       case "UI":
-        task.addTag(checkbox.value, "#d966ff");
+        task.addTag(tag.value, "#AAC4FF");
         break;
       case "Development":
-        task.addTag(checkbox.value, "#1affc6");
+        task.addTag(tag.value, "#ACE7FF");
         break;
       case "Testing":
-        task.addTag(checkbox.value, "#ff6666");
+        task.addTag(tag.value, "#ECC5FB");
         break;
       default:
-        task.addTag(checkbox.value);
     }
-  });
+  }
 
   // Check that all inputs are valid
-  if (validateInputs(name, description, taskType, person, priority, status, effort)) {
+  if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
     let index = retrieveLSData(TASK_KEY)
     productBacklog._taskArray[index] = task;
