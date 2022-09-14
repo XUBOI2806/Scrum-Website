@@ -109,12 +109,12 @@ div.mdl-textfield.mdl-js-textfield.is-upgraded{
 }
 
 /*styling of tag checkboxes*/
-div.tag-checkboxes{
+div#tag-radios{
     display: flex;
     align-items: center;
     padding-bottom: 15px;
 }
-label.mdl-checkbox{
+label.mdl-radio{
     width: auto;
     padding-right: 15px;
 }

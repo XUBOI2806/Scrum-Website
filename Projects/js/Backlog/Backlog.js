@@ -19,30 +19,46 @@ function createTask() {
     status = "Not Started";
   }
   let effort = document.getElementById("pbiEffort").value;
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  let tag = document.querySelector('input[name="tag"]:checked');
 
   // Create task
   let persons = new Person(person, "asfda");
   let task = new Task(name, des, status, priority, person, effort, taskType);
-  // Get the checked tags
-  tagCheckboxes.forEach((checkbox) => {
-    switch (checkbox.value) {
+  // Get the checked tag
+  if(tag != null){
+    switch (tag.value){
       case "UI":
-        task.addTag(checkbox.value, "#d966ff");
+        task.addTag(tag.value, "#d966ff");
         break;
       case "Development":
-        task.addTag(checkbox.value, "#1affc6");
+        task.addTag(tag.value, "#1affc6");
         break;
       case "Testing":
-        task.addTag(checkbox.value, "#ff6666");
+        task.addTag(tag.value, "#ff6666");
         break;
       default:
-        task.addTag(checkbox.value);
-    }
-  });
+  }
+
+
+  }
+  // radio.forEach((checkbox) => {
+  //   switch (checkbox.value) {
+  //     case "UI":
+  //       task.addTag(checkbox.value, "#d966ff");
+  //       break;
+  //     case "Development":
+  //       task.addTag(checkbox.value, "#1affc6");
+  //       break;
+  //     case "Testing":
+  //       task.addTag(checkbox.value, "#ff6666");
+  //       break;
+  //     default:
+  //       task.addTag(checkbox.value);
+  //   }
+  // });
 
   // Check that all inputs are valid
-  if (validateInputs(name, des, taskType, person, priority, status, effort)) {
+  if (validateInputs(name, des, taskType, person, priority, status, effort, tag)) {
     // Add to local storage
     productBacklog.addTask(task);
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
@@ -281,14 +297,15 @@ function showTask(index) {
   let tags = document.querySelectorAll('input[name="tag"]');
   let storedTags = productBacklog._taskArray[index]._tags;
   for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((checkBox) => {
-      if (storedTags[i][0] == checkBox.value) {
-        checkBox.parentElement.classList.add("is-checked");
-        checkBox.checked = true;
+    tags.forEach((radio) => {
+      if (storedTags[i][0] === radio.value) {
+        radio.parentElement.classList.add("is-checked");
+        radio.checked = true;
       }
-      checkBox.disabled = true;
+      radio.disabled = true;
     });
   }
+
 
   document.getElementById("saveTask").disabled = true;
 }
@@ -296,7 +313,7 @@ function showTask(index) {
 /**
  * Check that all inputs are valid, otherwise show error messages
  */
-function validateInputs(name, desc, type, person, priority, status, effort) {
+function validateInputs(name, desc, type, person, priority, status, effort, tag) {
   let retVal = true;
 
   if (name === "") {
@@ -327,6 +344,12 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
     document
       .getElementById("pbiEffort")
       .parentElement.classList.add("is-invalid");
+    retVal = false;
+  }
+
+  if (tag === null) {
+    document
+        .getElementById("tag-test").parentElement.parentElement.classList.add("is-invalid");
     retVal = false;
   }
 
@@ -370,13 +393,15 @@ function closeDialog() {
   document.getElementById("priority").value = "0";
   clearInput("status");
   document.getElementById("status").value = "0";
+
   document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
   document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
   document.getElementById("tag-test").parentElement.classList.remove("is-checked");
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]');
-  tagCheckboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-    checkbox.disabled = false;
+  document.getElementById("tag-test").parentElement.parentElement.classList.remove("is-invalid");
+  let radios = document.querySelectorAll('input[name="tag"]');
+  radios.forEach((radio) => {
+    radio.checked = false;
+    radio.disabled = false;
   });
   document.getElementById("saveTask").disabled = false;
 }
