@@ -98,9 +98,13 @@
                         <div style="display: inline-block">
                             <!-- Task Type -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="pbiType" pattern=".{1,}">
-                                <label class="mdl-textfield__label" for="pbiType">Type of Task*...</label>
-                                <span id="pbiTypeError" class="mdl-textfield__error">Task type required</span>
+                                <select class="mdl-textfield__input" id="pbiType">
+                                    <option value="0" hidden></option>
+                                    <option value="Story">Story</option>
+                                    <option value="Bug">Bug</option>
+                                </select>
+                                <label class="mdl-textfield__label" for="priority">Task Type</label>
+                                <span id="pbiTypeError" class="mdl-textfield__error">Type required</span>
                             </div>
                             <!-- Effort Estimation -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

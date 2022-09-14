@@ -137,7 +137,7 @@ span.mdl-textfield__error{
 }
 
 /**/
-#person{
+#person, #pbiType{
     min-width: 100px;
 }
 
