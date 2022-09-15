@@ -36,7 +36,7 @@ div.content-grid.mdl-grid{
 }
 
 /*green rectangle containing PBIs*/
-.PBI-container{
+.list-container{
     background-color: #006A6A;
     border-radius: 15px;
     opacity: 80%;
@@ -44,12 +44,13 @@ div.content-grid.mdl-grid{
 }
 
 /*individual PBI*/
-.list-item{
+li.list-item{
     background-color: #FFFCF6;
     border-radius: 12px;
     margin: 15px 0;
     border: 0 solid #FFFCF6;
     transition: border ease-in-out 0.5s;
+    min-height: 72px;
 }
 
 /*hover animation to tell user it can be clicked*/
@@ -96,11 +97,11 @@ dialog.mdl-dialog{
 }
 
 /*determines the layout of the dialog*/
-div.pbi-line{
+div.dialog-line{
     display: grid;
     max-width: none;
 }
-div.pbi-line.mdl-textfield{
+div.dialog-line.mdl-textfield{
     min-width: 200px;
     width: 100%;
 }

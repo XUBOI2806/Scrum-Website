@@ -332,13 +332,12 @@ function validateInputs(name, desc, type, person, priority, status, effort, tag)
  */
 function add_pbi() {
   let dialog = document.querySelector("dialog");
-  if (!dialog.showModal()) {
-    dialogPolyfill.registerDialog(dialog);
-    document.getElementById("saveTask").addEventListener("click", createTask);
-    document.getElementById("status").value = "Not Started";
-    document.getElementById("status").disabled = true;
-    document.getElementById("status").parentElement.classList.add("is-dirty");
-  }
+  dialog.showModal();
+  dialogPolyfill.registerDialog(dialog);
+  document.getElementById("saveTask").addEventListener("click", createTask);
+  document.getElementById("status").value = "Not Started";
+  document.getElementById("status").disabled = true;
+  document.getElementById("status").parentElement.classList.add("is-dirty");
   list_members();
 }
 
@@ -386,9 +385,8 @@ function closeDialog() {
  */
 function edit_pbi(index) {
   let dialog = document.querySelector("dialog");
-  if (!dialog.showModal()) {
-    dialogPolyfill.registerDialog(dialog);
-  }
+  dialog.showModal();
+  dialogPolyfill.registerDialog(dialog);
   document.getElementById("saveTask").addEventListener("click", saveEditTask);
   list_members();
   editTask(index);

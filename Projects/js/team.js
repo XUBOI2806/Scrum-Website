@@ -84,9 +84,8 @@ function displayTeamBacklog() {
 function showTeamMember(index){
     // Open the dialog
     let dialog = document.querySelector('dialog');
-    if (!dialog.showModal()){
-        dialogPolyfill.registerDialog(dialog);
-    }
+    dialog.showModal()
+    dialogPolyfill.registerDialog(dialog);
 
     // Disable the save button
     document.getElementById("saveMember").disabled = true;
@@ -109,9 +108,8 @@ function showTeamMember(index){
  */
 function add_team_member(){
     let dialog = document.querySelector('dialog');
-    if (!dialog.showModal()){
-        dialogPolyfill.registerDialog(dialog);
-    }
+    dialog.showModal()
+    dialogPolyfill.registerDialog(dialog);
     // Add functionality to the Save button
     document.getElementById("saveMember").addEventListener('click', createTeamMember);
 }
