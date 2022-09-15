@@ -92,9 +92,9 @@
                             <label class="mdl-textfield__label" for="pbiDesc">Description*...</label>
                             <span id="pbiDescError" class="mdl-textfield__error">Description required</span>
                         </div>
-                        <div style="display: inline-block">
+                        <div>
                             <!-- Task Type -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%">
                                 <select class="mdl-textfield__input" id="pbiType">
                                     <option value="0" hidden></option>
                                     <option value="Story">Story</option>
@@ -104,7 +104,7 @@
                                 <span id="pbiTypeError" class="mdl-textfield__error">Type required</span>
                             </div>
                             <!-- Effort Estimation -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%">
                                 <input class="mdl-textfield__input" type="text" id="pbiEffort" pattern="-?[0-9]*(\.[0-9]+)?">
                                 <label class="mdl-textfield__label" for="pbiEffort">Effort*...</label>
                                 <span id="pbiEffortError" class="mdl-textfield__error">Integer Effort Estimation required</span>
@@ -112,14 +112,14 @@
                         </div>
                         <div>
                             <!-- Assigning Person Input -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 32%">
                                 <select class="mdl-textfield__input" id="person">
                                     <option value="0" hidden></option>
                                 </select>
                                 <label class="mdl-textfield__label" for="person">Person</label>
                             </div>
                             <!-- Priority Input -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 32%;">
                                 <select class="mdl-textfield__input" id="priority">
                                     <option value="0" hidden></option>
                                     <option value="Low">Low</option>
@@ -131,7 +131,7 @@
                             </div>
 
                             <!-- Status Input -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 32%">
                                 <select class="mdl-textfield__input" id="status">
                                     <option value="0" hidden></option>
                                     <option value="Not Started">Not Started</option>
@@ -158,6 +158,7 @@
                                     <span class="mdl-radio__label">Testing</span>
                                     <span id="pbiTag" class="mdl-textfield__error">Tag Required</span>
                                 </label>
+
                             </div>
                         </div>
                         <div>

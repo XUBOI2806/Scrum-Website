@@ -1,3 +1,7 @@
+
+/**
+ * Open the add sprint dialog
+ */
 function add_sprint(){
     let dialog = document.querySelector("dialog");
     dialog.showModal();
@@ -10,4 +14,9 @@ function add_sprint(){
 function closeDialog() {
     let dialog = document.querySelector("dialog");
     dialog.close();
+}
+
+function showManageSprint(index){
+    // Check if it's status is not started, in progress, or completed
+    // Open the corresponding page
 }

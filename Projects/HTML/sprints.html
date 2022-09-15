@@ -48,7 +48,7 @@
                 <div class="list-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
                     <ul class="mdl-list" id="sprint-list">
                         <!-- li is one PBI item -->
-                        <li class="list-item mdl-list__item">
+                        <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
                             <span class="mdl-list__item-primary-content" onclick="showTask()">
                                 <span>Sprint Name</span>
                             </span>
@@ -72,7 +72,7 @@
                             <label class="mdl-textfield__label" for="sprintName">Name*...</label>
                             <span id="sprintNameError" class="mdl-textfield__error">Name required</span>
                         </div>
-                        <!-- Description input -->
+                        <!-- Date inputs -->
                         <div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
                                  style="width: 49%">
