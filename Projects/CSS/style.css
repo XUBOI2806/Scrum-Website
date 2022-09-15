@@ -109,6 +109,18 @@ div.mdl-textfield.mdl-js-textfield.is-upgraded{
     width: auto;
 }
 
+div.dialog-buttons{
+    display: flex;
+    flex: auto;
+    justify-content: center;
+}
+
+div.dialog-buttons button.mdl-button{
+    margin-left: 10px;
+    margin-right: 10px;
+    min-width: 84px;
+}
+
 /*styling of tag checkboxes*/
 div#tag-radios{
     display: flex;

@@ -78,12 +78,12 @@
                 <dialog class="mdl-dialog">
                     <div class="mdl-dialog__content">
                         <div class="dialog-line mdl-textfield">
-                            <label class="mdl-typography--title">New Sprint</label>
+                            <label class="mdl-typography--title">Product Backlog Item</label>
                         </div>
                         <!-- Name input -->
                         <div class="dialog-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="sprintName">
-                            <label class="mdl-textfield__label" for="sprintName">Name*...</label>
+                            <input class="mdl-textfield__input" type="text" id="pbiName">
+                            <label class="mdl-textfield__label" for="pbiName">Name*...</label>
                             <span id="sprintNameError" class="mdl-textfield__error">Name required</span>
                         </div>
                         <!-- Description input -->
@@ -162,7 +162,7 @@
                         </div>
                         <div>
                             <!-- Buttons to cancel or save -->
-                            <div>
+                            <div class="dialog-buttons">
                                 <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
                                 <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveTask">Save</button>
                             </div>

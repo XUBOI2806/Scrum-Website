@@ -68,9 +68,9 @@
                         </div>
                         <!-- Name input -->
                         <div class="dialog-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="pbiName">
-                            <label class="mdl-textfield__label" for="pbiName">Name*...</label>
-                            <span id="pbiNameError" class="mdl-textfield__error">Name required</span>
+                            <input class="mdl-textfield__input" type="text" id="sprintName">
+                            <label class="mdl-textfield__label" for="sprintName">Name*...</label>
+                            <span id="sprintNameError" class="mdl-textfield__error">Name required</span>
                         </div>
                         <!-- Description input -->
                         <div>
@@ -78,18 +78,20 @@
                                  style="width: 49%">
                                 <input class="mdl-textfield__input" type="date" id="startDate" placeholder="DD/MM/YYYY">
                                 <label class="mdl-textfield__label" for="startDate">Starting Date</label>
+                                <span id="startDateError" class="mdl-textfield__error">Starting Date required</span>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
                                  style="width: 49%">
                                 <input class="mdl-textfield__input" type="date" id="endDate" placeholder="DD/MM/YYYY">
                                 <label class="mdl-textfield__label" for="endDate">Starting Date</label>
+                                <span id="endDateError" class="mdl-textfield__error">End Date required</span>
                             </div>
                         </div>
                         <div>
                             <!-- Buttons to cancel or save -->
-                            <div>
+                            <div class="dialog-buttons">
                                 <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
-                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveTask">Save</button>
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveSprint">Save</button>
                             </div>
                         </div>
                     </div>
