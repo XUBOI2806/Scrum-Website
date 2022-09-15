@@ -176,4 +176,13 @@ div.dialog-buttons button.hover-red:hover{
 div.dialog-buttons button.hover-green:hover{
     background-color: #8cd9b3;
     transition: background-color ease-in-out 0.3s;
+
+}
+
+.container-title{
+    color: #FFFCF6;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+    margin: 12px 0;
 }
