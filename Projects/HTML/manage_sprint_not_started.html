@@ -41,7 +41,49 @@
     <main class="mdl-layout__content">
         <!-- PAGE CONTENT -->
         <div class="page-content">
-
+            <div class="content-grid mdl-grid">
+                <div class="mdl-cell mdl-cell--1-col">
+                </div>
+                <!-- The Sprint container (green rectangle) -->
+                <div class="list-container mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet">
+                    <ul class="mdl-list" id="backlog-list">
+                        <!-- li is one PBI item -->
+                        <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
+                            <span class="mdl-list__item-primary-content" onclick="showTask()">
+                                <span>PBI</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <!-- Add to Sprint Backlog button -->
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="">
+                                  <i class="material-icons">add</i>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-container mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet">
+                    <ul class="mdl-list" id="sprint-list">
+                        <!-- li is one PBI item -->
+                        <li class="list-item mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span>PBI</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <!-- Remove from Sprint Backlog button -->
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="">
+                                  <i class="material-icons">remove</i>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Buttons to delete, save or start sprint -->
+            <div class="dialog-buttons">
+                <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised" onclick="">Delete</button>
+                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="">Save</button>
+                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="">Start</button>
+            </div>
         </div>
 
     </main>

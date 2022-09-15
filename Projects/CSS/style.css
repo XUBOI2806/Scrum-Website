@@ -119,6 +119,9 @@ div.dialog-buttons button.mdl-button{
     margin-left: 10px;
     margin-right: 10px;
     min-width: 84px;
+    background-color: #FFFCF6;
+    border: 1px solid #006A6A;
+    border-radius: 6px;
 }
 
 /*styling of tag checkboxes*/
@@ -162,4 +165,15 @@ span.mdl-textfield__error{
 .home-buttons{
     display: flex;
     justify-content: space-around;
+}
+
+/* MANAGE SPRINT STYLING */
+div.dialog-buttons button.hover-red:hover{
+    background-color: #ff8080;
+    transition: background-color ease-in-out 0.3s;
+}
+
+div.dialog-buttons button.hover-green:hover{
+    background-color: #8cd9b3;
+    transition: background-color ease-in-out 0.3s;
 }

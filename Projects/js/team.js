@@ -61,10 +61,10 @@ function displayTeamBacklog() {
     // Go through each team member and create a list item for it
     for (let i = 0; i < teamBacklog._taskArray.length; i++) {
         let item = `
-                <li class="list-item mdl-list__item mdl-list__item--three-line">
+                <li class="list-item mdl-list__item mdl-list__item--two-line">
                     <span class="mdl-list__item-primary-content" onclick="showTeamMember(${i})">
                         <span>${teamBacklog._taskArray[i]._name}</span>
-                        <span class="mdl-list__item-text-body">${teamBacklog._taskArray[i]._email}</span>
+                        <span class="mdl-list__item-sub-title">${teamBacklog._taskArray[i]._email}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
