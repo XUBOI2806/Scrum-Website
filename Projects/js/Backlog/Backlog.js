@@ -19,30 +19,29 @@ function createTask() {
     status = "Not Started";
   }
   let effort = document.getElementById("pbiEffort").value;
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  let tag = document.querySelector('input[name="tag"]:checked');
 
   // Create task
   let persons = new Person(person, "asfda");
   let task = new Task(name, des, status, priority, person, effort, taskType);
-  // Get the checked tags
-  tagCheckboxes.forEach((checkbox) => {
-    switch (checkbox.value) {
+  // Get the checked tag
+  if(tag != null){
+    switch (tag.value){
       case "UI":
-        task.addTag(checkbox.value, "#d966ff");
+        task.addTag(tag.value, "#AAC4FF");
         break;
       case "Development":
-        task.addTag(checkbox.value, "#1affc6");
+        task.addTag(tag.value, "#ACE7FF");
         break;
       case "Testing":
-        task.addTag(checkbox.value, "#ff6666");
+        task.addTag(tag.value, "#ECC5FB");
         break;
       default:
-        task.addTag(checkbox.value);
     }
-  });
+  }
 
   // Check that all inputs are valid
-  if (validateInputs(name, des, taskType, person, priority, status, effort)) {
+  if (validateInputs(name, des, taskType, person, priority, status, effort, tag)) {
     // Add to local storage
     productBacklog.addTask(task);
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
@@ -77,16 +76,6 @@ function displayProductBacklog() {
 
   // Iterate through saved tasks in the backlog
   for (let i = 0; i < productBacklog._taskArray.length; i++) {
-    // Get tags of each task
-    let tagsOutput = "";
-    productBacklog._taskArray[i].tags.forEach((tag) => {
-      tagsOutput += `
-      <span class="mdl-chip" style="background-color: ${tag[1]}">
-          <span class="mdl-chip__text">${tag[0]}</span>
-      </span>
-      `;
-    });
-    // sorting the product backlog list by story points in descending order
     let temp = "";
     for (let i = 0; i < productBacklog._taskArray.length; i++) {
       for (let j = i + 1; j < productBacklog._taskArray.length; j++) {
@@ -103,15 +92,14 @@ function displayProductBacklog() {
 
     // Create html to display the task info
     let item = `
-                <li class="list-item mdl-list__item mdl-list__item--three-line">
+                <li class="list-item mdl-list__item mdl-list__item--three-line" 
+                style="background-color: ${productBacklog._taskArray[i].tags[0][1]}">
                     <span class="mdl-list__item-primary-content" onclick="showTask(${i})">
                         <span>${productBacklog._taskArray[i].title}</span>
                         <span class="mdl-list__item-text-body">
                             <span style="padding-right: 15px">Priority: ${productBacklog._taskArray[i].priority}</span>
                             <span>Story Points: ${productBacklog._taskArray[i].timeTracking}</span><br>
-                            <span>Tags:
-                              <span class="tag-chips">${tagsOutput}</span>
-                            </span>
+                            <span>Tag: ${productBacklog._taskArray[i].tags[0][0]}</span>
                         </span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
@@ -196,29 +184,28 @@ function saveEditTask() {
   let person = document.getElementById("person").value;
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  let tag = document.querySelector('input[name="tag"]:checked');
 
   // Creating a task with the information
   let task = new Task(name, description, status, priority, person, effort, taskType);
   //saving checkbox values
-  tagCheckboxes.forEach((checkbox) => {
-    switch (checkbox.value) {
+  if(tag != null){
+    switch (tag.value){
       case "UI":
-        task.addTag(checkbox.value, "#d966ff");
+        task.addTag(tag.value, "#AAC4FF");
         break;
       case "Development":
-        task.addTag(checkbox.value, "#1affc6");
+        task.addTag(tag.value, "#ACE7FF");
         break;
       case "Testing":
-        task.addTag(checkbox.value, "#ff6666");
+        task.addTag(tag.value, "#ECC5FB");
         break;
       default:
-        task.addTag(checkbox.value);
     }
-  });
+  }
 
   // Check that all inputs are valid
-  if (validateInputs(name, description, taskType, person, priority, status, effort)) {
+  if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
     let index = retrieveLSData(TASK_KEY)
     productBacklog._taskArray[index] = task;
@@ -281,14 +268,15 @@ function showTask(index) {
   let tags = document.querySelectorAll('input[name="tag"]');
   let storedTags = productBacklog._taskArray[index]._tags;
   for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((checkBox) => {
-      if (storedTags[i][0] == checkBox.value) {
-        checkBox.parentElement.classList.add("is-checked");
-        checkBox.checked = true;
+    tags.forEach((radio) => {
+      if (storedTags[i][0] === radio.value) {
+        radio.parentElement.classList.add("is-checked");
+        radio.checked = true;
       }
-      checkBox.disabled = true;
+      radio.disabled = true;
     });
   }
+
 
   document.getElementById("saveTask").disabled = true;
 }
@@ -296,7 +284,7 @@ function showTask(index) {
 /**
  * Check that all inputs are valid, otherwise show error messages
  */
-function validateInputs(name, desc, type, person, priority, status, effort) {
+function validateInputs(name, desc, type, person, priority, status, effort, tag) {
   let retVal = true;
 
   if (name === "") {
@@ -311,7 +299,7 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
       .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if (type === "") {
+  if (type === "0") {
     document
       .getElementById("pbiType")
       .parentElement.classList.add("is-invalid");
@@ -330,6 +318,12 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
     retVal = false;
   }
 
+  if (tag === null) {
+    document
+        .getElementById("tag-test").parentElement.parentElement.classList.add("is-invalid");
+    retVal = false;
+  }
+
   return retVal;
 }
 
@@ -341,6 +335,9 @@ function add_pbi() {
   if (!dialog.showModal()) {
     dialogPolyfill.registerDialog(dialog);
     document.getElementById("saveTask").addEventListener("click", createTask);
+    document.getElementById("status").value = "Not Started";
+    document.getElementById("status").disabled = true;
+    document.getElementById("status").parentElement.classList.add("is-dirty");
   }
   list_members();
 }
@@ -363,6 +360,7 @@ function closeDialog() {
   clearInput("pbiName");
   clearInput("pbiDesc");
   clearInput("pbiType");
+  document.getElementById("person").value = "0";
   clearInput("pbiEffort");
   clearInput("person");
   document.getElementById("person").value = "0";
@@ -370,13 +368,15 @@ function closeDialog() {
   document.getElementById("priority").value = "0";
   clearInput("status");
   document.getElementById("status").value = "0";
+
   document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
   document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
   document.getElementById("tag-test").parentElement.classList.remove("is-checked");
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]');
-  tagCheckboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-    checkbox.disabled = false;
+  document.getElementById("tag-test").parentElement.parentElement.classList.remove("is-invalid");
+  let radios = document.querySelectorAll('input[name="tag"]');
+  radios.forEach((radio) => {
+    radio.checked = false;
+    radio.disabled = false;
   });
   document.getElementById("saveTask").disabled = false;
 }

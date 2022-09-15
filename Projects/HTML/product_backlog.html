@@ -98,9 +98,13 @@
                         <div style="display: inline-block">
                             <!-- Task Type -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="pbiType" pattern=".{1,}">
-                                <label class="mdl-textfield__label" for="pbiType">Type of Task*...</label>
-                                <span id="pbiTypeError" class="mdl-textfield__error">Task type required</span>
+                                <select class="mdl-textfield__input" id="pbiType">
+                                    <option value="0" hidden></option>
+                                    <option value="Story">Story</option>
+                                    <option value="Bug">Bug</option>
+                                </select>
+                                <label class="mdl-textfield__label" for="priority">Task Type</label>
+                                <span id="pbiTypeError" class="mdl-textfield__error">Type required</span>
                             </div>
                             <!-- Effort Estimation -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -135,8 +139,6 @@
                                     <option value="0" hidden></option>
                                     <option value="Not Started">Not Started</option>
                                     <option value="In Progress">In Progress</option>
-                                    <option value="Developing Phase">Developing Phase</option>
-                                    <option value="Testing Phase">Testing Phase</option>
                                     <option value="Completed">Completed</option>
                                 </select>
                                 <label class="mdl-textfield__label" for="status">Status</label>
@@ -144,19 +146,20 @@
                         </div>
                         <div>
                             <!-- Tag checkboxes -->
-                            <div class="tag-checkboxes">
+                            <div id="tag-radios" class="mdl-textfield">
                                 <h5 class="dialog-label">Tags: </h5>
-                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="tag-ui">
-                                    <input type="checkbox" id="tag-ui" name="tag" value="UI" class="mdl-checkbox__input">
-                                    <span class="mdl-checkbox__label">UI</span>
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="tag-ui">
+                                    <input type="radio" id="tag-ui" class="mdl-radio__button" name="tag" value="UI">
+                                    <span class="mdl-radio__label">UI</span>
                                 </label>
-                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="tag-dev">
-                                    <input type="checkbox" id="tag-dev" name="tag" value="Development" class="mdl-checkbox__input">
-                                    <span class="mdl-checkbox__label">Development</span>
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="tag-dev">
+                                    <input type="radio" id="tag-dev" class="mdl-radio__button" name="tag" value="Development">
+                                    <span class="mdl-radio__label">Development</span>
                                 </label>
-                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="tag-test">
-                                    <input type="checkbox" id="tag-test" name="tag" value="Testing" class="mdl-checkbox__input">
-                                    <span class="mdl-checkbox__label">Testing</span>
+                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="tag-test">
+                                    <input type="radio" id="tag-test" class="mdl-radio__button" name="tag" value="Testing">
+                                    <span class="mdl-radio__label">Testing</span>
+                                    <span id="pbiTag" class="mdl-textfield__error">Tag Required</span>
                                 </label>
                             </div>
                         </div>
