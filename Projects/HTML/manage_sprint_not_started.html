@@ -50,12 +50,12 @@
                     <ul class="mdl-list" id="backlog-list">
                         <!-- li is one PBI item -->
                         <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
-                            <span class="mdl-list__item-primary-content" onclick="showTask()">
+                            <span class="mdl-list__item-primary-content">
                                 <span>PBI</span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
                                 <!-- Add to Sprint Backlog button -->
-                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="">
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="addTaskSB(0)">
                                   <i class="material-icons">add</i>
                                 </button>
                             </span>
@@ -82,14 +82,16 @@
             </div>
             <!-- Buttons to delete, save or start sprint -->
             <div class="dialog-buttons">
-                <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised" onclick="">Delete</button>
-                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="">Save</button>
-                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="">Start</button>
+                <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised" onclick="deleteSprint()">Delete</button>
+                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="saveInactiveSprint()">Save</button>
+                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="startInactiveSprint()">Start</button>
             </div>
         </div>
 
     </main>
 </div>
-
+<script src="../js/shared.js"></script>
+<script src="../js/dialog-polyfill.js"></script>
+<script src="../js/sprint.js"></script>
 </body>
 </html>

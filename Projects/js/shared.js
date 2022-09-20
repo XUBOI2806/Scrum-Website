@@ -183,6 +183,7 @@ class Backlog {
 class SprintBacklog extends Backlog{
     constructor() {
         super();
+        this.status = "not-started";
     }
 
     addTask(newTask){
@@ -292,6 +293,7 @@ function updateLSData(key, data) {
 // Global productBacklog and sprintBacklog variable
 let teamBacklog = new TeamBacklog();
 let productBacklog = new ProductBacklog();
+let sprintBacklog = new SprintBacklog();
 
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
