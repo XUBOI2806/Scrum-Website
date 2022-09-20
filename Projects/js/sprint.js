@@ -9,6 +9,7 @@ function add_sprint() {
 // IN ACTIVE SPRINT CODE
 function displayBackLogTasks() {
   let output = "";
+  let indexArray = [];
 
   // Iterate through saved tasks in the backlog
   for (let i = 0; i < productBacklog._taskArray.length; i++) {
@@ -38,10 +39,18 @@ function displayBackLogTasks() {
                                 </button>
                             </span>
                         </li>`;
+    if (sprintBacklog._taskArray.includes(productBacklog._taskArray[i])) {
+        indexArray.push(i)
+    }
     output += item;
   }
   // Add to the UI list
   document.getElementById("backlog-list").innerHTML = output;
+
+  for(let i = 0;i < indexArray.length;i++){
+    let node = document.getElementById("backlog-list");
+    node.children[indexArray[i]].setAttribute("disabled", "true");
+  }
 }
 
 displayBackLogTasks();
@@ -49,9 +58,12 @@ displayBackLogTasks();
 function addTaskSB(index) {
   let task = productBacklog._taskArray[index];
   sprintBacklog.addTask(task);
-  let node = document.getElementById("backlog-list");
-  node.children[index].setAttribute('disabled', 'true')
+  updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+  //   let node = document.getElementById("backlog-list");
+  //   node.children[index].setAttribute('disabled', 'true')
+
   displaySprintBacklog();
+  displayBackLogTasks();
 }
 
 function displaySprintBacklog() {
