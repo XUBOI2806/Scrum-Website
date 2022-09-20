@@ -11,13 +11,50 @@ function add_sprint(){
 }
 
 function createSprint(){
-        // take in user inputs
+    // take in user inputs
     let sprintName = document.getElementById("sprintName").value;
     let startDate = document.getElementById("startDate").value;
     let endDate = document.getElementById("endDate").value;
-    sprintList.push(sprintName)
-    displaySprint()
-    closeDialog()
+    if(validateSprintInputs(sprintName, startDate, endDate)){
+        sprintList.push(sprintName);
+        displaySprint();
+        closeDialog();
+    }
+}
+
+function validateSprintInputs(name, startDateString, endDateString){
+    let retVal = true;
+    let todaysDate = new Date();
+    startDate = new Date(startDateString);
+    endDate = new Date(endDateString);
+
+    if(name === ""){
+        document.getElementById("sprintName").parentElement.classList.add("is-invalid");
+        retVal = false;
+    }
+
+    if((startDateString === "") || (startDate.getTime() < todaysDate.getTime())){
+        document.getElementById("startDate").parentElement.classList.add("is-invalid");
+        retVal = false;
+    }
+
+    if(endDateString === "" || (endDate.getTime() < startDate.getTime())){
+        document.getElementById("endDate").parentElement.classList.add("is-invalid");
+        retVal = false;
+    }
+
+    return retVal;
+}
+
+/**
+ * Clear values and all extra attributes of an input
+ * @param id the id of the input
+ */
+function clearInput(id){
+    document.getElementById(id).value = '';
+    document.getElementById(id).parentElement.classList.remove("is-dirty");
+    document.getElementById(id).disabled = false;
+    document.getElementById(id).parentElement.classList.remove("is-invalid");
 }
 
 
@@ -46,11 +83,15 @@ function displaySprint() {
   
 
 /**
- * Close the dialog
+ * Close the dialog and clear all inputs
  */
 function closeDialog() {
     let dialog = document.querySelector("dialog");
     dialog.close();
+
+    clearInput("sprintName");
+    clearInput("startDate");
+    clearInput("endDate");
 }
 
 function showManageSprint(index){
