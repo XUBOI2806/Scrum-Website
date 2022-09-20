@@ -60,7 +60,38 @@ function closeDialog() {
     dialog.close();
 }
 
+/**
+ * Opens a page to modify a sprint depending on its status
+ * @param index
+ */
 function showManageSprint(index){
     // Check if it's status is not started, in progress, or completed
     // Open the corresponding page
+}
+
+/**
+ * Saves all tasks in an inactive sprint
+ * @param index the index of the sprint in the list of sprints
+ */
+function saveInactiveSprint(index){
+    // go back to sprint list page
+    window.location = "sprints.html";
+}
+
+/**
+ * Saves an inactive sprint and changes its status to 'in progress'
+ * @param index the index of the sprint in the list of sprints
+ */
+function startInactiveSprint(index){
+    saveInactiveSprint();
+    window.location = "manage_sprint_in_progress.html";
+
+}
+
+/**
+ * Deletes a sprint
+ * @param index the index of the sprint in the list of sprints
+ */
+function deleteSprint(index){
+
 }

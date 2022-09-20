@@ -183,6 +183,7 @@ class Backlog {
 class SprintBacklog extends Backlog{
     constructor() {
         super();
+        this.status = "not-started";
     }
 
     addTask(newTask){
