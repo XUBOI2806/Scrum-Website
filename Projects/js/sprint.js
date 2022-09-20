@@ -2,7 +2,7 @@
 /**
  * Open the add sprint dialog
  */
-let nameSprint = []
+
 
 function add_sprint(){
     let dialog = document.querySelector("dialog");
@@ -15,7 +15,7 @@ function createSprint(){
     let sprintName = document.getElementById("sprintName").value;
     let startDate = document.getElementById("startDate").value;
     let endDate = document.getElementById("endDate").value;
-    nameSprint.push(sprintName)
+    sprintList.push(sprintName)
     displaySprint()
     closeDialog()
 }
@@ -25,13 +25,13 @@ function displaySprint() {
     let output = "";
   
     // Iterate through saved tasks in the backlog
-    for (let i = 0; i < nameSprint.length; i++) {
+    for (let i = 0; i < sprintList.length; i++) {
   
       // Create html to display the task info
       let item = `
         <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
             <span class="mdl-list__item-primary-content" onclick="showTask()">
-                <span>${nameSprint[i]}</span>
+                <span>${sprintList[i]}</span>
             </span>
             <span class="mdl-list__item-secondary-content">
                 <!-- Edit button -->
