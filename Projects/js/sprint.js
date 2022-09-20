@@ -27,7 +27,7 @@ function displayBackLogTasks() {
     }
 
     let item = `
-    <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
+    <li class="list-item mdl-list__item" onclick="showManageSprint(0)" id="pbi${i}">
                             <span class="mdl-list__item-primary-content" onclick="showTask()">
                                 <span>${productBacklog._taskArray[i].title}</span>
                             </span>
@@ -47,9 +47,10 @@ function displayBackLogTasks() {
 displayBackLogTasks();
 
 function addTaskSB(index) {
-  let test = productBacklog._taskArray[index];
-  sprintBacklog.addTask(test);
-  displayBackLogTasks();
+  let task = productBacklog._taskArray[index];
+  sprintBacklog.addTask(task);
+  let node = document.getElementById("backlog-list");
+  node.children[index].setAttribute('disabled', 'true')
   displaySprintBacklog();
 }
 
