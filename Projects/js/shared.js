@@ -194,12 +194,20 @@ class SprintBacklog extends Backlog{
         this._taskArray.splice(taskIndex, 1)
     }
 
+    // fromData(data) {
+    //     this._array = [];
+    //     for (let i = 0; i < data._array.length; i++) {
+    //         let task = new Task();
+    //         task.fromData(data._array[i]);
+    //         this._array.push(task);
+    //     }
+    // }
     fromData(data) {
-        this._array = [];
-        for (let i = 0; i < data._array.length; i++) {
+        this._taskArray = [];
+        for (let i = 0; i < data._taskArray.length; i++) {
             let task = new Task();
-            task.fromData(data._array[i]);
-            this._array.push(task);
+            task.fromData(data._taskArray[i]);
+            this._taskArray.push(task);
         }
     }
 }
@@ -311,4 +319,5 @@ if (checkLSData(SPRINTBACKLOG_KEY)) {
     let data = retrieveLSData(SPRINTBACKLOG_KEY);
     // Restore data into vacationList
     sprintBacklog.fromData(data);
+    console.log(sprintBacklog._taskArray)
 }

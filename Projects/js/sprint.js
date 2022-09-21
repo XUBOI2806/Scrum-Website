@@ -59,6 +59,7 @@ function addTaskSB(index) {
   let task = productBacklog._taskArray[index];
   sprintBacklog.addTask(task);
   updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+  console.log(sprintBacklog._taskArray)
   //   let node = document.getElementById("backlog-list");
   //   node.children[index].setAttribute('disabled', 'true')
 
