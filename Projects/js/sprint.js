@@ -68,6 +68,7 @@ function addTaskSB(index) {
 
 function displaySprintBacklog() {
   let output = "";
+  console.log(sprintBacklog._taskArray)
 
   // Iterate through saved tasks in the backlog
   for (let i = 0; i < sprintBacklog._taskArray.length; i++) {
@@ -89,7 +90,7 @@ function displaySprintBacklog() {
   document.getElementById("sprint-list").innerHTML = output;
 }
 
-displaySprintBacklog;
+displaySprintBacklog();
 /**
  * Close the dialog
  */
