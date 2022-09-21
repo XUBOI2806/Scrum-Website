@@ -39,15 +39,24 @@ function displayBackLogTasks() {
                                 </button>
                             </span>
                         </li>`;
-    if (sprintBacklog._taskArray.includes(productBacklog._taskArray[i])) {
-        indexArray.push(i)
+
+    for (let j = 0; j < sprintBacklog._taskArray.length; j++) {
+      console.log(productBacklog._taskArray[i] == sprintBacklog._taskArray[j]);
+      console.log(productBacklog._taskArray[i]);
+      console.log(sprintBacklog._taskArray[j]);
+      if (productBacklog._taskArray[i] == sprintBacklog._taskArray[j]) {
+        indexArray.push(i);
+      }
     }
+    // if (sprintBacklog._taskArray.includes(productBacklog._taskArray[i])) {
+    //     indexArray.push(i)
+    // }
     output += item;
   }
   // Add to the UI list
   document.getElementById("backlog-list").innerHTML = output;
 
-  for(let i = 0;i < indexArray.length;i++){
+  for (let i = 0; i < indexArray.length; i++) {
     let node = document.getElementById("backlog-list");
     node.children[indexArray[i]].setAttribute("disabled", "true");
   }
@@ -55,11 +64,18 @@ function displayBackLogTasks() {
 
 displayBackLogTasks();
 
+function removeTaskSB(index) {
+  sprintBacklog.deleteTask(index);
+  updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+  displayBackLogTasks();
+  displaySprintBacklog();
+}
+
 function addTaskSB(index) {
   let task = productBacklog._taskArray[index];
   sprintBacklog.addTask(task);
   updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
-  console.log(sprintBacklog._taskArray)
+  console.log(sprintBacklog._taskArray);
   //   let node = document.getElementById("backlog-list");
   //   node.children[index].setAttribute('disabled', 'true')
 
@@ -69,7 +85,6 @@ function addTaskSB(index) {
 
 function displaySprintBacklog() {
   let output = "";
-  console.log(sprintBacklog._taskArray)
 
   // Iterate through saved tasks in the backlog
   for (let i = 0; i < sprintBacklog._taskArray.length; i++) {
@@ -80,7 +95,7 @@ function displaySprintBacklog() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Remove from Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="removeTaskSB(${i})">
                             <i class="material-icons">remove</i>
                         </button>
                     </span>

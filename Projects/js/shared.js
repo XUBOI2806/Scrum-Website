@@ -319,5 +319,4 @@ if (checkLSData(SPRINTBACKLOG_KEY)) {
     let data = retrieveLSData(SPRINTBACKLOG_KEY);
     // Restore data into vacationList
     sprintBacklog.fromData(data);
-    console.log(sprintBacklog._taskArray)
 }
