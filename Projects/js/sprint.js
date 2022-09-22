@@ -41,10 +41,7 @@ function displayBackLogTasks() {
                         </li>`;
 
     for (let j = 0; j < sprintBacklog._taskArray.length; j++) {
-      console.log(productBacklog._taskArray[i] == sprintBacklog._taskArray[j]);
-      console.log(productBacklog._taskArray[i]);
-      console.log(sprintBacklog._taskArray[j]);
-      if (productBacklog._taskArray[i] == sprintBacklog._taskArray[j]) {
+      if (productBacklog._taskArray[i].title == sprintBacklog._taskArray[j].title) {
         indexArray.push(i);
       }
     }
