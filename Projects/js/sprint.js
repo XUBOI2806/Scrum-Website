@@ -16,19 +16,21 @@ function createSprint(){
     let startDate = document.getElementById("startDate").value;
     let endDate = document.getElementById("endDate").value;
     if(validateSprintInputs(sprintName, startDate, endDate)){
-        sprintList.push(sprintName);
-        displaySprint();
+        let sprint = new Sprint(sprintName, startDate, endDate, "Not started", [])
+        sprintBacklog.add(sprint);
+        updateLSData(SPRINTBACKLOG_KEY, sprintBacklog)
+        displaySprintBacklog();
         closeDialog();
     }
 }
 
-function validateSprintInputs(name, startDateString, endDateString){
+function validateSprintInputs(sprintName, startDateString, endDateString){
     let retVal = true;
     let todaysDate = new Date();
     startDate = new Date(startDateString);
     endDate = new Date(endDateString);
 
-    if(name === ""){
+    if(sprintName === ""){
         document.getElementById("sprintName").parentElement.classList.add("is-invalid");
         retVal = false;
     }
@@ -58,17 +60,17 @@ function clearInput(id){
 }
 
 
-function displaySprint() {
+function displaySprintBacklog() {
     let output = "";
   
     // Iterate through saved tasks in the backlog
-    for (let i = 0; i < sprintList.length; i++) {
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
   
       // Create html to display the task info
       let item = `
         <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
             <span class="mdl-list__item-primary-content" onclick="showTask()">
-                <span>${sprintList[i]}</span>
+                <span>${sprintBacklog._array[i].title}</span>
             </span>
             <span class="mdl-list__item-secondary-content">
                 <!-- Edit button -->
@@ -98,3 +100,6 @@ function showManageSprint(index){
     // Check if it's status is not started, in progress, or completed
     // Open the corresponding page
 }
+
+// Displays the list of tasks when the page loads
+displaySprintBacklog();

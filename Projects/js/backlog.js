@@ -43,7 +43,7 @@ function createTask() {
   // Check that all inputs are valid
   if (validateInputs(name, des, taskType, person, priority, status, effort, tag)) {
     // Add to local storage
-    productBacklog.addTask(task);
+    productBacklog.add(task);
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     // Update Task list
     displayProductBacklog();
@@ -61,7 +61,7 @@ function createTask() {
  */
 function deleteTask(index) {
   //using function to delete at index
-  productBacklog.deleteTask(index);
+  productBacklog.delete(index);
   //updating local storage 
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
   //running the display function with changed PB
@@ -75,17 +75,17 @@ function displayProductBacklog() {
   let output = "";
 
   // Iterate through saved tasks in the backlog
-  for (let i = 0; i < productBacklog._taskArray.length; i++) {
+  for (let i = 0; i < productBacklog._array.length; i++) {
     let temp = "";
-    for (let i = 0; i < productBacklog._taskArray.length; i++) {
-      for (let j = i + 1; j < productBacklog._taskArray.length; j++) {
+    for (let i = 0; i < productBacklog._array.length; i++) {
+      for (let j = i + 1; j < productBacklog._array.length; j++) {
         if (
-          parseInt(productBacklog._taskArray[i]._timeTracking) <
-            parseInt(productBacklog._taskArray[j]._timeTracking)
+          parseInt(productBacklog._array[i]._timeTracking) <
+            parseInt(productBacklog._array[j]._timeTracking)
         ) {
-          temp = productBacklog._taskArray[i];
-          productBacklog._taskArray[i] = productBacklog._taskArray[j];
-          productBacklog._taskArray[j] = temp;
+          temp = productBacklog._array[i];
+          productBacklog._array[i] = productBacklog._array[j];
+          productBacklog._array[j] = temp;
         }
       }
     }
@@ -93,13 +93,13 @@ function displayProductBacklog() {
     // Create html to display the task info
     let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line" 
-                style="background-color: ${productBacklog._taskArray[i].tags[0][1]}">
+                style="background-color: ${productBacklog._array[i].tags[0][1]}">
                     <span class="mdl-list__item-primary-content" onclick="showTask(${i})">
-                        <span>${productBacklog._taskArray[i].title}</span>
+                        <span>${productBacklog._array[i].title}</span>
                         <span class="mdl-list__item-text-body">
-                            <span style="padding-right: 15px">Priority: ${productBacklog._taskArray[i].priority}</span>
-                            <span>Story Points: ${productBacklog._taskArray[i].timeTracking}</span><br>
-                            <span>Tag: ${productBacklog._taskArray[i].tags[0][0]}</span>
+                            <span style="padding-right: 15px">Priority: ${productBacklog._array[i].priority}</span>
+                            <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
+                            <span>Tag: ${productBacklog._array[i].tags[0][0]}</span>
                         </span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
@@ -128,35 +128,35 @@ function editTask(index) {
   //getting inputs from local storage and removing placeholders for every thing
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
-  name.value = productBacklog._taskArray[index]._title;
+  name.value = productBacklog._array[index]._title;
 
   let des = document.getElementById("pbiDesc");
   des.parentElement.classList.add("is-dirty");
-  des.value = productBacklog._taskArray[index]._description;
+  des.value = productBacklog._array[index]._description;
 
   let taskType = document.getElementById("pbiType");
   taskType.parentElement.classList.add("is-dirty");
-  taskType.value = productBacklog._taskArray[index]._taskType;
+  taskType.value = productBacklog._array[index]._taskType;
 
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
-  assigned.value = productBacklog._taskArray[index]._assigned;
+  assigned.value = productBacklog._array[index]._assigned;
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
-  priority.value = productBacklog._taskArray[index]._priority;
+  priority.value = productBacklog._array[index]._priority;
 
   let status = document.getElementById("status");
   status.parentElement.classList.add("is-dirty");
-  status.value = productBacklog._taskArray[index]._status;
+  status.value = productBacklog._array[index]._status;
 
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
-  effort.value = productBacklog._taskArray[index]._timeTracking;
+  effort.value = productBacklog._array[index]._timeTracking;
 
   //getting user tag values and then only ticking the right ones present in LS
   let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._taskArray[index]._tags;
+  let storedTags = productBacklog._array[index]._tags;
   for (let i = 0; i < storedTags.length; i++) {
     tags.forEach((checkBox) => {
       if (storedTags[i][0] === checkBox.value) {
@@ -208,7 +208,7 @@ function saveEditTask() {
   if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
     let index = retrieveLSData(TASK_KEY)
-    productBacklog._taskArray[index] = task;
+    productBacklog._array[index] = task;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     displayProductBacklog();
     document
@@ -233,40 +233,40 @@ function showTask(index) {
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
   name.disabled = true;
-  name.value = productBacklog._taskArray[index]._title;
+  name.value = productBacklog._array[index]._title;
 
   let des = document.getElementById("pbiDesc");
   des.parentElement.classList.add("is-dirty");
   des.disabled = true;
-  des.value = productBacklog._taskArray[index]._description;
+  des.value = productBacklog._array[index]._description;
 
   let taskType = document.getElementById("pbiType");
   taskType.parentElement.classList.add("is-dirty");
   taskType.disabled = true;
-  taskType.value = productBacklog._taskArray[index]._taskType;
+  taskType.value = productBacklog._array[index]._taskType;
 
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
   assigned.disabled = true;
-  assigned.value = productBacklog._taskArray[index]._assigned;
+  assigned.value = productBacklog._array[index]._assigned;
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
   priority.disabled = true;
-  priority.value = productBacklog._taskArray[index]._priority;
+  priority.value = productBacklog._array[index]._priority;
 
   let status = document.getElementById("status");
   status.parentElement.classList.add("is-dirty");
   status.disabled = true;
-  status.value = productBacklog._taskArray[index]._status;
+  status.value = productBacklog._array[index]._status;
 
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
   effort.disabled = true;
-  effort.value = productBacklog._taskArray[index]._timeTracking;
+  effort.value = productBacklog._array[index]._timeTracking;
 
   let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._taskArray[index]._tags;
+  let storedTags = productBacklog._array[index]._tags;
   for (let i = 0; i < storedTags.length; i++) {
     tags.forEach((radio) => {
       if (storedTags[i][0] === radio.value) {
@@ -397,8 +397,8 @@ function edit_pbi(index) {
  */
 function list_members() {
   let output = "<option value=\"0\" hidden></option>"
-  for (let i = 0; i < teamBacklog._taskArray.length; i++) {
-    output += `<option value="${i + 1}">${teamBacklog._taskArray[i]._name}</option>`
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    output += `<option value="${i + 1}">${teamBacklog._array[i]._name}</option>`
   }
   document.getElementById("person").innerHTML = output
 }

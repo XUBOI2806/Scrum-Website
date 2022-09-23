@@ -15,7 +15,7 @@ function createTeamMember() {
     // Check that all inputs are valid
     if (validateInputs(name, email)) {
         // Add to local storage
-        teamBacklog.addTask(person);
+        teamBacklog.add(person);
         updateLSData(TEAMBACKLOG_KEY, teamBacklog);
         // Display the updated Team Backlog
         displayTeamBacklog();
@@ -48,7 +48,7 @@ function validateInputs(name, email) {
  * Delete a team member from local storage and remove it from the list
  */
 function deleteTeamMember(index){
-    teamBacklog.deleteTask(index);
+    teamBacklog.delete(index);
     updateLSData(TEAMBACKLOG_KEY, teamBacklog);
     displayTeamBacklog();
 }
@@ -59,12 +59,12 @@ function deleteTeamMember(index){
 function displayTeamBacklog() {
     let output = "";
     // Go through each team member and create a list item for it
-    for (let i = 0; i < teamBacklog._taskArray.length; i++) {
+    for (let i = 0; i < teamBacklog._array.length; i++) {
         let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line">
                     <span class="mdl-list__item-primary-content" onclick="showTeamMember(${i})">
-                        <span>${teamBacklog._taskArray[i]._name}</span>
-                        <span class="mdl-list__item-text-body">${teamBacklog._taskArray[i]._email}</span>
+                        <span>${teamBacklog._array[i]._name}</span>
+                        <span class="mdl-list__item-text-body">${teamBacklog._array[i]._email}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
@@ -94,13 +94,13 @@ function showTeamMember(index){
     let name = document.getElementById("memberName");
     name.parentElement.classList.add("is-dirty");
     name.disabled = true;
-    name.value = teamBacklog._taskArray[index].name;
+    name.value = teamBacklog._array[index].name;
 
     // Put the member's email in the input box and disable it
     let email = document.getElementById("memberEmail");
     email.parentElement.classList.add("is-dirty");
     email.disabled = true;
-    email.value = teamBacklog._taskArray[index].email;
+    email.value = teamBacklog._array[index].email;
 }
 
 /**
