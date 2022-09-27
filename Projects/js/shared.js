@@ -140,13 +140,11 @@ class Sprint {
         title,
         startDate,
         endDate,
-        status,
-        tasks
     ) {
         this._title = title;
         this._startDate = startDate;
         this._endDate = endDate;
-        this._status = status;
+        this._status = "Not Started";
         this._tasks = [];
     }
 

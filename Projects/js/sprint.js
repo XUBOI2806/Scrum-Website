@@ -69,12 +69,12 @@ function displaySprintBacklog() {
       // Create html to display the task info
       let item = `
         <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
-            <span class="mdl-list__item-primary-content" onclick="showTask()">
-                <span>${sprintBacklog._array[i].title}</span>
+            <span class="mdl-list__item-primary-content" onclick="manageSprint(${i})">
+                <span>${sprintBacklog._array[i]._title}</span>
             </span>
             <span class="mdl-list__item-secondary-content">
                 <!-- Edit button -->
-                <span>Status</span>
+                <span>${sprintBacklog._array[i]._status}</span>
              </span>
         </li>`;
       output += item;
@@ -92,9 +92,18 @@ function deleteSprint(index) {
     //updating local storage
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     //running the display function with changed PB
-    displayProductBacklog();
+    displaySprintBacklog();
 }
 
+/**
+ * Manages the sprint
+ */
+function manageSprint(index) {
+    //update sprint key to the index of the sprint
+    updateLSData(SPRINT_KEY,index)
+    //open the manage sprint page
+    window.location.href = 'manage_sprint_not_started.html'
+}
 
 /**
  * Close the dialog and clear all inputs
