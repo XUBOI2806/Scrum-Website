@@ -180,6 +180,10 @@ class Sprint {
         this._tasks.push(task);
     }
 
+    deleteTask(taskIndex) {
+        this._tasks.splice(taskIndex, 1)
+    }
+
     editTask(title, startDate, endDate, tasks) {
         this._title = title;
         this._startDate = startDate;
@@ -285,7 +289,6 @@ class ProductBacklog extends Backlog {
 
     fromData(data) {
         this._array = [];
-        console.log(data)
         for (let i = 0; i < data._array.length; i++) {
             let task = new Task();
             task.fromData(data._array[i]);
@@ -361,6 +364,8 @@ function updateLSData(key, data) {
 let teamBacklog = new TeamBacklog();
 let productBacklog = new ProductBacklog();
 let sprintBacklog = new SprintBacklog();
+let sprintKey = 0;
+let taskKey = 0;
 
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
@@ -378,4 +383,16 @@ if (checkLSData(SPRINTBACKLOG_KEY)) {
     let data = retrieveLSData(SPRINTBACKLOG_KEY);
     // Restore data into vacationList
     sprintBacklog.fromData(data);
+}
+
+if (checkLSData(SPRINT_KEY)) {
+    let data = retrieveLSData(SPRINT_KEY);
+    // Restore data into vacationList
+    sprintKey = data;
+}
+
+if (checkLSData(TASK_KEY)) {
+    let data = retrieveLSData(TASK_KEY);
+    // Restore data into vacationList
+    taskKey = data;
 }

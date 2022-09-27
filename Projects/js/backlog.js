@@ -62,7 +62,7 @@ function createTask() {
 function deleteTask(index) {
   //using function to delete at index
   productBacklog.delete(index);
-  //updating local storage 
+  //updating local storage
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
   //running the display function with changed PB
   displayProductBacklog();
@@ -120,6 +120,7 @@ function displayProductBacklog() {
   // Add to the UI list
   document.getElementById("pbi-list").innerHTML = output;
 }
+
 
 /**
  * Put saved values of task into the dialog container
@@ -207,8 +208,7 @@ function saveEditTask() {
   // Check that all inputs are valid
   if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
-    let index = retrieveLSData(TASK_KEY)
-    productBacklog._array[index] = task;
+    productBacklog._array[TASK_KEY] = task;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     displayProductBacklog();
     document

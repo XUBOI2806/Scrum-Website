@@ -55,7 +55,7 @@
                             </span>
                             <span class="mdl-list__item-secondary-content">
                                 <!-- Add to Sprint Backlog button -->
-                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="addTaskSB(0)">
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToSB(0)">
                                   <i class="material-icons">add</i>
                                 </button>
                             </span>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="list-container mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet">
                     <h3 class="container-title">Sprint Backlog</h3>
-                    <ul class="mdl-list" id="sprint-list">
+                    <ul class="mdl-list" id="sprint-task-list">
                         <!-- li is one PBI item -->
                         <li class="list-item mdl-list__item">
                             <span class="mdl-list__item-primary-content">
@@ -94,5 +94,5 @@
 </body>
 <script src="../js/shared.js"></script>
 <script src="../js/dialog-polyfill.js"></script>
-<script src="../js/sprint.js"></script>
+<script src="../js/manageSprint.js"></script>
 </html>
