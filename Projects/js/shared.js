@@ -128,6 +128,75 @@ class Task {
     }
 }
 
+class Sprint {
+    /**
+     * @param {String} title
+     * @param {Date} startDate
+     * @param {Date} endDate
+     * @param {String} status
+     * @param {List} tasks
+     */
+    constructor(
+        title,
+        startDate,
+        endDate,
+        status,
+        tasks
+    ) {
+        this._title = title;
+        this._startDate = startDate;
+        this._endDate = endDate;
+        this._status = status;
+        this._tasks = [];
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(value) {
+        this._title = value;
+    }
+
+    get startDate() {
+        return this._startDate;
+    }
+
+    set startDate(value) {
+        this._startDate = value;
+    }
+
+    get endDate() {
+        return this._endDate;
+    }
+
+    set endDate(value) {
+        this._endDate = value;
+    }
+
+    get tasks() {
+        return this._tasks;
+    }
+
+    addTask(task) {
+        this._tasks.push(task);
+    }
+
+    editTask(title, startDate, endDate, tasks) {
+        this._title = title;
+        this._startDate = startDate;
+        this._endDate = endDate;
+        this._tasks = tasks;
+    }
+
+    fromData(data) {
+        this._title = data._title;
+        this._startDate = data._startDate;
+        this._endDate = data._endDate;
+        this._tasks = data._tasks;
+    }
+}
+
 class Person {
     /**
      * @param {String} name
@@ -162,17 +231,17 @@ class Person {
 
 class Backlog {
     constructor() {
-        this._taskArray = [];
+        this._array = [];
         if (this.constructor === Backlog) {
             throw new Error("Abstract class cannot be instantiated");
         }
     }
 
-    addTask(newTask) {
-        this._taskArray.push(newTask);
+    add(newTask) {
+        this._array.push(newTask);
     }
 
-    deleteTask(taskIndex) {
+    delete(taskIndex) {
         throw new Error("Method deleteTask must be implemented");
     }
 
@@ -183,31 +252,22 @@ class Backlog {
 class SprintBacklog extends Backlog{
     constructor() {
         super();
-        this.status = "not-started";
     }
 
-    addTask(newTask){
-        this._taskArray.push(newTask);
+    add(newSprint){
+        this._array.push(newSprint);
     }
 
-    deleteTask(taskIndex){
-        this._taskArray.splice(taskIndex, 1)
+    delete(sprintIndex){
+        this._array.splice(sprintIndex, 1)
     }
 
-    // fromData(data) {
-    //     this._array = [];
-    //     for (let i = 0; i < data._array.length; i++) {
-    //         let task = new Task();
-    //         task.fromData(data._array[i]);
-    //         this._array.push(task);
-    //     }
-    // }
     fromData(data) {
-        this._taskArray = [];
-        for (let i = 0; i < data._taskArray.length; i++) {
-            let task = new Task();
-            task.fromData(data._taskArray[i]);
-            this._taskArray.push(task);
+        this._array = [];
+        for (let i = 0; i < data._array.length; i++) {
+            let sprint = new Sprint();
+            sprint.fromData(data._array[i]);
+            this._array.push(sprint);
         }
     }
 }
@@ -217,20 +277,21 @@ class ProductBacklog extends Backlog {
         super();
     }
 
-    addTask(newTask) {
-        this._taskArray.push(newTask);
+    add(newTask) {
+        this._array.push(newTask);
     }
 
-    deleteTask(taskIndex) {
-        this._taskArray.splice(taskIndex, 1)
+    delete(taskIndex) {
+        this._array.splice(taskIndex, 1)
     }
 
     fromData(data) {
-        this._taskArray = [];
-        for (let i = 0; i < data._taskArray.length; i++) {
+        this._array = [];
+        console.log(data)
+        for (let i = 0; i < data._array.length; i++) {
             let task = new Task();
-            task.fromData(data._taskArray[i]);
-            this._taskArray.push(task);
+            task.fromData(data._array[i]);
+            this._array.push(task);
         }
     }
 }
@@ -240,20 +301,20 @@ class TeamBacklog extends Backlog{
         super();
     }
 
-    addTask(newTask){
-        this._taskArray.push(newTask);
+    add(newTask){
+        this._array.push(newTask);
     }
 
-    deleteTask(taskIndex){
-        this._taskArray.splice(taskIndex, 1)
+    delete(taskIndex){
+        this._array.splice(taskIndex, 1)
     }
 
     fromData(data) {
-        this._taskArray = [];
-        for (let i = 0; i < data._taskArray.length; i++) {
+        this._array = [];
+        for (let i = 0; i < data._array.length; i++) {
             let person = new Person();
-            person.fromData(data._taskArray[i]);
-            this._taskArray.push(person);
+            person.fromData(data._array[i]);
+            this._array.push(person);
         }
     }
 }
