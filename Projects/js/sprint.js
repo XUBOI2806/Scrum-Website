@@ -86,13 +86,13 @@ function displaySprintBacklog() {
 /**
  * Delete a task
  */
-function deleteSprint(index) {
+function deleteSprint() {
     //using function to delete at index
-    sprintBacklog.delete(index);
+    sprintBacklog.delete(TASK_KEY);
     //updating local storage
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     //running the display function with changed PB
-    displaySprintBacklog();
+    window.location.href = 'sprints.html';
 }
 
 /**
@@ -100,9 +100,9 @@ function deleteSprint(index) {
  */
 function manageSprint(index) {
     //update sprint key to the index of the sprint
-    updateLSData(SPRINT_KEY,index)
+    updateLSData(SPRINT_KEY,index);
     //open the manage sprint page
-    window.location.href = 'manage_sprint_not_started.html'
+    window.location.href = 'manage_sprint_not_started.html';
 }
 
 /**
