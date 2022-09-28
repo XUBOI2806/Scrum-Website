@@ -7,13 +7,12 @@ function displayTasksInSprint() {
     let output = "";
     console.log(sprintBacklog._array)
     // Iterate through saved tasks in the backlog
-    
-    for (let i = 0; i < sprintBacklog._array.length; i++) {
+    for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
         // Create html to display the task info
         let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
                     <span class="mdl-list__item-primary-content">
-                        <span>${sprintBacklog._array[i]._title}</span>
+                        <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
@@ -34,6 +33,7 @@ function displayTasksInSprint() {
 function displayProductBacklogInSprint() {
     let output = "";
     let indexArray = [];
+    console.log(productBacklog._array)
 
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < productBacklog._array.length; i++) {
@@ -52,7 +52,7 @@ function displayProductBacklogInSprint() {
               </li>`;
         output += item;
         for (let j = 0; j < sprintBacklog._array.length; j++) {
-            if (productBacklog._array[i].title == sprintBacklog._array[j].title) {
+            if (productBacklog._array[i]._status == "Not Started") {
               indexArray.push(i);
             }
           }
@@ -78,29 +78,19 @@ function deleteSprint() {
 }
 
 function moveTaskToSB(index) {
-    let task = productBacklog._array[index];
-    sprintBacklog.add(task);
-    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
-
-  
-   
-
-    // sprintBacklog._array[sprintKey].addTask(productBacklog._array[index])
-    // productBacklog.delete(index)
+    productBacklog._array[index]._status = "Not Started"
+    sprintBacklog._array[sprintKey].addTask(productBacklog._array[index])
     refreshBacklog()
 }
 
 function removeTask(index) {
-    sprintBacklog.delete(index);
-    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
-    refreshBacklog();
-  
-
-
-
-    // productBacklog.add(sprintBacklog._array[sprintKey]._tasks[index])
-    // sprintBacklog._array[sprintKey].deleteTask(index)
-    // refreshBacklog()
+    for (let i = 0; i < productBacklog._array.length; i++) {
+        if (sprintBacklog._array[sprintKey]._tasks[index] == productBacklog._array[i]){
+            productBacklog._array[i]._status = "Not Assigned"
+        }
+    }
+    sprintBacklog._array[sprintKey].deleteTask(index)
+    refreshBacklog()
 }
 
 function refreshBacklog() {

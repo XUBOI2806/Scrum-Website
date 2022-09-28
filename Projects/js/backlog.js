@@ -16,7 +16,7 @@ function createTask() {
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
   if(status === '0'){
-    status = "Not Started";
+    status = "Not Assigned";
   }
   let effort = document.getElementById("pbiEffort").value;
   let tag = document.querySelector('input[name="tag"]:checked');
