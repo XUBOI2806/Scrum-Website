@@ -2,8 +2,6 @@
 /**
  * Open the add sprint dialog
  */
-
-
 function add_sprint(){
     let dialog = document.querySelector("dialog");
     dialog.showModal();
@@ -59,13 +57,59 @@ function clearInput(id){
     document.getElementById(id).parentElement.classList.remove("is-invalid");
 }
 
+function displaySprintBacklog() {
+    let output = "";
+
+    // Iterate through saved tasks in the backlog
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
+        console.log(sprintBacklog._array[i]._status)
+      // Create html to display the task info
+      let item = `
+        <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
+            <span class="mdl-list__item-primary-content" onclick="manageSprint(${i})">
+                <span>${sprintBacklog._array[i]._title}</span>
+            </span>
+            <span class="mdl-list__item-secondary-content">
+                <!-- Edit button -->
+                <span>${sprintBacklog._array[i]._status}</span>
+             </span>
+        </li>`;
+      output += item;
+    }
+    // Add to the UI list
+    document.getElementById("sprint-list").innerHTML = output;
+  }
+
+/**
+ * Manages the sprint
+ */
+function manageSprint(index) {
+    //update sprint key to the index of the sprint
+    sprintKey = index
+    updateLSData(SPRINT_KEY, sprintKey);
+    //open the manage sprint page
+    window.location.href = 'manage_sprint_not_started.html';
+}
+
+/**
+ * Close the dialog and clear all inputs
+ * Clear values and all extra attributes of an input
+ * @param id the id of the input
+ */
+function clearInput(id){
+    document.getElementById(id).value = '';
+    document.getElementById(id).parentElement.classList.remove("is-dirty");
+    document.getElementById(id).disabled = false;
+    document.getElementById(id).parentElement.classList.remove("is-invalid");
+}
+
 
 function displaySprintBacklog() {
     let output = "";
-  
+
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < sprintBacklog._array.length; i++) {
-  
+
       // Create html to display the task info
       let item = `
         <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
@@ -82,7 +126,7 @@ function displaySprintBacklog() {
     // Add to the UI list
     document.getElementById("sprint-list").innerHTML = output;
   }
-  
+
 
 /**
  * Close the dialog and clear all inputs
