@@ -184,7 +184,7 @@ class Sprint {
         this._tasks.splice(taskIndex, 1)
     }
 
-    editTask(title, startDate, endDate, tasks) {
+    editSprint(title, startDate, endDate, tasks) {
         this._title = title;
         this._startDate = startDate;
         this._endDate = endDate;
@@ -195,7 +195,12 @@ class Sprint {
         this._title = data._title;
         this._startDate = data._startDate;
         this._endDate = data._endDate;
-        this._tasks = data._tasks;
+        this._tasks = [];
+        for (let i = 0; i < data._tasks.length; i++) {
+            let task = new Task();
+            task.fromData(data._tasks[i]);
+            this._tasks.push(task);
+        }
     }
 }
 

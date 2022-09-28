@@ -52,7 +52,7 @@ function displayProductBacklogInSprint() {
               </li>`;
         output += item;
         for (let j = 0; j < sprintBacklog._array.length; j++) {
-            if (productBacklog._array[i]._status == "Not Started") {
+            if (productBacklog._array[i]._status === "Not Started") {
               indexArray.push(i);
             }
           }
@@ -84,12 +84,15 @@ function moveTaskToSB(index) {
 }
 
 function removeTask(index) {
+    console.log(sprintBacklog._array[sprintKey]._tasks[index])
     for (let i = 0; i < productBacklog._array.length; i++) {
-        if (sprintBacklog._array[sprintKey]._tasks[index] == productBacklog._array[i]){
+        console.log(i)
+        console.log(productBacklog._array[i])
+        if (sprintBacklog._array[sprintKey]._tasks[index] === productBacklog._array[i]){
             productBacklog._array[i]._status = "Not Assigned"
+            sprintBacklog._array[sprintKey].deleteTask(index)
         }
     }
-    sprintBacklog._array[sprintKey].deleteTask(index)
     refreshBacklog()
 }
 

@@ -15,9 +15,6 @@ function createTask() {
   let person = document.getElementById("person").value;
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
-  if(status === '0'){
-    status = "Not Assigned";
-  }
   let effort = document.getElementById("pbiEffort").value;
   let tag = document.querySelector('input[name="tag"]:checked');
 
@@ -178,9 +175,6 @@ function saveEditTask() {
   let name = document.getElementById("pbiName").value;
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
-  if(status === '0'){
-    status = "Not Assigned";
-  }
   let priority = document.getElementById("priority").value;
   let person = document.getElementById("person").value;
   let effort = document.getElementById("pbiEffort").value;
@@ -366,7 +360,7 @@ function closeDialog() {
   clearInput("priority");
   document.getElementById("priority").value = "0";
   clearInput("status");
-  document.getElementById("status").value = "0";
+  document.getElementById("status").value = "Not Assigned";
 
   document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
   document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
