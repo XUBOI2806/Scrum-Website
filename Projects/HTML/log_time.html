@@ -40,41 +40,11 @@
 
     <main class="mdl-layout__content">
         <!-- PAGE CONTENT -->
-        <div class="page-content">
-            <div class="content-grid mdl-grid">
-                <div class="mdl-cell mdl-cell--3-col"></div>
-                <div class="list-container mdl-cell mdl-cell--3-col">
-                    <div class="task-info">
-                        <h4>Name</h4>
-                        <span>PBI name</span>
-                        <h4>Description</h4>
-                        <span>PBI description</span>
-                        <h4>Persons Assigned</h4>
-                        <ul class="persons-list demo-list-two mdl-list">
-                            <li class="mdl-list__item mdl-list__item--two-line">
-                              <span class="mdl-list__item-primary-content">
-                                <span>Person 1</span>
-                                <span class="mdl-list__item-sub-title">Email</span>
-                              </span>
-                            </li>
-                          </ul>
-                    </div>
-                </div>
-                <div class="task-time mdl-cell mdl-cell--3-col">
-                    <h3>Log Time</h3>
-                    <form action="#">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="loggedTime">
-                            <label class="mdl-textfield__label" for="sample2">Hours</label>
-                            <span class="mdl-textfield__error">Input is not a number</span>
-                        </div>
-                    </form>
-                    <h3>Total Time</h3>
-                    <span># Hours</span>
-                </div>
-            </div>
+        <div class="page-content" id="log-time-content">
         </div>
     </main>
+    <script src="../js/shared.js"></script>
+    <script src="../js/Log Time/log_time.js"></script>
 </div>
 
 </body>
