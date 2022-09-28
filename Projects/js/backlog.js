@@ -179,7 +179,7 @@ function saveEditTask() {
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
   if(status === '0'){
-    status = "Not Started";
+    status = "Not Assigned";
   }
   let priority = document.getElementById("priority").value;
   let person = document.getElementById("person").value;
@@ -335,7 +335,7 @@ function add_pbi() {
   dialog.showModal();
   dialogPolyfill.registerDialog(dialog);
   document.getElementById("saveTask").addEventListener("click", createTask);
-  document.getElementById("status").value = "Not Started";
+  document.getElementById("status").value = "Not Assigned";
   document.getElementById("status").disabled = true;
   document.getElementById("status").parentElement.classList.add("is-dirty");
   list_members();
