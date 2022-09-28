@@ -5,7 +5,6 @@
  */
 function displayTasksInSprint() {
     let output = "";
-    console.log(sprintBacklog._array)
     // Iterate through saved tasks in the backlog
     
     for (let i = 0; i < sprintBacklog._array.length; i++) {
@@ -52,7 +51,7 @@ function displayProductBacklogInSprint() {
               </li>`;
         output += item;
         for (let j = 0; j < sprintBacklog._array.length; j++) {
-            if (productBacklog._array[i].title == sprintBacklog._array[j].title) {
+            if (productBacklog._array[i].title === sprintBacklog._array[j].title) {
               indexArray.push(i);
             }
           }

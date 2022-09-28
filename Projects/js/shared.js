@@ -174,6 +174,14 @@ class Sprint {
         this._endDate = value;
     }
 
+    get status() {
+        return this._status;
+    }
+
+    set status(value) {
+        this._status = value;
+    }
+
     get tasks() {
         return this._tasks;
     }
@@ -191,8 +199,9 @@ class Sprint {
 
     fromData(data) {
         this._title = data._title;
-        this._startDate = data._startDate;
-        this._endDate = data._endDate;
+        this._startDate = new Date(data._startDate);
+        this._endDate = new Date(data._endDate);
+        this._status = data._status;
         this._tasks = data._tasks;
     }
 }
@@ -287,7 +296,6 @@ class ProductBacklog extends Backlog {
 
     fromData(data) {
         this._array = [];
-        console.log(data)
         for (let i = 0; i < data._array.length; i++) {
             let task = new Task();
             task.fromData(data._array[i]);
