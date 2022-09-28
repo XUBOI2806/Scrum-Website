@@ -5,14 +5,15 @@
  */
 function displayTasksInSprint() {
     let output = "";
-    console.log(sprintKey)
+    console.log(sprintBacklog._array)
     // Iterate through saved tasks in the backlog
-    for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
+    
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
         // Create html to display the task info
         let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
                     <span class="mdl-list__item-primary-content">
-                        <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
+                        <span>${sprintBacklog._array[i]._title}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
@@ -32,6 +33,7 @@ function displayTasksInSprint() {
  */
 function displayProductBacklogInSprint() {
     let output = "";
+    let indexArray = [];
 
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < productBacklog._array.length; i++) {
@@ -49,9 +51,20 @@ function displayProductBacklogInSprint() {
                     </span>
               </li>`;
         output += item;
+        for (let j = 0; j < sprintBacklog._array.length; j++) {
+            if (productBacklog._array[i].title == sprintBacklog._array[j].title) {
+              indexArray.push(i);
+            }
+          }
+      
     }
     // Add to the UI list
     document.getElementById("backlog-list").innerHTML = output;
+    for (let i = 0; i < indexArray.length; i++) {
+        let node = document.getElementById("backlog-list");
+        node.children[indexArray[i]].setAttribute("disabled", "true");
+      }
+    
 }
 
 /**
@@ -65,15 +78,29 @@ function deleteSprint() {
 }
 
 function moveTaskToSB(index) {
-    sprintBacklog._array[sprintKey].addTask(productBacklog._array[index])
-    productBacklog.delete(index)
+    let task = productBacklog._array[index];
+    sprintBacklog.add(task);
+    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+
+  
+   
+
+    // sprintBacklog._array[sprintKey].addTask(productBacklog._array[index])
+    // productBacklog.delete(index)
     refreshBacklog()
 }
 
 function removeTask(index) {
-    productBacklog.add(sprintBacklog._array[sprintKey]._tasks[index])
-    sprintBacklog._array[sprintKey].deleteTask(index)
-    refreshBacklog()
+    sprintBacklog.delete(index);
+    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    refreshBacklog();
+  
+
+
+
+    // productBacklog.add(sprintBacklog._array[sprintKey]._tasks[index])
+    // sprintBacklog._array[sprintKey].deleteTask(index)
+    // refreshBacklog()
 }
 
 function refreshBacklog() {

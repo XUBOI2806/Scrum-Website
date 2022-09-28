@@ -265,13 +265,14 @@ class SprintBacklog extends Backlog{
     }
 
     fromData(data) {
-        this._array = [];
-        for (let i = 0; i < data._array.length; i++) {
-            let sprint = new Sprint();
-            sprint.fromData(data._array[i]);
-            this._array.push(sprint);
+        this._taskArray = [];
+        for (let i = 0; i < data._taskArray.length; i++) {
+            let task = new Task();
+            task.fromData(data._taskArray[i]);
+            this._taskArray.push(task);
         }
     }
+
 }
 
 class ProductBacklog extends Backlog {
