@@ -140,7 +140,8 @@ function closeDialog() {
  * @param index the index of the sprint to show
  */
 function showManageSprint(index){
-    let sprint = sprintBacklog._array[index];
+    updateLSData(sprintKey, index)
+    let sprint = sprintBacklog._array[sprintKey];
     // Check if it's status is not started or in progress
     // Open their manage pages
     if(sprint._status === "Not Started"){
