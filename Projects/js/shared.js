@@ -40,7 +40,6 @@ class Task {
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
-        this._tags = [];
         this._timeTracking = timeTracking;
         this._taskType = taskType
     }
@@ -89,12 +88,16 @@ class Task {
         this._assigned = value;
     }
 
-    get tags() {
-        return this._tags;
+    get tag() {
+        return this._tag;
     }
 
-    addTag(tagName, tagColour = "#dedede") {
-        this._tags.push([tagName, tagColour]);
+    removeTag(){
+        this._tag = null;
+    }
+
+    addTag(value) {
+        this._tag = value;
     }
 
     get timeTracking() {
@@ -105,13 +108,13 @@ class Task {
         this._timeTracking = value;
     }
 
-    editTask(title, description, status, priority, assigned, tags, timeTracking) {
+    editTask(title, description, status, priority, assigned, tag, timeTracking, taskType) {
         this._title = title;
         this._description = description;
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
-        this._tags = tags;
+        this._tag = tag;
         this._timeTracking = timeTracking;
         this._taskType = taskType;
     }
@@ -122,12 +125,11 @@ class Task {
         this._status = data._status;
         this._priority = data._priority;
         this._assigned = data._assigned;
-        this._tags = data._tags;
+        this._tag = data._tag;
         this._timeTracking = data._timeTracking;
         this._taskType = data._taskType
     }
 }
-
 class Sprint {
     /**
      * @param {String} title
