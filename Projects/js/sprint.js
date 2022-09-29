@@ -16,7 +16,7 @@ function createSprint(){
     let startDate = document.getElementById("startDate").value;
     let endDate = document.getElementById("endDate").value;
     if(validateSprintInputs(sprintName, startDate, endDate)){
-        let sprint = new Sprint(sprintName, startDate, endDate, "Not started", [])
+        let sprint = new Sprint(sprintName, new Date(startDate), new Date(endDate), "Not Started", [])
         sprintBacklog.add(sprint);
         updateLSData(SPRINTBACKLOG_KEY, sprintBacklog)
         displaySprintBacklog();
@@ -27,8 +27,8 @@ function createSprint(){
 function validateSprintInputs(sprintName, startDateString, endDateString){
     let retVal = true;
     let todaysDate = new Date();
-    startDate = new Date(startDateString);
-    endDate = new Date(endDateString);
+    let startDate = new Date(startDateString);
+    let endDate = new Date(endDateString);
 
     if(sprintName === ""){
         document.getElementById("sprintName").parentElement.classList.add("is-invalid");
@@ -59,21 +59,40 @@ function clearInput(id){
     document.getElementById(id).parentElement.classList.remove("is-invalid");
 }
 
+
+function checkForCompletedSprints(){
+    // Check whether in-progress sprints have reached their end date and need to change to completed
+    let todaysDate = new Date();
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
+        if(sprintBacklog._array[i].endDate.getTime() < todaysDate.getTime()){
+            sprintBacklog._array[i].status = "Completed";
+        }
+    }
+    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog)
+}
+
+
 function displaySprintBacklog() {
     let output = "";
-  
+    checkForCompletedSprints()
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < sprintBacklog._array.length; i++) {
-        console.log(sprintBacklog._array[i]._status)
-      // Create html to display the task info
-      let item = `
-        <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
-            <span class="mdl-list__item-primary-content" onclick="manageSprint(${i})">
-                <span>${sprintBacklog._array[i]._title}</span>
+        // Check whether in-progress sprints have reached their end date and need to change to completed
+        let sprint = sprintBacklog._array[i]
+        let todaysDate = new Date();
+        if((sprint.status === "In Progress") && (sprint.endDate < todaysDate.getDate())){
+            sprint.status = "Completed";
+        }
+
+        // Create html to display the task info
+        let item = `
+        <li class="list-item mdl-list__item" onclick="showManageSprint(${i})">
+            <span class="mdl-list__item-primary-content">
+                <span>${sprintBacklog._array[i].title}</span>
             </span>
             <span class="mdl-list__item-secondary-content">
                 <!-- Edit button -->
-                <span>${sprintBacklog._array[i]._status}</span>
+                <span>${sprintBacklog._array[i].status}</span>
              </span>
         </li>`;
       output += item;
@@ -82,16 +101,6 @@ function displaySprintBacklog() {
     document.getElementById("sprint-list").innerHTML = output;
   }
 
-/**
- * Manages the sprint
- */
-function manageSprint(index) {
-    //update sprint key to the index of the sprint
-    sprintKey = index
-    updateLSData(SPRINT_KEY, sprintKey);
-    //open the manage sprint page
-    window.location.href = 'manage_sprint_not_started.html';
-}
 
 /**
  * Close the dialog and clear all inputs
@@ -108,6 +117,12 @@ function closeDialog() {
 function showManageSprint(index){
     // Check if it's status is not started, in progress, or completed
     // Open the corresponding page
+    let sprint = sprintBacklog._array[index];
+    if(sprint.status === "Not Started"){
+        window.location = 'manage_sprint_not_started.html';
+    } else if(sprint.status === 'In Progress'){
+        window.location = 'manage_sprint_in_progress.html';
+    }
 }
 
 // Displays the list of tasks when the page loads

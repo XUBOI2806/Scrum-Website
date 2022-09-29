@@ -172,6 +172,14 @@ class Sprint {
         this._endDate = value;
     }
 
+    get status() {
+        return this._status;
+    }
+
+    set status(value) {
+        this._status = value;
+    }
+
     get tasks() {
         return this._tasks;
     }
@@ -193,8 +201,8 @@ class Sprint {
 
     fromData(data) {
         this._title = data._title;
-        this._startDate = data._startDate;
-        this._endDate = data._endDate;
+        this._startDate = new Date(data._startDate);
+        this._endDate = new Date(data._endDate);
         this._tasks = [];
         for (let i = 0; i < data._tasks.length; i++) {
             let task = new Task();
