@@ -55,14 +55,26 @@ function displayTasks() {
 }
 
 function moveTaskToInProgress(index) {
-    sprintBacklog._array[sprintKey].addTask(productBacklog._array[index])
-    productBacklog.delete(index)
-
+    sprintBacklog._array[sprintKey]._tasks[index]._status = "In Progress"
+    displayTasks()
 }
 
 function moveTaskToDone(index) {
-    sprintBacklog._array[sprintKey].addTask(productBacklog._array[index])
-    productBacklog.delete(index)
+    sprintBacklog._array[sprintKey]._tasks[index]._status = "Done"
+    displayTasks()
+}
+
+function completeSprint(){
+    sprintBacklog._array[sprintKey]._status = "Done"
+    backToSprints()
+}
+
+/**
+ * Goes to the Sprints page
+ */
+function backToSprints(){
+    window.location.href = 'sprints.html';
 }
 
 displayTasks()
+
