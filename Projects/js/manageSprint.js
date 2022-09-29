@@ -101,9 +101,13 @@ function moveTaskToSB(index) {
  */
 function removeTask(index) {
     for (let i = 0; i < productBacklog._array.length; i++) {
-        if (sprintBacklog._array[sprintKey]._tasks[index] === productBacklog._array[i]){
+        console.log(sprintBacklog._array[sprintKey]._tasks[index])
+        console.log(productBacklog._array[i])
+        console.log(JSON.stringify(sprintBacklog._array[sprintKey]._tasks[index])===JSON.stringify(productBacklog._array[i]))
+        if (JSON.stringify(sprintBacklog._array[sprintKey]._tasks[index])===JSON.stringify(productBacklog._array[i])){
             productBacklog._array[i]._status = "Not Assigned";
             sprintBacklog._array[sprintKey].deleteTask(index);
+            break;
         }
     }
     refreshBacklog();

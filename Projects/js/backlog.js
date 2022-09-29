@@ -23,22 +23,19 @@ function createTask() {
   let tag = document.querySelector('input[name="tag"]:checked');
 
   // Create task
-  let persons = new Person(person, "asfda");
   let task = new Task(name, des, status, priority, person, effort, taskType);
   // Get the checked tag
   if(tag != null){
+    task.addTag(tag.value);
     switch (tag.value){
       case "UI":
-        let tag_value1 = [tag.value, "#AAC4FF"]
-        task.addTag(tag_value1);
+        task.addTag("#AAC4FF");
         break;
       case "Development":
-        let tag_value2 = [tag.value, "#ACE7FF"]
-        task.addTag(tag_value2);
+        task.addTag("#ACE7FF");
         break;
       case "Testing":
-        let tag_value3 = [tag.value, "#ECC5FB"]
-        task.addTag(tag_value3);
+        task.addTag("#ECC5FB");
         break;
       default:
     }
@@ -191,19 +188,17 @@ function saveEditTask() {
   let task = new Task(name, description, status, priority, person, effort, taskType);
   //saving checkbox values
   if(tag != null){
+    task.removeTag()
+    task.addTag(tag.value);
     switch (tag.value){
       case "UI":
-        console.log("success")
-        task.removeTag()
-        task.addTag([tag.value, "#AAC4FF"]);
+        task.addTag("#AAC4FF");
         break;
       case "Development":
-        task.removeTag()
-        task.addTag([tag.value, "#ACE7FF"]);
+        task.addTag("#ACE7FF");
         break;
       case "Testing":
-        task.removeTag()
-        task.addTag([tag.value, "#ECC5FB"]);
+        task.addTag("#ECC5FB");
         break;
       default:
     }

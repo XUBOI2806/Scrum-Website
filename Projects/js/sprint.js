@@ -109,11 +109,11 @@ function displaySprintBacklog() {
         let item = `
         <li class="list-item mdl-list__item" onclick="showManageSprint(${i})">
             <span class="mdl-list__item-primary-content">
-                <span>${sprintBacklog._array[i].title}</span>
+                <span>${sprintBacklog._array[i]._title}</span>
             </span>
             <span class="mdl-list__item-secondary-content">
                 <!-- Edit button -->
-                <span>${sprintBacklog._array[i].status}</span>
+                <span>${sprintBacklog._array[i]._status}</span>
              </span>
         </li>`;
       output += item;
@@ -143,9 +143,9 @@ function showManageSprint(index){
     let sprint = sprintBacklog._array[index];
     // Check if it's status is not started or in progress
     // Open their manage pages
-    if(sprint.status === "Not Started"){
+    if(sprint._status === "Not Started"){
         window.location = 'manage_sprint_not_started.html';
-    } else if(sprint.status === 'In Progress'){
+    } else if(sprint._status === 'In Progress'){
         window.location = 'manage_sprint_in_progress.html';
     }
 }

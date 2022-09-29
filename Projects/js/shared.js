@@ -40,6 +40,7 @@ class Task {
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
+        this._tag = [];
         this._timeTracking = timeTracking;
         this._taskType = taskType
     }
@@ -93,11 +94,11 @@ class Task {
     }
 
     removeTag(){
-        this._tag = null;
+        this._tag = [];
     }
 
     addTag(value) {
-        this._tag = value;
+        this._tag.push(value);
     }
 
     get timeTracking() {
@@ -125,7 +126,10 @@ class Task {
         this._status = data._status;
         this._priority = data._priority;
         this._assigned = data._assigned;
-        this._tag = data._tag;
+        this._tag = [];
+        for (let i = 0; i < data._tag.length; i++) {
+            this._tag.push(data._tag[i]);
+        }
         this._timeTracking = data._timeTracking;
         this._taskType = data._taskType
     }
