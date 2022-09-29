@@ -25,13 +25,16 @@ function createTask() {
   if(tag != null){
     switch (tag.value){
       case "UI":
-        task.addTag(tag.value, "#AAC4FF");
+        let tag_value1 = [tag.value, "#AAC4FF"]
+        task.addTag(tag_value1);
         break;
       case "Development":
-        task.addTag(tag.value, "#ACE7FF");
+        let tag_value2 = [tag.value, "#ACE7FF"]
+        task.addTag(tag_value2);
         break;
       case "Testing":
-        task.addTag(tag.value, "#ECC5FB");
+        let tag_value3 = [tag.value, "#ECC5FB"]
+        task.addTag(tag_value3);
         break;
       default:
     }
@@ -86,17 +89,17 @@ function displayProductBacklog() {
         }
       }
     }
-
+    console.log(productBacklog._array[i].tag)
     // Create html to display the task info
     let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line" 
-                style="background-color: ${productBacklog._array[i].tags[0][1]}">
+                style="background-color: ${productBacklog._array[i].tag[1]}">
                     <span class="mdl-list__item-primary-content" onclick="showTask(${i})">
                         <span>${productBacklog._array[i].title}</span>
                         <span class="mdl-list__item-text-body">
                             <span style="padding-right: 15px">Priority: ${productBacklog._array[i].priority}</span>
                             <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
-                            <span>Tag: ${productBacklog._array[i].tags[0][0]}</span>
+                            <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
@@ -153,18 +156,17 @@ function editTask(index) {
   effort.value = productBacklog._array[index]._timeTracking;
 
   //getting user tag values and then only ticking the right ones present in LS
-  let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._array[index]._tags;
-  for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((checkBox) => {
-      if (storedTags[i][0] === checkBox.value) {
-        checkBox.parentElement.classList.add("is-checked");
-        checkBox.checked = true
-      }
-    });
-  }
+  let tag = document.querySelectorAll('input[name="tag"]');
+  let storedTag = productBacklog._array[index]._tag;
+  tag.forEach((checkBox) => {
+    if (storedTag[0] === checkBox.value) {
+      checkBox.parentElement.classList.add("is-checked");
+      checkBox.checked = true
+    }
+  });
+
   //updating the index
-  updateLSData(TASK_KEY, index)
+  updateLSData(taskKey, index)
 }
 
 /**
@@ -187,13 +189,17 @@ function saveEditTask() {
   if(tag != null){
     switch (tag.value){
       case "UI":
-        task.addTag(tag.value, "#AAC4FF");
+        console.log("success")
+        task.removeTag()
+        task.addTag([tag.value, "#AAC4FF"]);
         break;
       case "Development":
-        task.addTag(tag.value, "#ACE7FF");
+        task.removeTag()
+        task.addTag([tag.value, "#ACE7FF"]);
         break;
       case "Testing":
-        task.addTag(tag.value, "#ECC5FB");
+        task.removeTag()
+        task.addTag([tag.value, "#ECC5FB"]);
         break;
       default:
     }
@@ -202,8 +208,9 @@ function saveEditTask() {
   // Check that all inputs are valid
   if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
-    productBacklog._array[TASK_KEY] = task;
+    productBacklog._array[taskKey] = task;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    console.log(productBacklog)
     displayProductBacklog();
     document
         .getElementById("saveTask")
@@ -259,17 +266,15 @@ function showTask(index) {
   effort.disabled = true;
   effort.value = productBacklog._array[index]._timeTracking;
 
-  let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._array[index]._tags;
-  for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((radio) => {
-      if (storedTags[i][0] === radio.value) {
-        radio.parentElement.classList.add("is-checked");
-        radio.checked = true;
-      }
-      radio.disabled = true;
-    });
-  }
+  let tag = document.querySelectorAll('input[name="tag"]');
+  let storedTag = productBacklog._array[index]._tag;
+  tag.forEach((radio) => {
+    if (storedTag[0] === radio.value) {
+      radio.parentElement.classList.add("is-checked");
+      radio.checked = true;
+    }
+    radio.disabled = true;
+  });
 
 
   document.getElementById("saveTask").disabled = true;
