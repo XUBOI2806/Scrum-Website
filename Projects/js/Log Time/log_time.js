@@ -19,7 +19,7 @@ function addEffort(name) {
     if (person === undefined){
         return
     }
-    let newEffort = parseInt(document.getElementById("loggedEffort").value) + person.loggedTime;
+    let newEffort = parseFloat(document.getElementById("loggedEffort").value) + person.loggedTime;
     person.loggedTime = newEffort;
     updateLSData(TEAMBACKLOG_KEY, teamBacklog);
 
@@ -27,7 +27,8 @@ function addEffort(name) {
 }
 
 function displayPage() {
-    let tempTask = new Task("Temp name", "Temp description", "Temp status", "Priority", new Person("bob", "temp@gmail.com"), 0, "Temp task type")
+    let tempTask = new Task("Temp name", "Temp description", "Temp status", "Priority",
+        new Person("bob", "temp@gmail.com"), 0, "Temp task type")
     let page = `
                 <div class="content-grid mdl-grid">
                     <div class="mdl-cell mdl-cell--3-col"></div>
