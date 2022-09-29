@@ -59,12 +59,9 @@ function displayProductBacklogInSprint() {
                     </span>
               </li>`;
         output += item;
-        for (let j = 0; j < sprintBacklog._array.length; j++) {
-            if (productBacklog._array[i]._status === "Not Started") {
-              indexArray.push(i);
-            }
+        if (productBacklog._array[i]._status === "Not Started") {
+            indexArray.push(i);
         }
-      
     }
     // Add to the UI list
     document.getElementById("backlog-list").innerHTML = output;
@@ -72,14 +69,21 @@ function displayProductBacklogInSprint() {
         let node = document.getElementById("backlog-list");
         node.children[indexArray[i]].setAttribute("disabled", "true");
     }
-    
+
 }
 
 /**
  * Delete a sprint
  */
 function deleteSprint() {
-    //using function to delete at index
+    for (let i = 0; i < productBacklog._array.length; i++) {
+        for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++)
+            if (JSON.stringify(sprintBacklog._array[sprintKey]._tasks[j])===JSON.stringify(productBacklog._array[i])){
+                productBacklog._array[i]._status = "Not Assigned";
+                break;
+            }
+    }
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     sprintBacklog.delete(sprintKey);
     updateLSData(SPRINTBACKLOG_KEY,sprintBacklog);
     backToSprints();
@@ -101,9 +105,6 @@ function moveTaskToSB(index) {
  */
 function removeTask(index) {
     for (let i = 0; i < productBacklog._array.length; i++) {
-        console.log(sprintBacklog._array[sprintKey]._tasks[index])
-        console.log(productBacklog._array[i])
-        console.log(JSON.stringify(sprintBacklog._array[sprintKey]._tasks[index])===JSON.stringify(productBacklog._array[i]))
         if (JSON.stringify(sprintBacklog._array[sprintKey]._tasks[index])===JSON.stringify(productBacklog._array[i])){
             productBacklog._array[i]._status = "Not Assigned";
             sprintBacklog._array[sprintKey].deleteTask(index);
