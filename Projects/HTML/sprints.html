@@ -41,10 +41,77 @@
     <main class="mdl-layout__content">
         <!-- PAGE CONTENT -->
         <div class="page-content">
+            <div class="content-grid mdl-grid">
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet">
+                </div>
+                <!-- The Sprint container (green rectangle) -->
+                <div class="list-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
+                    <ul class="mdl-list" id="sprint-list">
+                        <!-- li is one PBI item -->
+                        <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
+                            <span class="mdl-list__item-primary-content">
+                                <span>Sprint Name</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <!-- Status -->
+                                <span>Status</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
 
+                <!-- dialog box for adding sprints -->
+                <dialog class="mdl-dialog">
+                    <div class="mdl-dialog__content">
+                        <div class="dialog-line mdl-textfield">
+                            <label class="mdl-typography--title">Product Backlog Item</label>
+                        </div>
+                        <!-- Name input -->
+                        <div class="dialog-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="sprintName">
+                            <label class="mdl-textfield__label" for="sprintName">Name*...</label>
+                            <span id="sprintNameError" class="mdl-textfield__error">Name required</span>
+                        </div>
+                        <!-- Date inputs -->
+                        <div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
+                                 style="width: 49%">
+                                <input class="mdl-textfield__input" type="date" id="startDate" placeholder="DD/MM/YYYY">
+                                <label class="mdl-textfield__label" for="startDate">Start Date</label>
+                                <span id="startDateError" class="mdl-textfield__error">Start Date today or after required</span>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
+                                 style="width: 49%">
+                                <input class="mdl-textfield__input" type="date" id="endDate" placeholder="DD/MM/YYYY">
+                                <label class="mdl-textfield__label" for="endDate">End Date</label>
+                                <span id="endDateError" class="mdl-textfield__error">End Date must be after start date.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- Buttons to cancel or save -->
+                            <div class="dialog-buttons">
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
+                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveSprint" onclick="createSprint()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </dialog>
+            </div>
+            <!-- Button to add task -->
+            <div class="add_circle-container">
+                <!-- Colored FAB button -->
+                <button id="add-pbi" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="add_sprint()">
+                    <i class="material-icons">add</i>
+                </button>
+
+            </div>
         </div>
 
     </main>
+    <!-- Link js files -->
+    <script src="../js/shared.js"></script>
+    <script src="../js/dialog-polyfill.js"></script>
+    <script src="../js/sprint.js"></script>
 </div>
 
 </body>

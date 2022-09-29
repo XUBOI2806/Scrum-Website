@@ -9,9 +9,6 @@
     <!-- Linking css stylesheet -->
     <link rel="stylesheet" href="../CSS/style.css" />
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css">
-    <link rel="stylesheet" href="https://creativeit.github.io/getmdl-select/getmdl-select.min.css">
-    <script defer src="https://creativeit.github.io/getmdl-select/getmdl-select.min.js"></script>
-
     <!-- Linking fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +42,7 @@
                 <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet">
                 </div>
                 <!-- The PBI container (green rectangle) -->
-                <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
+                <div class="list-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
                     <ul class="mdl-list" id="pbi-list">
                         <!-- li is one PBI item -->
                         <li class="list-item mdl-list__item mdl-list__item--three-line">
@@ -77,37 +74,37 @@
                     </ul>
                 </div>
 
-                <!-- dialog box for adding/editing PBIs -->
+                <!-- dialog box for adding sprints -->
                 <dialog class="mdl-dialog">
                     <div class="mdl-dialog__content">
-                        <div class="pbi-line mdl-textfield">
+                        <div class="dialog-line mdl-textfield">
                             <label class="mdl-typography--title">Product Backlog Item</label>
                         </div>
                         <!-- Name input -->
-                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <div class="dialog-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiName">
                             <label class="mdl-textfield__label" for="pbiName">Name*...</label>
-                            <span id="pbiNameError" class="mdl-textfield__error">Name required</span>
+                            <span id="sprintNameError" class="mdl-textfield__error">Name required</span>
                         </div>
                         <!-- Description input -->
-                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <div class="dialog-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="pbiDesc">
                             <label class="mdl-textfield__label" for="pbiDesc">Description*...</label>
                             <span id="pbiDescError" class="mdl-textfield__error">Description required</span>
                         </div>
-                        <div style="display: inline-block">
+                        <div>
                             <!-- Task Type -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%">
                                 <select class="mdl-textfield__input" id="pbiType">
                                     <option value="0" hidden></option>
                                     <option value="Story">Story</option>
                                     <option value="Bug">Bug</option>
                                 </select>
-                                <label class="mdl-textfield__label" for="priority">Task Type</label>
+                                <label class="mdl-textfield__label" for="pbiType">Task Type</label>
                                 <span id="pbiTypeError" class="mdl-textfield__error">Type required</span>
                             </div>
                             <!-- Effort Estimation -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 49%">
                                 <input class="mdl-textfield__input" type="text" id="pbiEffort" pattern="-?[0-9]*(\.[0-9]+)?">
                                 <label class="mdl-textfield__label" for="pbiEffort">Effort*...</label>
                                 <span id="pbiEffortError" class="mdl-textfield__error">Integer Effort Estimation required</span>
@@ -115,14 +112,14 @@
                         </div>
                         <div>
                             <!-- Assigning Person Input -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 32%">
                                 <select class="mdl-textfield__input" id="person">
                                     <option value="0" hidden></option>
                                 </select>
                                 <label class="mdl-textfield__label" for="person">Person</label>
                             </div>
                             <!-- Priority Input -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 32%;">
                                 <select class="mdl-textfield__input" id="priority">
                                     <option value="0" hidden></option>
                                     <option value="Low">Low</option>
@@ -134,7 +131,7 @@
                             </div>
 
                             <!-- Status Input -->
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 32%">
                                 <select class="mdl-textfield__input" id="status">
                                     <option value="0" hidden></option>
                                     <option value="Not Started">Not Started</option>
@@ -161,13 +158,14 @@
                                     <span class="mdl-radio__label">Testing</span>
                                     <span id="pbiTag" class="mdl-textfield__error">Tag Required</span>
                                 </label>
+
                             </div>
                         </div>
                         <div>
                             <!-- Buttons to cancel or save -->
-                            <div>
-                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
-                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveTask">Save</button>
+                            <div class="dialog-buttons">
+                                <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
+                                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveTask">Save</button>
                             </div>
                         </div>
                     </div>
@@ -187,7 +185,7 @@
     <!-- Link js files -->
     <script src="../js/shared.js"></script>
     <script src="../js/dialog-polyfill.js"></script>
-    <script src="../js/Backlog/Backlog.js"></script>
+    <script src="../js/backlog.js"></script>
 </div>
 
 </body>
