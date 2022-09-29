@@ -138,7 +138,7 @@ function startInactiveSprint(){
     sprintBacklog._array[sprintKey].status = "In Progress";
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
-    backToSprints();
+    toManageStartedSprint();
 }
 
 /**
@@ -146,6 +146,13 @@ function startInactiveSprint(){
  */
 function backToSprints(){
     window.location.href = 'sprints.html';
+}
+
+/**
+ * Goes to the Manage started Sprints page
+ */
+function toManageStartedSprint(){
+    window.location.href = 'manage_sprint_started.html';
 }
 
 refreshBacklog()
