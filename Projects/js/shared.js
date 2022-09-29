@@ -1,9 +1,10 @@
-/*
- * FILENAME :  shared.js
- *
- * DESCRIPTION : This JavaScript contains the classes, as well as keys and functionality for storing data
- * in local storage
- *
+
+/**
+ * File Name: shared.js
+ * Description: Contains the classes, as well as keys and
+ *  functionality for storing data in local storage.
+ * ID: Team 2
+ * Last Modified: 29/09/22
  */
 
 "use strict";
@@ -22,7 +23,6 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {List} tag
      * @param {Number} timeTracking
      * @param {String} taskType
      */
@@ -40,6 +40,7 @@ class Task {
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
+        this._tags = [];
         this._timeTracking = timeTracking;
         this._taskType = taskType
     }
@@ -88,16 +89,12 @@ class Task {
         this._assigned = value;
     }
 
-    get tag() {
-        return this._tag;
+    get tags() {
+        return this._tags;
     }
 
-    removeTag(){
-        this._tag = null;
-    }
-
-    addTag(value) {
-        this._tag = value;
+    addTag(tagName, tagColour = "#dedede") {
+        this._tags.push([tagName, tagColour]);
     }
 
     get timeTracking() {
@@ -108,13 +105,13 @@ class Task {
         this._timeTracking = value;
     }
 
-    editTask(title, description, status, priority, assigned, tag, timeTracking) {
+    editTask(title, description, status, priority, assigned, tags, timeTracking) {
         this._title = title;
         this._description = description;
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
-        this._tag = tag;
+        this._tags = tags;
         this._timeTracking = timeTracking;
         this._taskType = taskType;
     }
@@ -125,7 +122,7 @@ class Task {
         this._status = data._status;
         this._priority = data._priority;
         this._assigned = data._assigned;
-        this._tag = data._tag;
+        this._tags = data._tags;
         this._timeTracking = data._timeTracking;
         this._taskType = data._taskType
     }
@@ -136,8 +133,6 @@ class Sprint {
      * @param {String} title
      * @param {Date} startDate
      * @param {Date} endDate
-     * @param {String} status
-     * @param {List} tasks
      */
     constructor(
         title,
@@ -175,6 +170,14 @@ class Sprint {
         this._endDate = value;
     }
 
+    get status() {
+        return this._status;
+    }
+
+    set status(value) {
+        this._status = value;
+    }
+
     get tasks() {
         return this._tasks;
     }
@@ -196,8 +199,8 @@ class Sprint {
 
     fromData(data) {
         this._title = data._title;
-        this._startDate = data._startDate;
-        this._endDate = data._endDate;
+        this._startDate = new Date(data._startDate);
+        this._endDate = new Date(data._endDate);
         this._tasks = [];
         for (let i = 0; i < data._tasks.length; i++) {
             let task = new Task();

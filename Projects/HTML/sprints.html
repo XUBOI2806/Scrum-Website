@@ -77,21 +77,21 @@
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
                                  style="width: 49%">
                                 <input class="mdl-textfield__input" type="date" id="startDate" placeholder="DD/MM/YYYY">
-                                <label class="mdl-textfield__label" for="startDate">Starting Date</label>
-                                <span id="startDateError" class="mdl-textfield__error">Starting Date required</span>
+                                <label class="mdl-textfield__label" for="startDate">Start Date</label>
+                                <span id="startDateError" class="mdl-textfield__error">Start Date today or after required</span>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
                                  style="width: 49%">
                                 <input class="mdl-textfield__input" type="date" id="endDate" placeholder="DD/MM/YYYY">
-                                <label class="mdl-textfield__label" for="endDate">Starting Date</label>
-                                <span id="endDateError" class="mdl-textfield__error">End Date required</span>
+                                <label class="mdl-textfield__label" for="endDate">End Date</label>
+                                <span id="endDateError" class="mdl-textfield__error">End Date must be after start date.</span>
                             </div>
                         </div>
                         <div>
                             <!-- Buttons to cancel or save -->
                             <div class="dialog-buttons">
-                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
-                                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveSprint">Save</button>
+                                <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
+                                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveSprint" onclick="createSprint()">Save</button>
                             </div>
                         </div>
                     </div>

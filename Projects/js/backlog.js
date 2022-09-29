@@ -1,12 +1,16 @@
+/**
+ * File Name: backlog.js
+ * Description: Contains the functionality for the product_backlog page.
+ *  Includes adding, deleting, modifying and displaying tasks.
+ * ID: Team 2
+ * Last Modified: 29/09/22
+ */
+
 "use strict";
 
-// let taskIndex = localStorage.getItem(TASK_KEY);
-// let selectedTask = productBacklog.getTask(taskIndex);
-//test comment
 /**
  * Create a new task and add it to local storage
  */
-
 function createTask() {
   // take in user inputs
   let name = document.getElementById("pbiName").value;
