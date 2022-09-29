@@ -404,3 +404,4 @@ function list_members() {
 
 // Displays the list of tasks when the page loads
 displayProductBacklog();
+console.log("hi")
