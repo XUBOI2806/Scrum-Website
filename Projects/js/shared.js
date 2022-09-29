@@ -1,9 +1,10 @@
-/*
- * FILENAME :  shared.js
- *
- * DESCRIPTION : This JavaScript contains the classes, as well as keys and functionality for storing data
- * in local storage
- *
+
+/**
+ * File Name: shared.js
+ * Description: Contains the classes, as well as keys and
+ *  functionality for storing data in local storage.
+ * ID: Team 2
+ * Last Modified: 29/09/22
  */
 
 "use strict";
@@ -22,7 +23,6 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {List} tags
      * @param {Number} timeTracking
      * @param {String} taskType
      */
@@ -133,8 +133,6 @@ class Sprint {
      * @param {String} title
      * @param {Date} startDate
      * @param {Date} endDate
-     * @param {String} status
-     * @param {List} tasks
      */
     constructor(
         title,
