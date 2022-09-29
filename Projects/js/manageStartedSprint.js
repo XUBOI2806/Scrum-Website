@@ -65,7 +65,8 @@ function moveTaskToDone(index) {
 }
 
 function completeSprint(){
-    sprintBacklog._array[sprintKey]._status = "Done"
+    sprintBacklog._array[sprintKey]._status = "Completed"
+    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     backToSprints()
 }
 
