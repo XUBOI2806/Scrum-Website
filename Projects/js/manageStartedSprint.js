@@ -7,7 +7,7 @@ function displayTasks() {
     let notStartedOutput = "";
     let inProgressOutput = "";
     let doneOutput = "";
-
+    document.getElementById("sprintName").textContent = "Sprint: " + sprintBacklog._array[sprintKey]._title
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
         // Create html to display the task info
