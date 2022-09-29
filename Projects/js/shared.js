@@ -207,6 +207,7 @@ class Sprint {
         this._title = data._title;
         this._startDate = new Date(data._startDate);
         this._endDate = new Date(data._endDate);
+        this._status = data._status;
         this._tasks = [];
         for (let i = 0; i < data._tasks.length; i++) {
             let task = new Task();
@@ -346,10 +347,8 @@ class TeamBacklog extends Backlog{
  * @returns true or false representing if data exists at key in LS
  */
 function checkLSData(key) {
-    if (localStorage.getItem(key) != null) {
-        return true;
-    }
-    return false;
+    return localStorage.getItem(key) != null;
+
 }
 /**
  * retrieveLSData function
@@ -362,9 +361,8 @@ function retrieveLSData(key) {
     try {
         data = JSON.parse(data);
     } catch (err) {
-    } finally {
-        return data;
     }
+    return data;
 }
 
 /**
@@ -404,13 +402,11 @@ if (checkLSData(SPRINTBACKLOG_KEY)) {
 }
 
 if (checkLSData(SPRINT_KEY)) {
-    let data = retrieveLSData(SPRINT_KEY);
     // Restore data into vacationList
-    sprintKey = data;
+    sprintKey = retrieveLSData(SPRINT_KEY);
 }
 
 if (checkLSData(TASK_KEY)) {
-    let data = retrieveLSData(TASK_KEY);
     // Restore data into vacationList
-    taskKey = data;
+    taskKey = retrieveLSData(TASK_KEY);
 }
