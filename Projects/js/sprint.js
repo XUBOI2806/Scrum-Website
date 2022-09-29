@@ -145,7 +145,7 @@ function showManageSprint(index){
     // Open their manage pages
     if(sprint.status === "Not Started"){
         window.location = 'manage_sprint_not_started.html';
-    } else if(sprint.status === 'In Progress'){
+    } else if(sprint.status === "In Progress"){
         window.location = 'manage_sprint_in_progress.html';
     }
 }

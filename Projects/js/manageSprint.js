@@ -130,7 +130,7 @@ function saveInactiveSprint(){
  * Saves the tasks in the inactive sprint's backlog and starts it
  */
 function startInactiveSprint(){
-    sprintBacklog._array[sprintKey]._status = "In Progress";
+    sprintBacklog._array[sprintKey].status = "In Progress";
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     backToSprints();
