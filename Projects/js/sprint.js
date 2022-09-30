@@ -89,11 +89,16 @@ function checkForCompletedSprints(){
     // Check whether in-progress sprints have reached their end date and need to change to completed
     let todaysDate = new Date();
     for (let i = 0; i < sprintBacklog._array.length; i++) {
-        if(sprintBacklog._array[i].endDate.getTime() < todaysDate.getTime()){
+        if((sprintBacklog._array[i].status !== "Completed") && (sprintBacklog._array[i].endDate.getTime() < todaysDate.getTime())){
             sprintBacklog._array[i].status = "Completed";
+            for (let j = 0; j < sprintBacklog._array[i]._tasks.length; j++){
+                sprintBacklog._array[i]._tasks[j]._status = "Done";
+                productBacklog.add(sprintBacklog._array[i]._tasks[j]);
+            }
         }
     }
-    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog)
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
 }
 
 /**
@@ -148,7 +153,7 @@ function showManageSprint(index){
     if(sprint._status === "Not Started"){
         window.location = 'manage_sprint_not_started.html';
     } else if(sprint._status === 'In Progress'){
-        window.location = 'manage_sprint_in_progress.html';
+        window.location = 'manage_sprint_started.html';
     }
 }
 

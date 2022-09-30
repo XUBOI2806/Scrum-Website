@@ -102,14 +102,16 @@ function displayProductBacklog() {
                             <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
                             <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
-                    </span>
-                    <span class="mdl-list__item-secondary-content">
+                    </span>`
+    if (productBacklog._array[i]._status === "Not Assigned"){
+      item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(${i})">
                           <i class="material-icons">edit</i>
                         </button>
-                    </span>
-                    <span class="mdl-list__item-secondary-content">
+                    </span>`
+    }
+    item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
                           <i class="material-icons">delete</i>
@@ -150,6 +152,7 @@ function editTask(index) {
 
   let status = document.getElementById("status");
   status.parentElement.classList.add("is-dirty");
+  status.disabled = true;
   status.value = productBacklog._array[index]._status;
 
   let effort = document.getElementById("pbiEffort");
@@ -167,7 +170,8 @@ function editTask(index) {
   });
 
   //updating the index
-  updateLSData(taskKey, index)
+  taskKey = index
+  updateLSData(TASK_KEY, taskKey);
 }
 
 /**
