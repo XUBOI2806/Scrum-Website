@@ -69,7 +69,7 @@ function displayProductBacklogInSprint() {
         let node = document.getElementById("backlog-list");
         node.children[indexArray[i]].setAttribute("disabled", "true");
     }
-    
+
 }
 
 /**
