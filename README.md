@@ -13,8 +13,8 @@
 ### Time and task tracking tools used: Trello
 Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
 
-### Updated Project Plan (Sprint 1)
-#### Updates
+### Updated Project Plan 
+#### Updates (Sprint 1)
 - **Vision** updated
 - **Git Usage** updated
 - **Time Tracking** details and process clarified 
@@ -47,4 +47,5 @@ Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
     
 
 ### Test Plan
-Link to [Test Plan](https://docs.google.com/document/d/10NlgySfTZtD1rXSI2qNJbRQfrGwfpMnTDaPPL6zbtQY/edit)
+- Link to [Sprint 1 Test Plan](https://docs.google.com/document/d/10NlgySfTZtD1rXSI2qNJbRQfrGwfpMnTDaPPL6zbtQY/edit)
+- Link to [Sprint 2 Test Plan](https://docs.google.com/document/d/1DtsDWe1ZIs6fOau9nZWQHLnNCToQ--w2So38oTOB-0Q/edit)
