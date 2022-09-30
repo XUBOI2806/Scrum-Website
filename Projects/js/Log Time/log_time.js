@@ -9,9 +9,9 @@ function addEffort(name) {
     let person = undefined;
 
     // find the correct person
-    while (i < teamBacklog._taskArray.length) {
-        if (teamBacklog._taskArray[i].name === name) {
-            person = teamBacklog._taskArray[i]
+    while (i < teamBacklog._array.length) {
+        if (teamBacklog._array[i].name === name) {
+            person = teamBacklog._array[i]
             break;
         }
         i++;
