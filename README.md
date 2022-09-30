@@ -13,8 +13,8 @@
 ### Time and task tracking tools used: Trello
 Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
 
-### Updated Project Plan
-####Updates
+### Updated Project Plan (Sprint 1)
+#### Updates
 - **Vision** updated
 - **Git Usage** updated
 - **Time Tracking** details and process clarified 
@@ -30,6 +30,21 @@ Link to [Updated Project Plan](https://docs.google.com/document/d/1-9FoIGbGiKlv4
 Please refer to the Trello board
 
 Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
+
+
+### Second Sprint Tasks
+The team is focusing on 
+- creating the sprint board for the sprints
+- being able to create and delete a sprint  
+- allowing tasks to be added to a sprint
+- being able to start and access a sprint
+- allowing users to change the status of tasks within an active sprint
+- creating a log time page for later
+    - logging time for a specific member of the team
+    - total logged time being displayed on screen
+
+Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
+    
 
 ### Test Plan
 Link to [Test Plan](https://docs.google.com/document/d/10NlgySfTZtD1rXSI2qNJbRQfrGwfpMnTDaPPL6zbtQY/edit)
