@@ -1,12 +1,16 @@
+/**
+ * File Name: backlog.js
+ * Description: Contains the functionality for the product_backlog page.
+ *  Includes adding, deleting, modifying and displaying tasks.
+ * ID: Team 2
+ * Last Modified: 29/09/22
+ */
+
 "use strict";
 
-// let taskIndex = localStorage.getItem(TASK_KEY);
-// let selectedTask = productBacklog.getTask(taskIndex);
-//test comment
 /**
  * Create a new task and add it to local storage
  */
-
 function createTask() {
   // take in user inputs
   let name = document.getElementById("pbiName").value;
@@ -15,26 +19,23 @@ function createTask() {
   let person = document.getElementById("person").value;
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
-  if(status === '0'){
-    status = "Not Started";
-  }
   let effort = document.getElementById("pbiEffort").value;
   let tag = document.querySelector('input[name="tag"]:checked');
 
   // Create task
-  let persons = new Person(person, "asfda");
   let task = new Task(name, des, status, priority, person, effort, taskType);
   // Get the checked tag
   if(tag != null){
+    task.addTag(tag.value);
     switch (tag.value){
       case "UI":
-        task.addTag(tag.value, "#AAC4FF");
+        task.addTag("#AAC4FF");
         break;
       case "Development":
-        task.addTag(tag.value, "#ACE7FF");
+        task.addTag("#ACE7FF");
         break;
       case "Testing":
-        task.addTag(tag.value, "#ECC5FB");
+        task.addTag("#ECC5FB");
         break;
       default:
     }
@@ -89,17 +90,17 @@ function displayProductBacklog() {
         }
       }
     }
-
+    console.log(productBacklog._array[i].tag)
     // Create html to display the task info
     let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line" 
-                style="background-color: ${productBacklog._array[i].tags[0][1]}">
+                style="background-color: ${productBacklog._array[i].tag[1]}">
                     <span class="mdl-list__item-primary-content" onclick="showTask(${i})">
                         <span>${productBacklog._array[i].title}</span>
                         <span class="mdl-list__item-text-body">
                             <span style="padding-right: 15px">Priority: ${productBacklog._array[i].priority}</span>
                             <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
-                            <span>Tag: ${productBacklog._array[i].tags[0][0]}</span>
+                            <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
@@ -156,18 +157,17 @@ function editTask(index) {
   effort.value = productBacklog._array[index]._timeTracking;
 
   //getting user tag values and then only ticking the right ones present in LS
-  let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._array[index]._tags;
-  for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((checkBox) => {
-      if (storedTags[i][0] === checkBox.value) {
-        checkBox.parentElement.classList.add("is-checked");
-        checkBox.checked = true
-      }
-    });
-  }
+  let tag = document.querySelectorAll('input[name="tag"]');
+  let storedTag = productBacklog._array[index]._tag;
+  tag.forEach((checkBox) => {
+    if (storedTag[0] === checkBox.value) {
+      checkBox.parentElement.classList.add("is-checked");
+      checkBox.checked = true
+    }
+  });
+
   //updating the index
-  updateLSData(TASK_KEY, index)
+  updateLSData(taskKey, index)
 }
 
 /**
@@ -178,9 +178,6 @@ function saveEditTask() {
   let name = document.getElementById("pbiName").value;
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
-  if(status === '0'){
-    status = "Not Started";
-  }
   let priority = document.getElementById("priority").value;
   let person = document.getElementById("person").value;
   let effort = document.getElementById("pbiEffort").value;
@@ -191,15 +188,17 @@ function saveEditTask() {
   let task = new Task(name, description, status, priority, person, effort, taskType);
   //saving checkbox values
   if(tag != null){
+    task.removeTag()
+    task.addTag(tag.value);
     switch (tag.value){
       case "UI":
-        task.addTag(tag.value, "#AAC4FF");
+        task.addTag("#AAC4FF");
         break;
       case "Development":
-        task.addTag(tag.value, "#ACE7FF");
+        task.addTag("#ACE7FF");
         break;
       case "Testing":
-        task.addTag(tag.value, "#ECC5FB");
+        task.addTag("#ECC5FB");
         break;
       default:
     }
@@ -208,8 +207,9 @@ function saveEditTask() {
   // Check that all inputs are valid
   if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
-    productBacklog._array[TASK_KEY] = task;
+    productBacklog._array[taskKey] = task;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    console.log(productBacklog)
     displayProductBacklog();
     document
         .getElementById("saveTask")
@@ -265,17 +265,15 @@ function showTask(index) {
   effort.disabled = true;
   effort.value = productBacklog._array[index]._timeTracking;
 
-  let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._array[index]._tags;
-  for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((radio) => {
-      if (storedTags[i][0] === radio.value) {
-        radio.parentElement.classList.add("is-checked");
-        radio.checked = true;
-      }
-      radio.disabled = true;
-    });
-  }
+  let tag = document.querySelectorAll('input[name="tag"]');
+  let storedTag = productBacklog._array[index]._tag;
+  tag.forEach((radio) => {
+    if (storedTag[0] === radio.value) {
+      radio.parentElement.classList.add("is-checked");
+      radio.checked = true;
+    }
+    radio.disabled = true;
+  });
 
 
   document.getElementById("saveTask").disabled = true;
@@ -335,7 +333,7 @@ function add_pbi() {
   dialog.showModal();
   dialogPolyfill.registerDialog(dialog);
   document.getElementById("saveTask").addEventListener("click", createTask);
-  document.getElementById("status").value = "Not Started";
+  document.getElementById("status").value = "Not Assigned";
   document.getElementById("status").disabled = true;
   document.getElementById("status").parentElement.classList.add("is-dirty");
   list_members();
@@ -366,7 +364,7 @@ function closeDialog() {
   clearInput("priority");
   document.getElementById("priority").value = "0";
   clearInput("status");
-  document.getElementById("status").value = "0";
+  document.getElementById("status").value = "Not Assigned";
 
   document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
   document.getElementById("tag-dev").parentElement.classList.remove("is-checked");

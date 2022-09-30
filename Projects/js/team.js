@@ -1,3 +1,10 @@
+/**
+ * File Name: team.js
+ * Description: Contains the functionality for the teams page.
+ *  Includes adding, deleting and displaying team members.
+ * ID: Team 2
+ * Last Modified: 29/09/22
+ */
 
 "use strict";
 
