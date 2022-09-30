@@ -45,9 +45,9 @@
                 <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet">
                 </div>
                 <!-- The Team container (green rectangle) -->
-                <div class="PBI-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
+                <div class="list-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content">
                     <ul class="mdl-list" id="team-list">
-                        <li class="list-item mdl-list__item mdl-list__item--three-line">
+                        <li class="list-item mdl-list__item mdl-list__item--two-line">
                     <span class="mdl-list__item-primary-content">
                         <span>Name</span>
                         <span class="mdl-list__item-text-body">Email</span>
@@ -63,22 +63,22 @@
                 </div>
                 <dialog class="mdl-dialog">
                     <div class="mdl-dialog__content">
-                        <div class="pbi-line mdl-textfield">
+                        <div class="dialog-line mdl-textfield">
                             <label class="mdl-typography--title">Team Member</label>
                         </div>
-                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <div class="dialog-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="memberName">
                             <label class="mdl-textfield__label" for="memberName">Name</label>
                             <span id="memberNameError" class="mdl-textfield__error">Name required</span>
                         </div>
-                        <div class="pbi-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <div class="dialog-line mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" id="memberEmail">
                             <label class="mdl-textfield__label" for="memberEmail">Email</label>
                             <span id="memberEmailError" class="mdl-textfield__error">Email required</span>
                         </div>
-                        <div>
-                            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
-                            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveMember">Save</button>
+                        <div class="dialog-buttons">
+                            <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="closeDialog()">Cancel</button>
+                            <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="saveMember">Save</button>
                         </div>
                     </div>
                 </dialog>
@@ -93,7 +93,7 @@
     </main>
     <script src="../js/shared.js"></script>
     <script src="../js/dialog-polyfill.js"></script>
-    <script src="../js/Team/team.js"></script>
+    <script src="../js/team.js"></script>
 </div>
 
 

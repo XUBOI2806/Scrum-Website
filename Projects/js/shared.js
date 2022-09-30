@@ -1,9 +1,10 @@
-/*
- * FILENAME :  shared.js
- *
- * DESCRIPTION : This JavaScript contains the classes, as well as keys and functionality for storing data
- * in local storage
- *
+
+/**
+ * File Name: shared.js
+ * Description: Contains the classes, as well as keys and
+ *  functionality for storing data in local storage.
+ * ID: Team 2
+ * Last Modified: 29/09/22
  */
 
 "use strict";
@@ -22,7 +23,6 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {List} tags
      * @param {Number} timeTracking
      * @param {String} taskType
      */
@@ -40,7 +40,7 @@ class Task {
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
-        this._tags = [];
+        this._tag = [];
         this._timeTracking = timeTracking;
         this._taskType = taskType
     }
@@ -89,12 +89,16 @@ class Task {
         this._assigned = value;
     }
 
-    get tags() {
-        return this._tags;
+    get tag() {
+        return this._tag;
     }
 
-    addTag(tagName, tagColour = "#dedede") {
-        this._tags.push([tagName, tagColour]);
+    removeTag(){
+        this._tag = [];
+    }
+
+    addTag(value) {
+        this._tag.push(value);
     }
 
     get timeTracking() {
@@ -105,13 +109,13 @@ class Task {
         this._timeTracking = value;
     }
 
-    editTask(title, description, status, priority, assigned, tags, timeTracking) {
+    editTask(title, description, status, priority, assigned, tag, timeTracking, taskType) {
         this._title = title;
         this._description = description;
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
-        this._tags = tags;
+        this._tag = tag;
         this._timeTracking = timeTracking;
         this._taskType = taskType;
     }
@@ -122,9 +126,94 @@ class Task {
         this._status = data._status;
         this._priority = data._priority;
         this._assigned = data._assigned;
-        this._tags = data._tags;
+        this._tag = [];
+        for (let i = 0; i < data._tag.length; i++) {
+            this._tag.push(data._tag[i]);
+        }
         this._timeTracking = data._timeTracking;
         this._taskType = data._taskType
+    }
+}
+class Sprint {
+    /**
+     * @param {String} title
+     * @param {Date} startDate
+     * @param {Date} endDate
+     */
+    constructor(
+        title,
+        startDate,
+        endDate,
+    ) {
+        this._title = title;
+        this._startDate = startDate;
+        this._endDate = endDate;
+        this._status = "Not Started";
+        this._tasks = [];
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(value) {
+        this._title = value;
+    }
+
+    get startDate() {
+        return this._startDate;
+    }
+
+    set startDate(value) {
+        this._startDate = value;
+    }
+
+    get endDate() {
+        return this._endDate;
+    }
+
+    set endDate(value) {
+        this._endDate = value;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    set status(value) {
+        this._status = value;
+    }
+
+    get tasks() {
+        return this._tasks;
+    }
+
+    addTask(task) {
+        this._tasks.push(task);
+    }
+
+    deleteTask(taskIndex) {
+        this._tasks.splice(taskIndex, 1)
+    }
+
+    editSprint(title, startDate, endDate, tasks) {
+        this._title = title;
+        this._startDate = startDate;
+        this._endDate = endDate;
+        this._tasks = tasks;
+    }
+
+    fromData(data) {
+        this._title = data._title;
+        this._startDate = new Date(data._startDate);
+        this._endDate = new Date(data._endDate);
+        this._status = data._status;
+        this._tasks = [];
+        for (let i = 0; i < data._tasks.length; i++) {
+            let task = new Task();
+            task.fromData(data._tasks[i]);
+            this._tasks.push(task);
+        }
     }
 }
 
@@ -132,10 +221,12 @@ class Person {
     /**
      * @param {String} name
      * @param {String} email
+     * @param {Number} loggedTime
      */
-    constructor(name, email) {
+    constructor(name, email, loggedTime= 0) {
         this._name = name;
         this._email = email;
+        this._loggedTime = loggedTime;
     }
 
     get name() {
@@ -154,25 +245,34 @@ class Person {
         this._email = value;
     }
 
+    get loggedTime(){
+        return this._loggedTime;
+    }
+
+    set loggedTime(value){
+        this._loggedTime = value;
+    }
+
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
+        this._loggedTime = data._loggedTime;
     }
 }
 
 class Backlog {
     constructor() {
-        this._taskArray = [];
+        this._array = [];
         if (this.constructor === Backlog) {
             throw new Error("Abstract class cannot be instantiated");
         }
     }
 
-    addTask(newTask) {
-        this._taskArray.push(newTask);
+    add(newTask) {
+        this._array.push(newTask);
     }
 
-    deleteTask(taskIndex) {
+    delete(taskIndex) {
         throw new Error("Method deleteTask must be implemented");
     }
 
@@ -185,22 +285,23 @@ class SprintBacklog extends Backlog{
         super();
     }
 
-    addTask(newTask){
-        this._taskArray.push(newTask);
+    add(newSprint){
+        this._array.push(newSprint);
     }
 
-    deleteTask(taskIndex){
-        this._taskArray.splice(taskIndex, 1)
+    delete(sprintIndex){
+        this._array.splice(sprintIndex, 1)
     }
 
-    // fromData(data) {
-    //     this._array = [];
-    //     for (let i = 0; i < data._array.length; i++) {
-    //         let sprint = new Sprint();
-    //         sprint.fromData(data._array[i]);
-    //         this._array.push(sprint);
-    //     }
-    // }
+    fromData(data) {
+        this._array = [];
+        for (let i = 0; i < data._array.length; i++) {
+            let sprint = new Sprint();
+            sprint.fromData(data._array[i]);
+            this._array.push(sprint);
+        }
+    }
+
 }
 
 class ProductBacklog extends Backlog {
@@ -208,20 +309,20 @@ class ProductBacklog extends Backlog {
         super();
     }
 
-    addTask(newTask) {
-        this._taskArray.push(newTask);
+    add(newTask) {
+        this._array.push(newTask);
     }
 
-    deleteTask(taskIndex) {
-        this._taskArray.splice(taskIndex, 1)
+    delete(taskIndex) {
+        this._array.splice(taskIndex, 1)
     }
 
     fromData(data) {
-        this._taskArray = [];
-        for (let i = 0; i < data._taskArray.length; i++) {
+        this._array = [];
+        for (let i = 0; i < data._array.length; i++) {
             let task = new Task();
-            task.fromData(data._taskArray[i]);
-            this._taskArray.push(task);
+            task.fromData(data._array[i]);
+            this._array.push(task);
         }
     }
 }
@@ -231,20 +332,20 @@ class TeamBacklog extends Backlog{
         super();
     }
 
-    addTask(newTask){
-        this._taskArray.push(newTask);
+    add(newTask){
+        this._array.push(newTask);
     }
 
-    deleteTask(taskIndex){
-        this._taskArray.splice(taskIndex, 1)
+    delete(taskIndex){
+        this._array.splice(taskIndex, 1)
     }
 
     fromData(data) {
-        this._taskArray = [];
-        for (let i = 0; i < data._taskArray.length; i++) {
+        this._array = [];
+        for (let i = 0; i < data._array.length; i++) {
             let person = new Person();
-            person.fromData(data._taskArray[i]);
-            this._taskArray.push(person);
+            person.fromData(data._array[i]);
+            this._array.push(person);
         }
     }
 }
@@ -257,10 +358,8 @@ class TeamBacklog extends Backlog{
  * @returns true or false representing if data exists at key in LS
  */
 function checkLSData(key) {
-    if (localStorage.getItem(key) != null) {
-        return true;
-    }
-    return false;
+    return localStorage.getItem(key) != null;
+
 }
 /**
  * retrieveLSData function
@@ -273,9 +372,8 @@ function retrieveLSData(key) {
     try {
         data = JSON.parse(data);
     } catch (err) {
-    } finally {
-        return data;
     }
+    return data;
 }
 
 /**
@@ -292,6 +390,9 @@ function updateLSData(key, data) {
 // Global productBacklog and sprintBacklog variable
 let teamBacklog = new TeamBacklog();
 let productBacklog = new ProductBacklog();
+let sprintBacklog = new SprintBacklog();
+let sprintKey = 0;
+let taskKey = 0;
 
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
@@ -303,4 +404,20 @@ if (checkLSData(TEAMBACKLOG_KEY)) {
     let data = retrieveLSData(TEAMBACKLOG_KEY);
     // Restore data into vacationList
     teamBacklog.fromData(data);
+}
+
+if (checkLSData(SPRINTBACKLOG_KEY)) {
+    let data = retrieveLSData(SPRINTBACKLOG_KEY);
+    // Restore data into vacationList
+    sprintBacklog.fromData(data);
+}
+
+if (checkLSData(SPRINT_KEY)) {
+    // Restore data into vacationList
+    sprintKey = retrieveLSData(SPRINT_KEY);
+}
+
+if (checkLSData(TASK_KEY)) {
+    // Restore data into vacationList
+    taskKey = retrieveLSData(TASK_KEY);
 }

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Page Title -->
+    <title>ScrumMaster - Manage Sprint</title>
+    <!-- Linking MDL -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Linking css stylesheet -->
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css">
+
+    <!-- Linking fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- NAVIGATION -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Manage Sprint</span>
+        </div>
+    </header>
+    <!-- Navigation Drawer -->
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Manage Sprint</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="home.html">Home</a>
+            <a class="mdl-navigation__link" href="product_backlog.html">Product Backlog</a>
+            <a class="mdl-navigation__link" href="sprints.html">Sprints</a>
+            <a class="mdl-navigation__link" href="team.html">My Team</a>
+        </nav>
+    </div>
+
+
+    <main class="mdl-layout__content">
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+            <div class="content-grid mdl-grid">
+                <div class="mdl-cell mdl-cell--1-col">
+                </div>
+                <!-- The Sprint container (green rectangle) -->
+                <div class="list-container mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet">
+                    <h3 class="container-title">Product Backlog</h3>
+                    <ul class="mdl-list" id="backlog-list">
+                        <!-- li is one PBI item -->
+                        <li class="list-item mdl-list__item" onclick="showManageSprint(0)">
+                            <span class="mdl-list__item-primary-content">
+                                <span>PBI</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <!-- Add to Sprint Backlog button -->
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToSB(0)">
+                                  <i class="material-icons">add</i>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-container mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet">
+                    <h3 class="container-title">Sprint Backlog</h3>
+                    <ul class="mdl-list" id="sprint-task-list">
+                        <!-- li is one PBI item -->
+                        <li class="list-item mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span>PBI</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <!-- Remove from Sprint Backlog button -->
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="">
+                                  <i class="material-icons">remove</i>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Buttons to delete, save or start sprint -->
+            <div class="dialog-buttons">
+                <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised" onclick="deleteSprint()">Delete</button>
+                <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised" onclick="backToSprints()">Back</button>
+                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="saveInactiveSprint()">Save</button>
+                <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="startInactiveSprint()">Start</button>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+<script src="../js/shared.js"></script>
+<script src="../js/dialog-polyfill.js"></script>
+<script src="../js/manageSprint.js"></script>
+</html>

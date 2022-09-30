@@ -1,12 +1,16 @@
+/**
+ * File Name: backlog.js
+ * Description: Contains the functionality for the product_backlog page.
+ *  Includes adding, deleting, modifying and displaying tasks.
+ * ID: Team 2
+ * Last Modified: 29/09/22
+ */
+
 "use strict";
 
-// let taskIndex = localStorage.getItem(TASK_KEY);
-// let selectedTask = productBacklog.getTask(taskIndex);
-//test comment
 /**
  * Create a new task and add it to local storage
  */
-
 function createTask() {
   // take in user inputs
   let name = document.getElementById("pbiName").value;
@@ -15,36 +19,32 @@ function createTask() {
   let person = document.getElementById("person").value;
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
-  if(status === '0'){
-    status = "Not Started";
-  }
   let effort = document.getElementById("pbiEffort").value;
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  let tag = document.querySelector('input[name="tag"]:checked');
 
   // Create task
-  let persons = new Person(person, "asfda");
   let task = new Task(name, des, status, priority, person, effort, taskType);
-  // Get the checked tags
-  tagCheckboxes.forEach((checkbox) => {
-    switch (checkbox.value) {
+  // Get the checked tag
+  if(tag != null){
+    task.addTag(tag.value);
+    switch (tag.value){
       case "UI":
-        task.addTag(checkbox.value, "#d966ff");
+        task.addTag("#AAC4FF");
         break;
       case "Development":
-        task.addTag(checkbox.value, "#1affc6");
+        task.addTag("#ACE7FF");
         break;
       case "Testing":
-        task.addTag(checkbox.value, "#ff6666");
+        task.addTag("#ECC5FB");
         break;
       default:
-        task.addTag(checkbox.value);
     }
-  });
+  }
 
   // Check that all inputs are valid
-  if (validateInputs(name, des, taskType, person, priority, status, effort)) {
+  if (validateInputs(name, des, taskType, person, priority, status, effort, tag)) {
     // Add to local storage
-    productBacklog.addTask(task);
+    productBacklog.add(task);
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     // Update Task list
     displayProductBacklog();
@@ -62,8 +62,8 @@ function createTask() {
  */
 function deleteTask(index) {
   //using function to delete at index
-  productBacklog.deleteTask(index);
-  //updating local storage 
+  productBacklog.delete(index);
+  //updating local storage
   updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
   //running the display function with changed PB
   displayProductBacklog();
@@ -76,51 +76,42 @@ function displayProductBacklog() {
   let output = "";
 
   // Iterate through saved tasks in the backlog
-  for (let i = 0; i < productBacklog._taskArray.length; i++) {
-    // Get tags of each task
-    let tagsOutput = "";
-    productBacklog._taskArray[i].tags.forEach((tag) => {
-      tagsOutput += `
-      <span class="mdl-chip" style="background-color: ${tag[1]}">
-          <span class="mdl-chip__text">${tag[0]}</span>
-      </span>
-      `;
-    });
-    // sorting the product backlog list by story points in descending order
+  for (let i = 0; i < productBacklog._array.length; i++) {
     let temp = "";
-    for (let i = 0; i < productBacklog._taskArray.length; i++) {
-      for (let j = i + 1; j < productBacklog._taskArray.length; j++) {
+    for (let i = 0; i < productBacklog._array.length; i++) {
+      for (let j = i + 1; j < productBacklog._array.length; j++) {
         if (
-          parseInt(productBacklog._taskArray[i]._timeTracking) <
-            parseInt(productBacklog._taskArray[j]._timeTracking)
+          parseInt(productBacklog._array[i]._timeTracking) <
+            parseInt(productBacklog._array[j]._timeTracking)
         ) {
-          temp = productBacklog._taskArray[i];
-          productBacklog._taskArray[i] = productBacklog._taskArray[j];
-          productBacklog._taskArray[j] = temp;
+          temp = productBacklog._array[i];
+          productBacklog._array[i] = productBacklog._array[j];
+          productBacklog._array[j] = temp;
         }
       }
     }
-
+    console.log(productBacklog._array[i].tag)
     // Create html to display the task info
     let item = `
-                <li class="list-item mdl-list__item mdl-list__item--three-line">
+                <li class="list-item mdl-list__item mdl-list__item--three-line" 
+                style="background-color: ${productBacklog._array[i].tag[1]}">
                     <span class="mdl-list__item-primary-content" onclick="showTask(${i})">
-                        <span>${productBacklog._taskArray[i].title}</span>
+                        <span>${productBacklog._array[i].title}</span>
                         <span class="mdl-list__item-text-body">
-                            <span style="padding-right: 15px">Priority: ${productBacklog._taskArray[i].priority}</span>
-                            <span>Story Points: ${productBacklog._taskArray[i].timeTracking}</span><br>
-                            <span>Tags:
-                              <span class="tag-chips">${tagsOutput}</span>
-                            </span>
+                            <span style="padding-right: 15px">Priority: ${productBacklog._array[i].priority}</span>
+                            <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
+                            <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
-                    </span>
-                    <span class="mdl-list__item-secondary-content">
+                    </span>`
+    if (productBacklog._array[i]._status === "Not Assigned"){
+      item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(${i})">
                           <i class="material-icons">edit</i>
                         </button>
-                    </span>
-                    <span class="mdl-list__item-secondary-content">
+                    </span>`
+    }
+    item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
                           <i class="material-icons">delete</i>
@@ -133,6 +124,7 @@ function displayProductBacklog() {
   document.getElementById("pbi-list").innerHTML = output;
 }
 
+
 /**
  * Put saved values of task into the dialog container
  */
@@ -140,45 +132,46 @@ function editTask(index) {
   //getting inputs from local storage and removing placeholders for every thing
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
-  name.value = productBacklog._taskArray[index]._title;
+  name.value = productBacklog._array[index]._title;
 
   let des = document.getElementById("pbiDesc");
   des.parentElement.classList.add("is-dirty");
-  des.value = productBacklog._taskArray[index]._description;
+  des.value = productBacklog._array[index]._description;
 
   let taskType = document.getElementById("pbiType");
   taskType.parentElement.classList.add("is-dirty");
-  taskType.value = productBacklog._taskArray[index]._taskType;
+  taskType.value = productBacklog._array[index]._taskType;
 
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
-  assigned.value = productBacklog._taskArray[index]._assigned;
+  assigned.value = productBacklog._array[index]._assigned;
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
-  priority.value = productBacklog._taskArray[index]._priority;
+  priority.value = productBacklog._array[index]._priority;
 
   let status = document.getElementById("status");
   status.parentElement.classList.add("is-dirty");
-  status.value = productBacklog._taskArray[index]._status;
+  status.disabled = true;
+  status.value = productBacklog._array[index]._status;
 
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
-  effort.value = productBacklog._taskArray[index]._timeTracking;
+  effort.value = productBacklog._array[index]._timeTracking;
 
   //getting user tag values and then only ticking the right ones present in LS
-  let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._taskArray[index]._tags;
-  for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((checkBox) => {
-      if (storedTags[i][0] === checkBox.value) {
-        checkBox.parentElement.classList.add("is-checked");
-        checkBox.checked = true
-      }
-    });
-  }
+  let tag = document.querySelectorAll('input[name="tag"]');
+  let storedTag = productBacklog._array[index]._tag;
+  tag.forEach((checkBox) => {
+    if (storedTag[0] === checkBox.value) {
+      checkBox.parentElement.classList.add("is-checked");
+      checkBox.checked = true
+    }
+  });
+
   //updating the index
-  updateLSData(TASK_KEY, index)
+  taskKey = index
+  updateLSData(TASK_KEY, taskKey);
 }
 
 /**
@@ -189,40 +182,38 @@ function saveEditTask() {
   let name = document.getElementById("pbiName").value;
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
-  if(status === '0'){
-    status = "Not Started";
-  }
   let priority = document.getElementById("priority").value;
   let person = document.getElementById("person").value;
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]:checked');
+  let tag = document.querySelector('input[name="tag"]:checked');
 
   // Creating a task with the information
   let task = new Task(name, description, status, priority, person, effort, taskType);
   //saving checkbox values
-  tagCheckboxes.forEach((checkbox) => {
-    switch (checkbox.value) {
+  if(tag != null){
+    task.removeTag()
+    task.addTag(tag.value);
+    switch (tag.value){
       case "UI":
-        task.addTag(checkbox.value, "#d966ff");
+        task.addTag("#AAC4FF");
         break;
       case "Development":
-        task.addTag(checkbox.value, "#1affc6");
+        task.addTag("#ACE7FF");
         break;
       case "Testing":
-        task.addTag(checkbox.value, "#ff6666");
+        task.addTag("#ECC5FB");
         break;
       default:
-        task.addTag(checkbox.value);
     }
-  });
+  }
 
   // Check that all inputs are valid
-  if (validateInputs(name, description, taskType, person, priority, status, effort)) {
+  if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
-    let index = retrieveLSData(TASK_KEY)
-    productBacklog._taskArray[index] = task;
+    productBacklog._array[taskKey] = task;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    console.log(productBacklog)
     displayProductBacklog();
     document
         .getElementById("saveTask")
@@ -246,49 +237,48 @@ function showTask(index) {
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
   name.disabled = true;
-  name.value = productBacklog._taskArray[index]._title;
+  name.value = productBacklog._array[index]._title;
 
   let des = document.getElementById("pbiDesc");
   des.parentElement.classList.add("is-dirty");
   des.disabled = true;
-  des.value = productBacklog._taskArray[index]._description;
+  des.value = productBacklog._array[index]._description;
 
   let taskType = document.getElementById("pbiType");
   taskType.parentElement.classList.add("is-dirty");
   taskType.disabled = true;
-  taskType.value = productBacklog._taskArray[index]._taskType;
+  taskType.value = productBacklog._array[index]._taskType;
 
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
   assigned.disabled = true;
-  assigned.value = productBacklog._taskArray[index]._assigned;
+  assigned.value = productBacklog._array[index]._assigned;
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
   priority.disabled = true;
-  priority.value = productBacklog._taskArray[index]._priority;
+  priority.value = productBacklog._array[index]._priority;
 
   let status = document.getElementById("status");
   status.parentElement.classList.add("is-dirty");
   status.disabled = true;
-  status.value = productBacklog._taskArray[index]._status;
+  status.value = productBacklog._array[index]._status;
 
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
   effort.disabled = true;
-  effort.value = productBacklog._taskArray[index]._timeTracking;
+  effort.value = productBacklog._array[index]._timeTracking;
 
-  let tags = document.querySelectorAll('input[name="tag"]');
-  let storedTags = productBacklog._taskArray[index]._tags;
-  for (let i = 0; i < storedTags.length; i++) {
-    tags.forEach((checkBox) => {
-      if (storedTags[i][0] == checkBox.value) {
-        checkBox.parentElement.classList.add("is-checked");
-        checkBox.checked = true;
-      }
-      checkBox.disabled = true;
-    });
-  }
+  let tag = document.querySelectorAll('input[name="tag"]');
+  let storedTag = productBacklog._array[index]._tag;
+  tag.forEach((radio) => {
+    if (storedTag[0] === radio.value) {
+      radio.parentElement.classList.add("is-checked");
+      radio.checked = true;
+    }
+    radio.disabled = true;
+  });
+
 
   document.getElementById("saveTask").disabled = true;
 }
@@ -296,7 +286,7 @@ function showTask(index) {
 /**
  * Check that all inputs are valid, otherwise show error messages
  */
-function validateInputs(name, desc, type, person, priority, status, effort) {
+function validateInputs(name, desc, type, person, priority, status, effort, tag) {
   let retVal = true;
 
   if (name === "") {
@@ -311,7 +301,7 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
       .parentElement.classList.add("is-invalid");
     retVal = false;
   }
-  if (type === "") {
+  if (type === "0") {
     document
       .getElementById("pbiType")
       .parentElement.classList.add("is-invalid");
@@ -330,6 +320,12 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
     retVal = false;
   }
 
+  if (tag === null) {
+    document
+        .getElementById("tag-test").parentElement.parentElement.classList.add("is-invalid");
+    retVal = false;
+  }
+
   return retVal;
 }
 
@@ -338,10 +334,12 @@ function validateInputs(name, desc, type, person, priority, status, effort) {
  */
 function add_pbi() {
   let dialog = document.querySelector("dialog");
-  if (!dialog.showModal()) {
-    dialogPolyfill.registerDialog(dialog);
-    document.getElementById("saveTask").addEventListener("click", createTask);
-  }
+  dialog.showModal();
+  dialogPolyfill.registerDialog(dialog);
+  document.getElementById("saveTask").addEventListener("click", createTask);
+  document.getElementById("status").value = "Not Assigned";
+  document.getElementById("status").disabled = true;
+  document.getElementById("status").parentElement.classList.add("is-dirty");
   list_members();
 }
 
@@ -363,20 +361,23 @@ function closeDialog() {
   clearInput("pbiName");
   clearInput("pbiDesc");
   clearInput("pbiType");
+  document.getElementById("person").value = "0";
   clearInput("pbiEffort");
   clearInput("person");
   document.getElementById("person").value = "0";
   clearInput("priority");
   document.getElementById("priority").value = "0";
   clearInput("status");
-  document.getElementById("status").value = "0";
+  document.getElementById("status").value = "Not Assigned";
+
   document.getElementById("tag-ui").parentElement.classList.remove("is-checked");
   document.getElementById("tag-dev").parentElement.classList.remove("is-checked");
   document.getElementById("tag-test").parentElement.classList.remove("is-checked");
-  let tagCheckboxes = document.querySelectorAll('input[name="tag"]');
-  tagCheckboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-    checkbox.disabled = false;
+  document.getElementById("tag-test").parentElement.parentElement.classList.remove("is-invalid");
+  let radios = document.querySelectorAll('input[name="tag"]');
+  radios.forEach((radio) => {
+    radio.checked = false;
+    radio.disabled = false;
   });
   document.getElementById("saveTask").disabled = false;
 }
@@ -386,9 +387,8 @@ function closeDialog() {
  */
 function edit_pbi(index) {
   let dialog = document.querySelector("dialog");
-  if (!dialog.showModal()) {
-    dialogPolyfill.registerDialog(dialog);
-  }
+  dialog.showModal();
+  dialogPolyfill.registerDialog(dialog);
   document.getElementById("saveTask").addEventListener("click", saveEditTask);
   list_members();
   editTask(index);
@@ -399,8 +399,8 @@ function edit_pbi(index) {
  */
 function list_members() {
   let output = "<option value=\"0\" hidden></option>"
-  for (let i = 0; i < teamBacklog._taskArray.length; i++) {
-    output += `<option value="${i + 1}">${teamBacklog._taskArray[i]._name}</option>`
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    output += `<option value="${i + 1}">${teamBacklog._array[i]._name}</option>`
   }
   document.getElementById("person").innerHTML = output
 }
