@@ -103,7 +103,7 @@ function displayProductBacklog() {
                             <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
                     </span>`
-    if (productBacklog._array[i]._status == "Not Assigned"){
+    if (productBacklog._array[i]._status === "Not Assigned"){
       item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(${i})">

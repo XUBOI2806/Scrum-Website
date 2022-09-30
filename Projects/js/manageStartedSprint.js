@@ -1,3 +1,13 @@
+/**
+ * File Name: manageStartedSprint.js
+ * Description: Contains the functionality for the manage
+ *  active sprint page. Includes moving tasks from
+ *  'Not Started' to 'In Progress' and finally to the
+ *  'Completed' status. Also allows user to complete sprints.
+ * ID: Team 2
+ * Last Modified: 30/09/22
+ */
+
 "use strict";
 
 /**
@@ -17,7 +27,7 @@ function displayTasks() {
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">`
-        if (sprintBacklog._array[sprintKey]._tasks[i]._status == "Not Started"){
+        if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
             item += `
                         <!-- Add to Sprint Backlog button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToInProgress(${i})">
@@ -27,7 +37,7 @@ function displayTasks() {
                 </li>`
             notStartedOutput += item;
         }
-        else if(sprintBacklog._array[sprintKey]._tasks[i]._status == "In Progress"){
+        else if(sprintBacklog._array[sprintKey]._tasks[i]._status === "In Progress"){
             item += `
                         <!-- Add to Sprint Backlog button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToDone(${i})">
@@ -54,25 +64,47 @@ function displayTasks() {
     document.getElementById("done-list").innerHTML = doneOutput;
 }
 
+/**
+ * Moves a task from 'Not Started' to 'In Progress'
+ * @param index the index of the task in the sprint backlog
+ */
 function moveTaskToInProgress(index) {
     sprintBacklog._array[sprintKey]._tasks[index]._status = "In Progress"
     displayTasks()
 }
 
+/**
+ * Moves a task from 'In Progress' to 'Done'
+ * @param index the index of the task in the sprint backlog
+ */
 function moveTaskToDone(index) {
     sprintBacklog._array[sprintKey]._tasks[index]._status = "Done"
     displayTasks()
 }
 
+/**
+ * Finishes a sprint
+ */
 function completeSprint(){
+    // Mark all tasks as completed
     for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
         sprintBacklog._array[sprintKey]._tasks[i]._status = "Completed"
         productBacklog.add(sprintBacklog._array[sprintKey]._tasks[i])
     }
+    // Mark sprint as completed and update LS
     sprintBacklog._array[sprintKey]._status = "Completed"
-    updateLSData(PRODUCTBACKLOG_KEY, productBacklog)
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     backToSprints()
+}
+
+/**
+ * Saves a sprint
+ */
+function saveSprint(){
+    // Mark sprint as completed and update LS
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
 }
 
 /**
