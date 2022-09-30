@@ -59,7 +59,7 @@ function displayProductBacklogInSprint() {
                     </span>
               </li>`;
         output += item;
-        if (productBacklog._array[i]._status === "Not Started") {
+        if (productBacklog._array[i]._status === "Not Started"||productBacklog._array[i]._status ==="Completed") {
             indexArray.push(i);
         }
     }
@@ -135,6 +135,14 @@ function saveInactiveSprint(){
  * Saves the tasks in the inactive sprint's backlog and starts it
  */
 function startInactiveSprint(){
+    for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
+        for (let j = 0; j < productBacklog._array.length; j++) {
+            if (JSON.stringify(sprintBacklog._array[sprintKey]._tasks[i]) === JSON.stringify(productBacklog._array[j])) {
+                productBacklog.delete(j)
+                break;
+            }
+        }
+    }
     sprintBacklog._array[sprintKey].status = "In Progress";
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
