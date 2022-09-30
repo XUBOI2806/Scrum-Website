@@ -210,10 +210,12 @@ class Person {
     /**
      * @param {String} name
      * @param {String} email
+     * @param {Number} loggedTime
      */
-    constructor(name, email) {
+    constructor(name, email, loggedTime= 0) {
         this._name = name;
         this._email = email;
+        this._loggedTime = loggedTime;
     }
 
     get name() {
@@ -232,9 +234,18 @@ class Person {
         this._email = value;
     }
 
+    get loggedTime(){
+        return this._loggedTime;
+    }
+
+    set loggedTime(value){
+        this._loggedTime = value;
+    }
+
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
+        this._loggedTime = data._loggedTime;
     }
 }
 
