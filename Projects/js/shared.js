@@ -223,10 +223,10 @@ class Person {
      * @param {String} email
      * @param {Number} loggedTime
      */
-    constructor(name, email, loggedTime= 0) {
+    constructor(name, email) {
         this._name = name;
         this._email = email;
-        this._loggedTime = loggedTime;
+        this._loggedTime = [];
     }
 
     get name() {
@@ -249,14 +249,16 @@ class Person {
         return this._loggedTime;
     }
 
-    set loggedTime(value){
-        this._loggedTime = value;
+    addLoggedTime(value){
+        this._loggedTime.push(value);
     }
 
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
-        this._loggedTime = data._loggedTime;
+        for (let i = 0; i < data._loggedTime.length; i++) {
+            this._loggedTime.push(data.loggedTime[i]);
+        }
     }
 }
 
