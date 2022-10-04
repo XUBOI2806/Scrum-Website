@@ -1,48 +1,29 @@
 "use strict";
 
-function addEffort(name) {
-    // get original data from ls
-    let teamBacklog = new TeamBacklog();
-    let data = retrieveLSData(TEAMBACKLOG_KEY);
-    teamBacklog.fromData(data);
-    let i = 0;
-    let person = undefined;
+function addEffort() {
 
-    // find the correct person
-    while (i < teamBacklog._array.length) {
-        if (teamBacklog._array[i].name === name) {
-            person = teamBacklog._array[i]
-            break;
-        }
-        i++;
-    }
-    if (person === undefined){
-        return
-    }
     // **Update task total time**
     let loggedTime = (document.getElementById("logDate").value, document.getElementById("loggedEffort").value)
-    person.addLoggedTime(loggedTime)
+    sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned.addLoggedTime(loggedTime)
     updateLSData(TEAMBACKLOG_KEY, teamBacklog);
 }
 
 function displayPage() {
-    let tempTask = new Task("Temp name", "Temp description", "Temp status", "Priority",
-        new Person("bob", "temp@gmail.com"), 0, "Temp task type")
     let page = `
                 <div class="content-grid mdl-grid">
                     <div class="mdl-cell mdl-cell--3-col"></div>
                     <div class="mdl-cell mdl-cell--3-col">
                         <div class="task-info">
                             <h4>Name</h4>
-                            <span>${tempTask.title}</span>
+                            <span>${sprintBacklog._array[sprintKey]._tasks[taskKey]._title}</span>
                             <h4>Description</h4>
-                            <span>${tempTask.description}</span>
+                            <span>${sprintBacklog._array[sprintKey]._tasks[taskKey]._description}</span>
                             <h4>Person Assigned</h4>
                             <ul class="persons-list demo-list-two mdl-list">
                                 <li class="mdl-list__item mdl-list__item--two-line">
                                     <span class="mdl-list__item-primary-content">
-                                        <span>${tempTask.assigned.name}</span>
-                                        <span class="mdl-list__item-sub-title">${tempTask.assigned.email}</span>
+                                        <span>${sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned._name}</span>
+                                        <span class="mdl-list__item-sub-title">${sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned._email}</span>
                                     </span>
                                 </li>
                             </ul>
@@ -62,9 +43,9 @@ function displayPage() {
                             <label class="mdl-textfield__label" for="logDate">Log Date</label>
                             <span id="startDateError" class="mdl-textfield__error">Start Date today or before required</span>
                         </div>
-                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="addEffort('${tempTask.assigned.name}')">Add</button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised" onclick="addEffort()">Add</button>
                         <h3>Total Time</h3>
-                        <span id="totalHours">${tempTask.timeTracking} Hours</span>
+                        <span id="totalHours"> Hours</span>
                     </div>
                 </div>`;
     document.getElementById("log-time-content").innerHTML = page;
