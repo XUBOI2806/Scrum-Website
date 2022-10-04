@@ -23,7 +23,7 @@ function displayTasks() {
         // Create html to display the task info
         let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
+                    <span class="mdl-list__item-primary-content" onclick="">
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">`
