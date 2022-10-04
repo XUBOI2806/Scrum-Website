@@ -23,7 +23,7 @@ function displayTasks() {
         // Create html to display the task info
         let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
-                    <span class="mdl-list__item-primary-content" onclick="">
+                    <span class="mdl-list__item-primary-content" onclick="toLogTime(${i})">
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">`
@@ -112,6 +112,16 @@ function saveSprint(){
  */
 function backToSprints(){
     window.location.href = 'sprints.html';
+}
+
+/**
+ * Goes to the Log time page
+ */
+function toLogTime(index){
+    taskKey = index
+    updateLSData(TASK_KEY, taskKey)
+    saveSprint();
+    window.location.href = 'log_time.html';
 }
 
 displayTasks()

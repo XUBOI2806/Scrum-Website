@@ -24,6 +24,7 @@ function createTask() {
 
   // Create task
   let task = new Task(name, des, status, priority, person, effort, taskType);
+  console.log(person)
   // Get the checked tag
   if(tag != null){
     task.addTag(tag.value);
@@ -400,7 +401,7 @@ function edit_pbi(index) {
 function list_members() {
   let output = "<option value=\"0\" hidden></option>"
   for (let i = 0; i < teamBacklog._array.length; i++) {
-    output += `<option value="${i + 1}">${teamBacklog._array[i]._name}</option>`
+    output += `<option value="${teamBacklog._array[i]}">${teamBacklog._array[i]._name}</option>`
   }
   document.getElementById("person").innerHTML = output
 }

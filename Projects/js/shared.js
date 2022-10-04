@@ -125,7 +125,9 @@ class Task {
         this._description = data._description;
         this._status = data._status;
         this._priority = data._priority;
-        this._assigned = data._assigned;
+        let person = new Person();
+        person.fromData(data._assigned);
+        this._assigned = person;
         this._tag = [];
         for (let i = 0; i < data._tag.length; i++) {
             this._tag.push(data._tag[i]);
@@ -251,11 +253,12 @@ class Person {
 
     addLoggedTime(value){
         this._loggedTime.push(value);
-    }
+    } 
 
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
+        this.loggedTime = [];
         for (let i = 0; i < data._loggedTime.length; i++) {
             this._loggedTime.push(data.loggedTime[i]);
         }
