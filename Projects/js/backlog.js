@@ -16,7 +16,10 @@ function createTask() {
   let name = document.getElementById("pbiName").value;
   let des = document.getElementById("pbiDesc").value;
   let taskType = document.getElementById("pbiType").value;
-  let person = document.getElementById("person").value;
+  let person_value = document.getElementById("person").value;
+  console.log(document.getElementById("person").value)
+  let person = teamBacklog._array[person_value - 1]
+  console.log(person)
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
   let effort = document.getElementById("pbiEffort").value;
@@ -24,7 +27,6 @@ function createTask() {
 
   // Create task
   let task = new Task(name, des, status, priority, person, effort, taskType);
-  console.log(person)
   // Get the checked tag
   if(tag != null){
     task.addTag(tag.value);
@@ -145,7 +147,11 @@ function editTask(index) {
 
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
-  assigned.value = productBacklog._array[index]._assigned;
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    if (JSON.stringify(teamBacklog._array[i] )=== JSON.stringify(productBacklog._array[index]._assigned)) {
+      assigned.value = i+1
+    }
+  }
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
@@ -184,7 +190,8 @@ function saveEditTask() {
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
   let priority = document.getElementById("priority").value;
-  let person = document.getElementById("person").value;
+  let person_value = document.getElementById("person").value;
+  let person = teamBacklog._array[person_value]
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
   let tag = document.querySelector('input[name="tag"]:checked');
@@ -250,10 +257,16 @@ function showTask(index) {
   taskType.disabled = true;
   taskType.value = productBacklog._array[index]._taskType;
 
+  list_members();
+
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
   assigned.disabled = true;
-  assigned.value = productBacklog._array[index]._assigned;
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    if (JSON.stringify(teamBacklog._array[i] )=== JSON.stringify(productBacklog._array[index]._assigned)) {
+      assigned.value = i+1
+    }
+  }
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
@@ -362,7 +375,6 @@ function closeDialog() {
   clearInput("pbiName");
   clearInput("pbiDesc");
   clearInput("pbiType");
-  document.getElementById("person").value = "0";
   clearInput("pbiEffort");
   clearInput("person");
   document.getElementById("person").value = "0";
@@ -401,7 +413,7 @@ function edit_pbi(index) {
 function list_members() {
   let output = "<option value=\"0\" hidden></option>"
   for (let i = 0; i < teamBacklog._array.length; i++) {
-    output += `<option value="${teamBacklog._array[i]}">${teamBacklog._array[i]._name}</option>`
+    output += `<option value="${i+1}">${teamBacklog._array[i]._name}</option>`
   }
   document.getElementById("person").innerHTML = output
 }
