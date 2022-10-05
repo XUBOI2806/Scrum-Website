@@ -258,9 +258,9 @@ class Person {
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
-        this.loggedTime = [];
+        this._loggedTime = [];
         for (let i = 0; i < data._loggedTime.length; i++) {
-            this._loggedTime.push(data.loggedTime[i]);
+            this._loggedTime.push(data._loggedTime[i]);
         }
     }
 }
