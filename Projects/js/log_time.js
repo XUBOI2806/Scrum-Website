@@ -3,9 +3,19 @@
 function addEffort() {
 
     // **Update task total time**
-    let loggedTime = (document.getElementById("logDate").value, document.getElementById("loggedEffort").value)
+    let loggedTime = [document.getElementById("logDate").value, document.getElementById("loggedEffort").value]
     sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned.addLoggedTime(loggedTime)
-    updateLSData(TEAMBACKLOG_KEY, teamBacklog);
+    updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    displayPage();
+}
+
+function getHours() {
+    let hours = 0;
+    let loggedTime = sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned._loggedTime
+    for (let i = 0; i < loggedTime.length; i++) {
+        hours += parseInt(loggedTime[i][1])
+    }
+    return hours
 }
 
 function displayPage() {
@@ -45,7 +55,7 @@ function displayPage() {
                         </div>
                         <button class="mdl-button mdl-js-button mdl-button--raised" onclick="addEffort()">Add</button>
                         <h3>Total Time</h3>
-                        <span id="totalHours"> Hours</span>
+                        <span id="totalHours">${getHours()} Hours</span>
                     </div>
                 </div>`;
     document.getElementById("log-time-content").innerHTML = page;

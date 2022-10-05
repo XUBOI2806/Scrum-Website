@@ -105,6 +105,7 @@ function saveSprint(){
     // Mark sprint as completed and update LS
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    window.location.href = 'sprints.html';
 }
 
 /**
