@@ -76,7 +76,8 @@ function displayTeamBacklog() {
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTeamMember(${i})">
-                            <i class="material-icons">delete</i>
+                            <i class="material-icons" id="del-mem${i}">delete</i>
+                            <div class="mdl-tooltip" data-mdl-for="del-mem${i}">Delete</div>
                         </button>
                     </span>
                 </li>`;

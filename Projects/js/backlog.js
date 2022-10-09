@@ -106,14 +106,16 @@ function displayProductBacklog() {
       item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(${i})">
-                          <i class="material-icons">edit</i>
+                          <i class="material-icons" id="edit-pbi${i}">edit</i>
+                          <div class="mdl-tooltip" data-mdl-for="edit-pbi${i}">Edit</div>
                         </button>
                     </span>`
     }
     item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
-                          <i class="material-icons">delete</i>
+                          <i class="material-icons" id="del-pbi${i}">delete</i>
+                          <div class="mdl-tooltip" data-mdl-for="del-pbi${i}">Delete</div>
                         </button>
                     </span>
               </li>`;
@@ -231,10 +233,9 @@ function saveEditTask() {
 function showTask(index) {
   //displaying necessary modal
   let dialog = document.querySelector("dialog");
-  if (!dialog.showModal()) {
-    dialogPolyfill.registerDialog(dialog);
-    document.getElementById("saveTask");
-  }
+  dialog.showModal();
+  dialogPolyfill.registerDialog(dialog);
+  document.getElementById("saveTask");
   //getting inputs from LS and displaying them, they cannot be manipulated
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");

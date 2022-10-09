@@ -29,32 +29,26 @@ function displayTasks() {
                     <span class="mdl-list__item-secondary-content">`
         if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
             item += `
-                        <!-- Add to Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToInProgress(${i})">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="move-ns${i}" onclick="moveTaskToInProgress(${i})">
                             <i class="material-icons">arrow_forward</i>
                         </button>
+                        <div class="mdl-tooltip" data-mdl-for="move-ns${i}">Move to In Progress</div>
                     </span>
                 </li>`
             notStartedOutput += item;
         }
         else if(sprintBacklog._array[sprintKey]._tasks[i]._status === "In Progress"){
             item += `
-                        <!-- Add to Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToDone(${i})">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="move-com${i}" onclick="moveTaskToDone(${i})">
                             <i class="material-icons">arrow_forward</i>
                         </button>
+                        <div class="mdl-tooltip" data-mdl-for="move-com${i}">Move to Completed</div>
                     </span>
                 </li>`
             inProgressOutput += item;
         }
         else{
-            item += `
-                        <!-- Add to Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored"">
-                            <i class="material-icons">done</i>
-                        </button>
-                    </span>
-                </li>`
+            item += `<i class="material-icons">done</i></span></li>`
             doneOutput += item;
         }
     }

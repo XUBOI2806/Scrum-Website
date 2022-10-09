@@ -25,9 +25,10 @@ function displayTasksInSprint() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="removeTask(${i})">
-                        <i class="material-icons">remove</i>
-                        </button>                        
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="rem-spr${i}" onclick="removeTask(${i})">
+                            <i class="material-icons">remove</i>
+                        </button>        
+                        <div class="mdl-tooltip" data-mdl-for="rem-spr${i}">Remove</div>                
                     </span>
               </li>`;
         output += item;
@@ -53,9 +54,10 @@ function displayProductBacklogInSprint() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToSB(${i})">
-                        <i class="material-icons">add</i>
-                        </button>                        
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="add-spr${i}" onclick="moveTaskToSB(${i})">
+                            <i class="material-icons">add</i>
+                        </button>  
+                        <div class="mdl-tooltip" data-mdl-for="add-spr${i}">Add</div>                      
                     </span>
               </li>`;
         output += item;
