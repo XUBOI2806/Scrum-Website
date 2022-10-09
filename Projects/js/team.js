@@ -55,9 +55,11 @@ function validateInputs(name, email) {
  * Delete a team member from local storage and remove it from the list
  */
 function deleteTeamMember(index){
-    teamBacklog.delete(index);
-    updateLSData(TEAMBACKLOG_KEY, teamBacklog);
-    displayTeamBacklog();
+    if(confirm(`Are you sure want to delete ${teamBacklog._array[index].name}?\nDeleted data cannot be recovered.`)) {
+        teamBacklog.delete(index);
+        updateLSData(TEAMBACKLOG_KEY, teamBacklog);
+        displayTeamBacklog();
+    }
 }
 
 /**

@@ -61,12 +61,14 @@ function createTask() {
  * Delete a task
  */
 function deleteTask(index) {
-  //using function to delete at index
-  productBacklog.delete(index);
-  //updating local storage
-  updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
-  //running the display function with changed PB
-  displayProductBacklog();
+  if(confirm(`Are you sure want to delete ${productBacklog._array[index].title}?\nDeleted data cannot be recovered.`)){
+    //using function to delete at index
+    productBacklog.delete(index);
+    //updating local storage
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    //running the display function with changed PB
+    displayProductBacklog();
+  }
 }
 
 /**
