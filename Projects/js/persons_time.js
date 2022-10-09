@@ -1,19 +1,10 @@
 "use strict";
 
 function displayPage() {
-    let temp = new Person("Temp Name", "temp@gmail.com");
-    temp.addLoggedTime(['14/10/2022', 7])
-    temp.addLoggedTime(['11/10/2022', 2])
-    temp.addLoggedTime(['14/10/2022', 7])
-    temp.addLoggedTime(['11/10/2022', 2])
-    temp.addLoggedTime(['14/10/2022', 7])
-    temp.addLoggedTime(['11/10/2022', 2])
-    temp.addLoggedTime(['14/10/2022', 7])
-    temp.addLoggedTime(['11/10/2022', 2])
-    temp.addLoggedTime(['14/10/2022', 7])
-    temp.addLoggedTime(['11/10/2022', 2])
-    temp.addLoggedTime(['14/10/2022', 7])
-    temp.addLoggedTime(['11/10/2022', 2])
+    let temp = new Person("Team Members Name", "temp@gmail.com");
+    temp.addLoggedTime(['~Test~ 14/10/2022', 7])
+    temp.addLoggedTime(['~Test~ 14/10/2022', 2])
+
 
     // Collecting all logged time in to html
     let logged_time = ``;
