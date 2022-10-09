@@ -192,3 +192,16 @@ li[disabled]{
     opacity: 0.6;
     background: #e6e6e6;
 }
+
+#persons-effort-item {
+    width: 100%;
+}
+
+#persons-effort-item div {
+    width: 49%;
+    display: inline-block;
+}
+
+#right {
+    text-align: right;
+}
