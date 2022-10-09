@@ -90,7 +90,6 @@ function displayProductBacklog() {
         }
       }
     }
-    console.log(productBacklog._array[i].tag)
     // Create html to display the task info
     let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line" 
@@ -119,6 +118,9 @@ function displayProductBacklog() {
                     </span>
               </li>`;
     output += item;
+  }
+  if(output === ""){
+    output = `<span class="mdl-layout-title" style="color: white">No Product Backlog Items.<br>Use + button below to start adding.</span>`;
   }
   // Add to the UI list
   document.getElementById("pbi-list").innerHTML = output;

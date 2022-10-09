@@ -82,6 +82,9 @@ function displayTeamBacklog() {
                 </li>`;
         output += item;
     }
+    if(output === ""){
+        output = `<span class="mdl-layout-title" style="color: white">No Team Members.<br>Use + button below to start adding.</span>`;
+    }
     document.getElementById("team-list").innerHTML = output;
 }
 
