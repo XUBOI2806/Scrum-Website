@@ -414,7 +414,7 @@ let productBacklog = new ProductBacklog();
 let sprintBacklog = new SprintBacklog();
 let sprintKey = 0;
 let taskKey = 0;
-let sprintInProgress = Boolean(0);
+let sprintInProgress = false;
 
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
