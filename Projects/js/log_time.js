@@ -22,7 +22,7 @@ function displayPage() {
     let page = `
                 <div class="content-grid mdl-grid">
                     <div class="mdl-cell mdl-cell--3-col"></div>
-                    <div class="list-container mdl-cell mdl-cell--3-col">
+                    <div class="mdl-cell mdl-cell--3-col">
                         <div class="task-info">
                             <h4>Name</h4>
                             <span>${sprintBacklog._array[sprintKey]._tasks[taskKey]._title}</span>
