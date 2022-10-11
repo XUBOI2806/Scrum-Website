@@ -140,4 +140,31 @@ function closeDialog(){
     document.getElementById("memberEmail").disabled = false;
 }
 
+function get_current_sprint(){
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
+        if(sprintBacklog._array[i]._status === "In Progress"){
+            sprintKey = i;
+            updateLSData(SPRINT_KEY, sprintKey)
+        }
+    }
+}
+
+function total_time(){
+    let total_array = []
+    for (let i = 0; i < teamBacklog._array.length; i++) {
+        let value = 0
+        for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++) {
+            if (sprintBacklog._array[sprintKey]._tasks[j]._assigned === teamBacklog._array[i]) {
+                value += sprintBacklog._array[sprintKey]._tasks[j]._assigned.getTotalTime()
+            }
+        }
+        total_array.push([teamBacklog._array[i]._name, value])
+    }
+    console.log(total_array)
+    return total_array
+}
+
+
 displayTeamBacklog();
+get_current_sprint();
+total_time();
