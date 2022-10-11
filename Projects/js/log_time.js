@@ -5,7 +5,7 @@ function addEffort() {
     // **Update task total time**
     let loggedTime = [document.getElementById("logDate").value, document.getElementById("loggedEffort").value]
     sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned.addLoggedTime(loggedTime)
-    sprintBacklog._array[sprintKey]._tasks[taskKey]._timeTracking += loggedTime;
+    sprintBacklog._array[sprintKey]._tasks[taskKey].timeTracking(loggedTime);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     displayPage();
 }
