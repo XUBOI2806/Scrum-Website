@@ -27,7 +27,7 @@ function createSprint(){
     let endDate = document.getElementById("endDate").value;
     // If they are valid inputs, save sprint to LS
     if(validateSprintInputs(sprintName, startDate, endDate)){
-        let sprint = new Sprint(sprintName, new Date(startDate), new Date(endDate), "Not Started", [])
+        let sprint = new Sprint(sprintName, new Date(startDate), new Date(endDate))
         sprintBacklog.add(sprint);
         updateLSData(SPRINTBACKLOG_KEY, sprintBacklog)
         displaySprintBacklog();
