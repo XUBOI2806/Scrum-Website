@@ -23,7 +23,7 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {Number} timeTracking
+     * @param {Object} timeTracking
      * @param {String} taskType
      */
     constructor(
@@ -32,7 +32,7 @@ class Task {
         status,
         priority,
         assigned,
-        timeTracking = 0,
+        timeTracking = [],
         taskType
     ) {
         this._title = title;
@@ -252,6 +252,7 @@ class Person {
     }
 
     addLoggedTime(value){
+
         this._loggedTime.push(value);
     } 
 
