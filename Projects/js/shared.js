@@ -14,6 +14,7 @@ const SPRINT_KEY = "currentSprintIndex";
 const PRODUCTBACKLOG_KEY = "productBacklogData";
 const SPRINTBACKLOG_KEY = "sprintBacklogData";
 const TEAMBACKLOG_KEY = "teamBacklogData";
+const SPRINT_IN_PROGRESS = "sprintInProgressData"
 
 
 class Task {
@@ -23,7 +24,7 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {Object} timeTracking
+     * @param {Number} timeTracking
      * @param {String} taskType
      */
     constructor(
@@ -32,7 +33,6 @@ class Task {
         status,
         priority,
         assigned,
-        timeTracking = [],
         taskType
     ) {
         this._title = title;
@@ -41,7 +41,7 @@ class Task {
         this._priority = priority;
         this._assigned = assigned;
         this._tag = [];
-        this._timeTracking = timeTracking;
+        this._timeTracking = [];
         this._taskType = taskType
     }
 
@@ -252,9 +252,12 @@ class Person {
     }
 
     addLoggedTime(value){
-
         this._loggedTime.push(value);
-    } 
+    }
+
+    emptyLoggedTime(value){
+        this._loggedTime = []
+    }
 
     fromData(data) {
         this._name = data._name;
@@ -399,6 +402,7 @@ let productBacklog = new ProductBacklog();
 let sprintBacklog = new SprintBacklog();
 let sprintKey = 0;
 let taskKey = 0;
+let sprintInProgress = Boolean(0);
 
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
@@ -426,4 +430,9 @@ if (checkLSData(SPRINT_KEY)) {
 if (checkLSData(TASK_KEY)) {
     // Restore data into vacationList
     taskKey = retrieveLSData(TASK_KEY);
+}
+
+if (checkLSData(SPRINT_IN_PROGRESS)) {
+    // Restore data into vacationList
+    sprintInProgress = retrieveLSData(SPRINT_IN_PROGRESS);
 }
