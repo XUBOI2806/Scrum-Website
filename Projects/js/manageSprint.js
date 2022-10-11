@@ -120,6 +120,10 @@ function removeTask(index) {
 function refreshBacklog() {
     displayProductBacklogInSprint();
     displayTasksInSprint();
+    console.log(sprintInProgress)
+    if (sprintInProgress === true){
+        document.getElementById("save-button").disabled = true;
+    }
 }
 
 /**
@@ -144,6 +148,8 @@ function startInactiveSprint(){
         }
     }
     sprintBacklog._array[sprintKey].status = "In Progress";
+    sprintInProgress = true;
+    updateLSData(SPRINT_IN_PROGRESS, sprintInProgress)
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     toManageStartedSprint();
