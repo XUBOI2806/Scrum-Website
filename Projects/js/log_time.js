@@ -1,18 +1,17 @@
 "use strict";
 
 function addEffort() {
-
     // **Update task total time**
     let loggedTime = [document.getElementById("logDate").value, document.getElementById("loggedEffort").value]
     sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned.addLoggedTime(loggedTime)
-    sprintBacklog._array[sprintKey]._tasks[taskKey].timeTracking(loggedTime);
+    sprintBacklog._array[sprintKey]._tasks[taskKey].addTimeTracking(loggedTime);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     displayPage();
 }
 
 function getHours() {
     let hours = 0;
-    let loggedTime = sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned._loggedTime
+    let loggedTime = sprintBacklog._array[sprintKey]._tasks[taskKey]._timeTracking
     for (let i = 0; i < loggedTime.length; i++) {
         hours += parseInt(loggedTime[i][1])
     }
