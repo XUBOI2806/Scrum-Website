@@ -24,7 +24,7 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {Number} timeTracking
+     * @param {Number} effort
      * @param {String} taskType
      */
     constructor(
@@ -33,6 +33,7 @@ class Task {
         status,
         priority,
         assigned,
+        effort,
         taskType
     ) {
         this._title = title;
@@ -42,6 +43,7 @@ class Task {
         this._assigned = assigned;
         this._tag = [];
         this._timeTracking = [];
+        this._effort = effort;
         this._taskType = taskType
     }
 
@@ -105,17 +107,26 @@ class Task {
         return this._timeTracking;
     }
 
-    set timeTracking(value) {
-        this._timeTracking = value;
+    set addTimeTracking(value) {
+        this._timeTracking.push(value);
     }
 
-    editTask(title, description, status, priority, assigned, tag, timeTracking, taskType) {
+    get effort(){
+        return this._effort;
+    }
+
+    set effort(value){
+        this._effort = value;
+    }
+
+    editTask(title, description, status, priority, assigned, tag, effort, timeTracking, taskType) {
         this._title = title;
         this._description = description;
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
         this._tag = tag;
+        this._effort = effort;
         this._timeTracking = timeTracking;
         this._taskType = taskType;
     }
@@ -132,6 +143,7 @@ class Task {
         for (let i = 0; i < data._tag.length; i++) {
             this._tag.push(data._tag[i]);
         }
+        this._effort = data._effort;
         this._timeTracking = data._timeTracking;
         this._taskType = data._taskType
     }
