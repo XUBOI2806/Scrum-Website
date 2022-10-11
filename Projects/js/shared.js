@@ -271,14 +271,6 @@ class Person {
         this._loggedTime = []
     }
 
-    getTotalTime(){
-        let value = 0;
-        for (let i = 0; i < this._loggedTime.length; i++) {
-            value += this._loggedTime[i][0]
-        }
-        return value
-    }
-
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
