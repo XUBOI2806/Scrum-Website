@@ -84,8 +84,8 @@ function displayProductBacklog() {
     for (let i = 0; i < productBacklog._array.length; i++) {
       for (let j = i + 1; j < productBacklog._array.length; j++) {
         if (
-          parseInt(productBacklog._array[i]._timeTracking) <
-            parseInt(productBacklog._array[j]._timeTracking)
+          parseInt(productBacklog._array[i]._effort) <
+            parseInt(productBacklog._array[j]._effort)
         ) {
           temp = productBacklog._array[i];
           productBacklog._array[i] = productBacklog._array[j];
@@ -102,7 +102,7 @@ function displayProductBacklog() {
                         <span>${productBacklog._array[i].title}</span>
                         <span class="mdl-list__item-text-body">
                             <span style="padding-right: 15px">Priority: ${productBacklog._array[i].priority}</span>
-                            <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
+                            <span>Story Points: ${productBacklog._array[i].effort}</span><br>
                             <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
                     </span>`
@@ -164,7 +164,7 @@ function editTask(index) {
 
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
-  effort.value = productBacklog._array[index]._timeTracking;
+  effort.value = productBacklog._array[index]._effort;
 
   //getting user tag values and then only ticking the right ones present in LS
   let tag = document.querySelectorAll('input[name="tag"]');
@@ -281,7 +281,7 @@ function showTask(index) {
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
   effort.disabled = true;
-  effort.value = productBacklog._array[index]._timeTracking;
+  effort.value = productBacklog._array[index]._effort;
 
   let tag = document.querySelectorAll('input[name="tag"]');
   let storedTag = productBacklog._array[index]._tag;
