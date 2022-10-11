@@ -21,14 +21,13 @@ function displayTasks() {
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
         // Create html to display the task info
-        let item = `
+        if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
+            let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
                     </span>
-                    <span class="mdl-list__item-secondary-content">`
-        if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
-            item += `
+                    <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToInProgress(${i})">
                             <i class="material-icons">arrow_forward</i>
@@ -38,7 +37,12 @@ function displayTasks() {
             notStartedOutput += item;
         }
         else if(sprintBacklog._array[sprintKey]._tasks[i]._status === "In Progress"){
-            item += `
+            let item = `
+                <li class="list-item mdl-list__item mdl-list__item">
+                    <span class="mdl-list__item-primary-content" onclick="toLogTime(${i})">
+                        <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToDone(${i})">
                             <i class="material-icons">arrow_forward</i>
@@ -48,7 +52,12 @@ function displayTasks() {
             inProgressOutput += item;
         }
         else{
-            item += `
+            let item = `
+                <li class="list-item mdl-list__item mdl-list__item">
+                    <span class="mdl-list__item-primary-content" >
+                        <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored"">
                             <i class="material-icons">done</i>
@@ -93,8 +102,10 @@ function completeSprint(){
     }
     // Mark sprint as completed and update LS
     sprintBacklog._array[sprintKey]._status = "Completed"
+    sprintInProgress = false;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    updateLSData(SPRINT_IN_PROGRESS, sprintInProgress)
     backToSprints()
 }
 
@@ -105,6 +116,7 @@ function saveSprint(){
     // Mark sprint as completed and update LS
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    window.location.href = 'sprints.html';
 }
 
 /**
@@ -112,6 +124,16 @@ function saveSprint(){
  */
 function backToSprints(){
     window.location.href = 'sprints.html';
+}
+
+/**
+ * Goes to the Log time page
+ */
+function toLogTime(index){
+    taskKey = index
+    updateLSData(TASK_KEY, taskKey)
+    saveSprint();
+    window.location.href = 'log_time.html';
 }
 
 displayTasks()
