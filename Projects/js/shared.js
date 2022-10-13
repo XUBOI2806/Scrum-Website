@@ -263,21 +263,21 @@
          return this._loggedTime;
      }
  
-     addLoggedTime(value){
-         this._loggedTime.push(value);
-     }
+    //  addLoggedTime(value){
+    //      this._loggedTime.push(value);
+    //  }
  
-     emptyLoggedTime(value){
-         this._loggedTime = []
-     }
+    //  emptyLoggedTime(value){
+    //      this._loggedTime = []
+    //  }
  
      fromData(data) {
          this._name = data._name;
          this._email = data._email;
          this._loggedTime = [];
-         for (let i = 0; i < data._loggedTime.length; i++) {
-             this._loggedTime.push(data._loggedTime[i]);
-         }
+        //  for (let i = 0; i < data._loggedTime.length; i++) {
+        //      this._loggedTime.push(data._loggedTime[i]);
+        //  }
      }
  }
  
