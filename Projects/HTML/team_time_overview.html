@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Page Title -->
+    <title>ScrumMaster - My Team Stats Overview</title>
+    <!-- Linking MDL -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Linking css stylesheet -->
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css">
+
+    <!-- Linking fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- NAVIGATION -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">My Team Stats</span>
+        </div>
+    </header>
+    <!-- Navigation Drawer -->
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">My Team Stats</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="home.html">Home</a>
+            <a class="mdl-navigation__link" href="product_backlog.html">Product Backlog</a>
+            <a class="mdl-navigation__link" href="sprints.html">Sprints</a>
+            <a class="mdl-navigation__link" href="team.html">My Team</a>
+        </nav>
+    </div>
+
+
+    <main class="mdl-layout__content">
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+            <div class="team-dates">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
+                     style="width: 35%">
+                    <input class="mdl-textfield__input" type="date" id="startDate" placeholder="DD/MM/YYYY">
+                    <label class="mdl-textfield__label" for="startDate">Start Date</label>
+                    <span id="startDateError" class="mdl-textfield__error">Start Date today or after required</span>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
+                     style="width: 35%">
+                    <input class="mdl-textfield__input" type="date" id="endDate" placeholder="DD/MM/YYYY">
+                    <label class="mdl-textfield__label" for="endDate">End Date</label>
+                    <span id="endDateError" class="mdl-textfield__error">End Date must be after start date.</span>
+                </div>
+                <div class="btn-holder">
+                    <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" onclick="">Set</button>
+                </div>
+            </div>
+            <div style="margin: auto; text-align: center">
+                <h3 id="team_total_time">Total Time: </h3>
+            </div>
+            <div class="content-grid mdl-grid" style="height: 80%;">
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet" style="position: relative">
+                    <div class="btn-holder">
+                        <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" style="position: absolute; bottom: 5px; right: 5px" onclick="">Back</button>
+                    </div>
+                </div>
+                <!-- The time container (green rectangle) -->
+                <div class="list-container mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet" id="content" style="">
+                    <!-- Team member name column -->
+                    <div class="team-column">
+                        <h3 class="container-title">Name</h3>
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item">Member1</li>
+                        </ul>
+                    </div>
+                    <!-- Team member time worked -->
+                    <div class="team-column">
+                        <h3 class="container-title">Time</h3>
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item">50</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+<script src="../js/shared.js"></script>
+<script src="../js/dialog-polyfill.js"></script>
+</html>
