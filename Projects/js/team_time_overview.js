@@ -19,8 +19,13 @@ function showList() {
         textSpan.append(teamMemberTime);
 
         let totalTime = 0;
+        let startDate = document.getElementById("startDate");
+        let endDate = document.getElementById("endDate");
         for (let j = 0; j < teamBacklog._array[i]._loggedTime.length; j++){
-            totalTime += teamBacklog._array[i]._loggedTime[j][1]
+            let loggedDate = teamBacklog._array[i]._loggedTime[j][0];
+            if (startDate >= loggedDate && loggedDate <= endDate){
+                totalTime += teamBacklog._array[i]._loggedTime[j][1];
+            }
         }
         document.getElementById(teamBacklog._array[i]._name + "time").innerText = totalTime.toString();
     }
