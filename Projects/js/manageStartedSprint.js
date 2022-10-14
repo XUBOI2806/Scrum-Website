@@ -21,7 +21,8 @@ function displayTasks() {
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
         // Create html to display the task info
-        let item = `
+        if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
+            let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
@@ -91,8 +92,10 @@ function completeSprint(){
     }
     // Mark sprint as completed and update LS
     sprintBacklog._array[sprintKey]._status = "Completed"
+    sprintInProgress = false;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    updateLSData(SPRINT_IN_PROGRESS, sprintInProgress)
     backToSprints()
 }
 
@@ -103,6 +106,7 @@ function saveSprint(){
     // Mark sprint as completed and update LS
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    window.location.href = 'sprints.html';
 }
 
 /**
@@ -110,6 +114,16 @@ function saveSprint(){
  */
 function backToSprints(){
     window.location.href = 'sprints.html';
+}
+
+/**
+ * Goes to the Log time page
+ */
+function toLogTime(index){
+    taskKey = index
+    updateLSData(TASK_KEY, taskKey)
+    saveSprint();
+    window.location.href = 'log_time.html';
 }
 
 displayTasks()
