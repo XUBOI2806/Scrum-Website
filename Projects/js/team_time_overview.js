@@ -1,4 +1,18 @@
-function calculate_time_for_member(start_date, end_date) {
+
+function showList() {
+    // display all team members
+    for (let i = 0; i < teamBacklog._array.length; i++){
+        let teamMember = document.createElement("li");
+        teamMember.id = teamBacklog._array[i]._name;
+        teamMember.className = "mdl-list__item";
+        let textSpan = document.getElementById("member-list");
+        textSpan.append(teamMember);
+
+        document.getElementById(teamBacklog._array[i]._name).innerText = teamBacklog._array[i]._name;
+    }
+    // display all team member time
+
+
 
 }
 
@@ -34,15 +48,13 @@ function displayPage() {
                     <!-- Team member name column -->
                     <div class="team-column">
                         <h3 class="container-title">Name</h3>
-                        <ul class="mdl-list">
-                            <li class="mdl-list__item">Member1</li>
+                        <ul class="mdl-list" id="member-list">
                         </ul>
                     </div>
                     <!-- Team member time worked -->
                     <div class="team-column">
                         <h3 class="container-title">Time</h3>
                         <ul class="mdl-list">
-                            <li class="mdl-list__item">50</li>
                         </ul>
                     </div>
                 </div>
@@ -52,3 +64,4 @@ function displayPage() {
 }
 
 displayPage();
+showList();
