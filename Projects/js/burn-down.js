@@ -49,7 +49,7 @@ function actualV() {
             let date = new Date(currentTask[j][0]).getTime()
             let timeDate = date - new Date(currentSprint._startDate).getTime()
             let numDate = timeDate / (1000 * 3600 * 24);
-            dataER[numDate] = parseInt(currentTask[j][1])
+            dataER[numDate] += parseInt(currentTask[j][1])
         }
     }
     let remainingE = totalHrs
