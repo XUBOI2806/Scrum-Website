@@ -63,8 +63,10 @@ function displayTasks() {
  * @param index the index of the task in the sprint backlog
  */
 function moveTaskToInProgress(index) {
-    sprintBacklog._array[sprintKey]._tasks[index]._status = "In Progress"
-    displayTasks()
+    if(confirm(`Are you sure want to move ${sprintBacklog._array[sprintKey]._tasks[index].name} to 'In Progress'?\nThis action cannot be undone.`)) {
+        sprintBacklog._array[sprintKey]._tasks[index]._status = "In Progress"
+        displayTasks()
+    }
 }
 
 /**
@@ -72,8 +74,10 @@ function moveTaskToInProgress(index) {
  * @param index the index of the task in the sprint backlog
  */
 function moveTaskToDone(index) {
-    sprintBacklog._array[sprintKey]._tasks[index]._status = "Done"
-    displayTasks()
+    if(confirm(`Are you sure want to move ${sprintBacklog._array[sprintKey]._tasks[index].name} to 'Done'?\nThis action cannot be undone.`)) {
+        sprintBacklog._array[sprintKey]._tasks[index]._status = "Done"
+        displayTasks()
+    }
 }
 
 /**
