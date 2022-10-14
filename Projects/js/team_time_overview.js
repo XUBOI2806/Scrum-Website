@@ -3,15 +3,27 @@ function showList() {
     // display all team members
     for (let i = 0; i < teamBacklog._array.length; i++){
         let teamMember = document.createElement("li");
-        teamMember.id = teamBacklog._array[i]._name;
         teamMember.className = "mdl-list__item";
+        teamMember.id = teamBacklog._array[i]._name;
         let textSpan = document.getElementById("member-list");
         textSpan.append(teamMember);
 
         document.getElementById(teamBacklog._array[i]._name).innerText = teamBacklog._array[i]._name;
     }
     // display all team member time
+    for (let i = 0; i < teamBacklog._array.length; i++){
+        let teamMemberTime = document.createElement("li")
+        teamMemberTime.className = "mdl-list__item";
+        teamMemberTime.id = teamBacklog._array[i]._name + " time";
+        let textSpan = document.getElementById("time-list");
+        textSpan.append(teamMemberTime);
 
+        let totalTime = 0;
+        for (let j = 0; j < teamBacklog._array[i]._loggedTime.length; j++){
+            totalTime += teamBacklog._array[i]._loggedTime[j][1]
+        }
+        document.getElementById(teamBacklog._array[i]._name + "time").innerText = totalTime.toString();
+    }
 
 
 }
@@ -54,7 +66,7 @@ function displayPage() {
                     <!-- Team member time worked -->
                     <div class="team-column">
                         <h3 class="container-title">Time</h3>
-                        <ul class="mdl-list">
+                        <ul class="mdl-list" id="time-list">
                         </ul>
                     </div>
                 </div>
