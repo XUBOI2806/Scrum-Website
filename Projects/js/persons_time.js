@@ -10,8 +10,8 @@ function displayPage() {
     }
 
     // Collecting all logged time in to html
-    let startDate = currentSprint._startDate;
-    let today = new Date();
+    let startDate = currentSprint._startDate.setHours(0,0,0,0);
+    let today = new Date().setHours(0,0,0,0);
 
     // Variables to be input to the graph
     let xlabels = [];
@@ -23,19 +23,12 @@ function displayPage() {
     let total_effort = 0;
     let day = 1;
     // For each day the sprint has been ongoing, get the amount of effort spent
-    teamBacklog._array[teamKey].addLoggedTime([new Date(2022,9,17),3])
-    console.log(startDate)
-    today.setDate(today.getDate() +2)
-    console.log(today)
-    for (let i = startDate; i <= today; i.setDate(i.getDate() + 1)) {
+    for (let i = startDate; i <= today; i+=(24*3600*1000)) {
         let dayEffort = 0;
         xlabels.push('Day ' + day.toString());
         day += 1;
-        console.log(i)
         for (let j = 0; j < teamBacklog._array[teamKey]._loggedTime.length; j++) {
-            console.log(teamBacklog._array[teamKey]._loggedTime[j][0].getTime())
-            console.log(i.getTime())
-            if (teamBacklog._array[teamKey]._loggedTime[j][0].getTime() == i.getTime()) {         // if (date of logged time == day within sprint)
+            if (teamBacklog._array[teamKey]._loggedTime[j][0] == i) {         // if (date of logged time == day within sprint)
                 dayEffort += teamBacklog._array[teamKey]._loggedTime[j][1] * 4;
                 total_effort += teamBacklog._array[teamKey]._loggedTime[j][1] * 4;
             }
