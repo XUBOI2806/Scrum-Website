@@ -52,6 +52,9 @@ function actualV() {
         dataArrayAV[i] = remainingE - dataER[i]
         remainingE = dataArrayAV[i]
     }
+    for(let i = 1; i < dataER.length; i++){
+      dataER[i] = dataER[i-1] + dataER[i]
+    }
     console.log(dataArrayAV)
 }
 // timeTracking = (date, hr)
