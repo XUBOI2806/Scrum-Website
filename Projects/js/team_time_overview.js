@@ -1,4 +1,16 @@
+/**
+ * File Name: team_time_overview.js
+ * Description: Contains the functionality for the team hours overview page
+ *  Includes listing team members with the hours they've worked
+ * ID: Team 2
+ * Last Modified: 16/10/22
+ */
 
+"use strict";
+
+/**
+ * Displays list of team members with the hours they've worked
+ */
 function showList() {
     // display all team members
     for (let i = 0; i < teamBacklog._array.length; i++){
@@ -21,18 +33,30 @@ function showList() {
         let totalTime = 0;
         let startDate = document.getElementById("startDate");
         let endDate = document.getElementById("endDate");
-        for (let j = 0; j < teamBacklog._array[i]._loggedTime.length; j++){
-            let loggedDate = teamBacklog._array[i]._loggedTime[j][0];
-            if (startDate >= loggedDate && loggedDate <= endDate){
+        if(startDate.value === "" || endDate.value === ""){
+            for (let j = 0; j < teamBacklog._array[i]._loggedTime.length; j++){
+                let loggedDate = teamBacklog._array[i]._loggedTime[j][0];
                 totalTime += teamBacklog._array[i]._loggedTime[j][1];
             }
+        } else {
+            startDate = new Date(startDate.value);
+            endDate = new Date(endDate.value);
+            for (let j = 0; j < teamBacklog._array[i]._loggedTime.length; j++){
+                let loggedDate = teamBacklog._array[i]._loggedTime[j][0];
+                if (startDate >= loggedDate && loggedDate <= endDate){
+                    totalTime += teamBacklog._array[i]._loggedTime[j][1];
+                }
+            }
         }
-        document.getElementById(teamBacklog._array[i]._name + "time").innerText = totalTime.toString();
+        document.getElementById(teamBacklog._array[i]._name + " time").innerText = totalTime.toString();
     }
 
 
 }
 
+/**
+ * Displays the html of the page
+ */
 function displayPage() {
     let page = `<div class="team-dates">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder"
@@ -48,7 +72,7 @@ function displayPage() {
                     <span id="endDateError" class="mdl-textfield__error">End Date must be after start date.</span>
                 </div>
                 <div class="btn-holder">
-                    <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" onclick="">Set</button>
+                    <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" onclick="showList()">Set</button>
                 </div>
             </div>
             <div style="margin: auto; text-align: center">
@@ -57,7 +81,7 @@ function displayPage() {
             <div class="content-grid mdl-grid" style="height: 80%;">
                 <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet" style="position: relative">
                     <div class="btn-holder">
-                        <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" style="position: absolute; bottom: 5px; right: 5px" onclick="">Back</button>
+                        <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" style="position: absolute; bottom: 5px; right: 5px" onclick="backToTeam()">Back</button>
                     </div>
                 </div>
                 <!-- The time container (green rectangle) -->
@@ -78,6 +102,13 @@ function displayPage() {
             </div>`
 
     document.getElementById("time_overview").innerHTML = page;
+}
+
+/**
+ * Takes user back to the My Team page
+ */
+function backToTeam(){
+    window.location.href = 'team.html';
 }
 
 displayPage();

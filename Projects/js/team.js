@@ -140,4 +140,8 @@ function closeDialog(){
     document.getElementById("memberEmail").disabled = false;
 }
 
+function teamHours(){
+    window.location.href = 'team_time_overview.html';
+}
+
 displayTeamBacklog();
