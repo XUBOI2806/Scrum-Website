@@ -45,7 +45,7 @@ function displayPage() {
                     <div class="mdl-cell mdl-cell--3-col"></div>
                     <div class="mdl-cell mdl-cell--6-col">
                         <h3 style="color:#666666">${teamBacklog._array[teamKey].name}</h3>
-                        <span style="text-align: center"><h3>Total Effort: ${total_effort.toString()} Story Points</h3></span>
+                        <span style="text-align: center"><h3>Total Effort: ${total_effort.toString()} Hours</h3></span>
                         <div class="persons-effort">
                             <canvas id="persons-effort-chart" width="500" height="350"></canvas>
                         </div>
