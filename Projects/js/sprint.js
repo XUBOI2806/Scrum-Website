@@ -48,6 +48,9 @@ function validateSprintInputs(sprintName, startDateString, endDateString){
     let todaysDate = new Date();
     let startDate = new Date(startDateString);
     let endDate = new Date(endDateString);
+    console.log(todaysDate.getTime())
+    console.log(startDate.getTime())
+    console.log(endDate.getTime())
 
     // Check that name is not empty
     if(sprintName === ""){
