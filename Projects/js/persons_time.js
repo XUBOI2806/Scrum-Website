@@ -1,28 +1,44 @@
 "use strict";
 
 function displayPage() {
-    let person = teamBacklog._array[0]
-    console.log(teamBacklog._array[0])
-    person.addLoggedTime(['~Test~ 14/10/2022', 7])
-    person.addLoggedTime(['~Test~ 14/10/2022', 2])
-
+    // Getting person and the current sprint
+    let temp = new Person("Team Members Name", "temp@gmail.com");
+    
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
+        if (sprintBacklog._array[i]._status == "In Progress") {
+            currentSprint = sprintBacklog._array[i]
+        }
+    }
 
     // Collecting all logged time in to html
-    let logged_time = ``;
+    startDate = currentSprint._startDate;
+    today = new Date();
+
+    // Variables to be input to the graph
+    xlabels = [];
+    barGraphData = [];
+    barGraphColours = [];
+    barGraphBorders = [];
+
+    
     let total_effort = 0;
-    for (let i = 0; i < person.loggedTime.length; i++) {
-        logged_time += `
-                        <li class="list-item mdl-list__item mdl-list__item--one-line">
-                            <div id="persons-effort-item">
-                                <div>
-                                    <span class="mdl-list__item-primary-content">${person.loggedTime[i][0]}</span>
-                                </div>
-                                <div id="right">
-                                    <span id="right" class="persons-logged-time mdl-list__item-secondary-content">${person.loggedTime[i][1].toString()} Story Points</span>
-                                </div>
-                            </div>
-                        </li>`
-        total_effort += person.loggedTime[i][1]
+    day = 1;
+    // For each day the sprint has been ongoing, get the amount of effort spent
+    for (let i = startDate; i <= today; i.setDate(i.getDate() + 1)) {
+
+        dayEffort = 0;
+        xlabels.push('Day ' + day.toString());
+        day += 1;
+        for (let j = 0; j < temp._loggedTime; j ++) {
+            if (temp._loggedTime[j][0] == i) {         // if (date of logged time == day within sprint)
+                dayEffort += temp._loggedTime[j][1] * 4;
+                totalEffort += temp._loggedTime[j][1] * 4;
+            }
+        }
+
+        barGraphData.push(dayEffort);
+        barGraphColours.push('rgba(255, 99, 132, 0.2)');
+        barGraphBorders.push('rgba(255, 99, 132, 0.2)');
     }
 
 
@@ -32,13 +48,33 @@ function displayPage() {
                     <div class="mdl-cell mdl-cell--6-col">
                         <h3 style="color:#666666">${person.name}</h3>
                         <span style="text-align: center"><h3>Total Effort: ${total_effort.toString()} Story Points</h3></span>
-                        <div class="persons-effort list-container">
-                            <ul id="logged-time-list" class="mdl-list">${logged_time}
-                            </ul>
+                        <div class="persons-effort">
+                            <canvas id="persons-effort-chart" width="500" height="350"></canvas>
                         </div>
                     </div>
                 </div`;
     document.getElementById("persons-time-content").innerHTML = page;
+
+    let personsChart = new Chart(document.getElementById("persons-effort-chart").getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: xlabels,
+                datasets: [{
+                    label: 'Hours Worked',
+                    data: barGraphData,
+                    backgroundColor: barGraphColours,
+                    borderColor: barGraphBorders,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 }
 
 displayPage()
