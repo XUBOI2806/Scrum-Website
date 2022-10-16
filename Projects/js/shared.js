@@ -14,6 +14,7 @@ const SPRINT_KEY = "currentSprintIndex";
 const PRODUCTBACKLOG_KEY = "productBacklogData";
 const SPRINTBACKLOG_KEY = "sprintBacklogData";
 const TEAMBACKLOG_KEY = "teamBacklogData";
+const TEAM_KEY = "currentTeamIndex"
 
 
 class Task {
@@ -395,6 +396,7 @@ let productBacklog = new ProductBacklog();
 let sprintBacklog = new SprintBacklog();
 let sprintKey = 0;
 let taskKey = 0;
+let teamKey = 0;
 
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
@@ -422,4 +424,9 @@ if (checkLSData(SPRINT_KEY)) {
 if (checkLSData(TASK_KEY)) {
     // Restore data into vacationList
     taskKey = retrieveLSData(TASK_KEY);
+}
+
+if (checkLSData(TEAM_KEY)) {
+    // Restore data into vacationList
+    teamKey = retrieveLSData(TEAM_KEY);
 }
