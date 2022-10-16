@@ -155,6 +155,9 @@ function showManageSprint(index){
     } else if(sprint._status === 'In Progress'){
         window.location = 'manage_sprint_started.html';
     }
+    else{
+        window.location = 'burndown.html';
+    }
 }
 
 // Displays the list of tasks when the page loads

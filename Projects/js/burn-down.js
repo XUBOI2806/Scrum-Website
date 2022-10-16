@@ -2,7 +2,6 @@ let labelArrayIV = [];
 let dataArrayIV = [];
 let dataER = [];
 let dataArrayAV = [];
-let currentSprint = null;
 let totalHrs = 0
 
 idealV();
@@ -10,20 +9,16 @@ function idealV() {
   let totalSP = 0;
   let numDays = 0;
 
-  for (let i = 0; i < sprintBacklog._array.length; i++) {
-    if (sprintBacklog._array[i].status == "In Progress") {
-        currentSprint = sprintBacklog._array[i];
-      let sprintT = sprintBacklog._array[i].tasks;
-      let numTime =
-        new Date(sprintBacklog._array[i]._endDate).getTime() -
-        new Date(sprintBacklog._array[i].startDate).getTime();
-      numDays = numTime / (1000 * 3600 * 24);
-      for (let j = 0; j < sprintT.length; j++) {
-        console.log(sprintT[j]._effort);
-        totalSP += parseInt(sprintT[j]._effort);
-      }
-    }
+  let sprintT = sprintBacklog._array[sprintKey].tasks;
+  let numTime =
+      new Date(sprintBacklog._array[sprintKey]._endDate).getTime() -
+      new Date(sprintBacklog._array[sprintKey]._startDate).getTime();
+  numDays = numTime / (1000 * 3600 * 24);
+  for (let j = 0; j < sprintT.length; j++) {
+      console.log(sprintT[j]._effort);
+      totalSP += parseInt(sprintT[j]._effort);
   }
+
   for (let i = 0; i <= numDays; i++) {
     labelArrayIV.push(i + 1);
     dataER.push(0)
@@ -33,7 +28,7 @@ function idealV() {
   let avgDay = totalHrs / numDays;
   dataArrayIV.push(totalHrs);
   let hours = totalHrs
-  while (dataArrayIV.length != numDays) {
+  while (dataArrayIV.length !== numDays) {
     let val = hours - avgDay;
     dataArrayIV.push(val);
     hours = val;
@@ -43,11 +38,11 @@ function idealV() {
 
 actualV()
 function actualV() {
-    for(let i = 0; i < currentSprint._tasks.length; i++){
-        let currentTask = currentSprint._tasks[i]._timeTracking
+    for(let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++){
+        let currentTask = sprintBacklog._array[sprintKey]._tasks[i]._timeTracking
         for(let j = 0; j < currentTask.length; j++){
             let date = new Date(currentTask[j][0]).getTime()
-            let timeDate = date - new Date(currentSprint._startDate).getTime()
+            let timeDate = date - new Date(sprintBacklog._array[sprintKey]._startDate).getTime()
             let numDate = timeDate / (1000 * 3600 * 24);
             dataER[numDate] += parseInt(currentTask[j][1])
         }
