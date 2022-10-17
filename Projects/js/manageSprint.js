@@ -80,11 +80,12 @@ function displayProductBacklogInSprint() {
 function deleteSprint() {
     if(confirm(`Are you sure want to delete ${sprintBacklog._array[sprintKey].title}?\nDeleted data cannot be recovered.`)) {
         for (let i = 0; i < productBacklog._array.length; i++) {
-            for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++)
+            for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++) {
                 if (JSON.stringify(sprintBacklog._array[sprintKey]._tasks[j]) === JSON.stringify(productBacklog._array[i])) {
                     productBacklog._array[i]._status = "Not Assigned";
                     break;
                 }
+            }
         }
         updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
         sprintBacklog.delete(sprintKey);
