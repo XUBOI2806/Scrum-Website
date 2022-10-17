@@ -3,7 +3,7 @@
  * Description: Contains the functionality for the teams page.
  *  Includes adding, deleting and displaying team members.
  * ID: Team 2
- * Last Modified: 29/09/22
+ * Last Modified: 17/10/22
  */
 
 "use strict";
@@ -74,6 +74,12 @@ function displayTeamBacklog() {
                     <span class="mdl-list__item-primary-content" onclick="showTeamMember(${i})">
                         <span>${teamBacklog._array[i]._name}</span>
                         <span class="mdl-list__item-text-body">${teamBacklog._array[i]._email}</span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="">
+                            <i class="material-icons" id="stats-mem${i}">bar_chart</i>
+                            <div class="mdl-tooltip" data-mdl-for="stats-mem${i}">Show Hours</div>
+                        </button>
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
