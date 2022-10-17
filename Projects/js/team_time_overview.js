@@ -55,7 +55,7 @@ function showList() {
                 if (currentSprint._tasks[j]._assigned._email === teamBacklog._array[i]._email){
                     for (let k = 0; k < currentSprint._tasks[j]._assigned._loggedTime.length; k++) {
                         let loggedDate = currentSprint._tasks[j]._timeTracking[k][0];
-                        if(startDate >= loggedDate && loggedDate <= endDate) {
+                        if(startDate <= loggedDate && loggedDate <= endDate) {
                             totalTime += currentSprint._tasks[j]._assigned._loggedTime[k][1] * 4;
                         }
                     }
