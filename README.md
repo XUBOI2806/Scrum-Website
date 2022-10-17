@@ -55,6 +55,8 @@ The team is focusing on
 - create velocity Burn-down charts for sprints 
 - create bar chart to show individuals work hours
 - displaying total working hours for each individual's on the same page
+
+Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
     
 
 ### Test Plan
