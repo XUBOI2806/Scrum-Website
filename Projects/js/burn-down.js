@@ -28,7 +28,6 @@ function idealV() {
       new Date(sprintBacklog._array[sprintKey]._startDate).getTime();
   numDays = numTime / (1000 * 3600 * 24);
   for (let j = 0; j < sprintT.length; j++) {
-      console.log(sprintT[j]._effort);
       totalSP += parseInt(sprintT[j]._effort);
   }
 
@@ -57,21 +56,23 @@ function actualV() {
     for(let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++){
         let currentTask = sprintBacklog._array[sprintKey]._tasks[i]._timeTracking
         for(let j = 0; j < currentTask.length; j++){
-            let date = new Date(currentTask[j][0]).getTime()
-            let timeDate = date - new Date(sprintBacklog._array[sprintKey]._startDate).getTime()
-            let numDate = timeDate / (1000 * 3600 * 24);
-            dataER[numDate] += parseInt(currentTask[j][1])
+            let date = new Date(currentTask[j][0]).setHours(0, 0, 0, 0)
+            let timeDate = date - new Date(sprintBacklog._array[sprintKey]._startDate).setHours(0, 0, 0, 0);
+            let numDate = (timeDate / (1000 * 3600 * 24))+1;
+            dataER[numDate] += parseInt(currentTask[j][1])*4;
         }
     }
     let remainingE = totalHrs
     for(let i = 0; i < dataArrayAV.length; i++){
         dataArrayAV[i] = remainingE - dataER[i]
+        // if(dataArrayAV[i] < 0){
+        //     dataArrayAV[i] = 0;
+        // }
         remainingE = dataArrayAV[i]
     }
     for(let i = 1; i < dataER.length; i++){
       dataER[i] = dataER[i-1] + dataER[i]
     }
-    console.log(dataArrayAV)
 }
 // timeTracking = (date, hr)
 

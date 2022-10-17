@@ -17,9 +17,7 @@ function createTask() {
   let des = document.getElementById("pbiDesc").value;
   let taskType = document.getElementById("pbiType").value;
   let person_value = document.getElementById("person").value;
-  console.log(document.getElementById("person").value)
   let person = teamBacklog._array[person_value - 1]
-  console.log(person)
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
   let effort = document.getElementById("pbiEffort").value;
@@ -45,7 +43,7 @@ function createTask() {
   }
 
   // Check that all inputs are valid
-  if (validateInputs(name, des, taskType, person, priority, status, effort, tag)) {
+  if (validateInputs(name, des, taskType, person_value, priority, status, effort, tag)) {
     // Add to local storage
     productBacklog.add(task);
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
@@ -223,7 +221,7 @@ function saveEditTask() {
   }
 
   // Check that all inputs are valid
-  if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
+  if (validateInputs(name, description, taskType, person_value, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
     productBacklog._array[taskKey] = task;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
@@ -330,6 +328,12 @@ function validateInputs(name, desc, type, person, priority, status, effort, tag)
     document
       .getElementById("priority")
       .parentElement.classList.add("is-invalid");
+    retVal = false;
+  }
+  if (person === "0") {
+    document
+        .getElementById("person")
+        .parentElement.classList.add("is-invalid");
     retVal = false;
   }
   if (effort === "") {
