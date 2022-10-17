@@ -61,12 +61,14 @@ function createTask() {
  * Delete a task
  */
 function deleteTask(index) {
-  //using function to delete at index
-  productBacklog.delete(index);
-  //updating local storage
-  updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
-  //running the display function with changed PB
-  displayProductBacklog();
+  if(confirm(`Are you sure want to delete ${productBacklog._array[index].title}?\nDeleted data cannot be recovered.`)){
+    //using function to delete at index
+    productBacklog.delete(index);
+    //updating local storage
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    //running the display function with changed PB
+    displayProductBacklog();
+  }
 }
 
 /**
@@ -90,7 +92,6 @@ function displayProductBacklog() {
         }
       }
     }
-    console.log(productBacklog._array[i].tag)
     // Create html to display the task info
     let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line" 
@@ -107,18 +108,23 @@ function displayProductBacklog() {
       item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(${i})">
-                          <i class="material-icons">edit</i>
+                          <i class="material-icons" id="edit-pbi${i}">edit</i>
+                          <div class="mdl-tooltip" data-mdl-for="edit-pbi${i}">Edit</div>
                         </button>
                     </span>`
     }
     item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
-                          <i class="material-icons">delete</i>
+                          <i class="material-icons" id="del-pbi${i}">delete</i>
+                          <div class="mdl-tooltip" data-mdl-for="del-pbi${i}">Delete</div>
                         </button>
                     </span>
               </li>`;
     output += item;
+  }
+  if(output === ""){
+    output = `<span class="mdl-layout-title" style="color: white">No Product Backlog Items.<br>Use + button below to start adding.</span>`;
   }
   // Add to the UI list
   document.getElementById("pbi-list").innerHTML = output;
@@ -229,10 +235,9 @@ function saveEditTask() {
 function showTask(index) {
   //displaying necessary modal
   let dialog = document.querySelector("dialog");
-  if (!dialog.showModal()) {
-    dialogPolyfill.registerDialog(dialog);
-    document.getElementById("saveTask");
-  }
+  dialog.showModal();
+  dialogPolyfill.registerDialog(dialog);
+  document.getElementById("saveTask");
   //getting inputs from LS and displaying them, they cannot be manipulated
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
