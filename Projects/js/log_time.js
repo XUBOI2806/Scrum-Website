@@ -13,7 +13,8 @@
  */
 function addEffort() {
     // **Update task total time**
-    let loggedTime = [document.getElementById("logDate").value, document.getElementById("loggedEffort").value]
+    let loggedTime = [new Date(document.getElementById("logDate").value).setHours(0,0,0,0), document.getElementById("loggedEffort").value]
+    console.log(loggedTime)
     sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned.addLoggedTime(loggedTime)
     sprintBacklog._array[sprintKey]._tasks[taskKey].addTimeTracking(loggedTime);
     for(let i = 0; i < teamBacklog._array.length; i++){
