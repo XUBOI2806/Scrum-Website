@@ -21,8 +21,7 @@ function displayTasks() {
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
         // Create html to display the task info
-        if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
-            let item = `
+        let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
                     <span class="mdl-list__item-primary-content" onclick="toLogTime(${i})">
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
@@ -64,7 +63,7 @@ function displayTasks() {
  * @param index the index of the task in the sprint backlog
  */
 function moveTaskToInProgress(index) {
-    if(confirm(`Are you sure want to move ${sprintBacklog._array[sprintKey]._tasks[index].name} to 'In Progress'?\nThis action cannot be undone.`)) {
+    if(confirm(`Are you sure want to move ${sprintBacklog._array[sprintKey]._tasks[index]._title} to 'In Progress'?\nThis action cannot be undone.`)) {
         sprintBacklog._array[sprintKey]._tasks[index]._status = "In Progress"
         displayTasks()
     }
@@ -75,7 +74,7 @@ function moveTaskToInProgress(index) {
  * @param index the index of the task in the sprint backlog
  */
 function moveTaskToDone(index) {
-    if(confirm(`Are you sure want to move ${sprintBacklog._array[sprintKey]._tasks[index].name} to 'Done'?\nThis action cannot be undone.`)) {
+    if(confirm(`Are you sure want to move ${sprintBacklog._array[sprintKey]._tasks[index]._title} to 'Done'?\nThis action cannot be undone.`)) {
         sprintBacklog._array[sprintKey]._tasks[index]._status = "Done"
         displayTasks()
     }
@@ -134,5 +133,5 @@ function displayBurndownChart(){
 }
 
 
-displayTasks()
+displayTasks();
 

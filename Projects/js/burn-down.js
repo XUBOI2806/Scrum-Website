@@ -1,9 +1,22 @@
+/**
+ * File Name: burn-down.js
+ * Description: Contains the functionality for creating the
+ *  burndown chart of the current sprint
+ * ID: Team 2
+ * Last Modified: 17/10/22
+ */
+
+"use strict";
+
 let labelArrayIV = [];
 let dataArrayIV = [];
 let dataER = [];
 let dataArrayAV = [];
 let totalHrs = 0
 
+/**
+ * Gets the ideal velocity of the sprint
+ */
 idealV();
 function idealV() {
   let totalSP = 0;
@@ -36,6 +49,9 @@ function idealV() {
   dataArrayIV.push(0);
 }
 
+/**
+ * Calculates the actual velocity of the sprint
+ */
 actualV()
 function actualV() {
     for(let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++){
@@ -59,6 +75,9 @@ function actualV() {
 }
 // timeTracking = (date, hr)
 
+/**
+ * Create the burndown chart
+ */
 new Chart(document.getElementById("bd-chart"), {
   type: "line",
   data: {
