@@ -12,6 +12,12 @@
  * Displays list of team members with the hours they've worked
  */
 function showList() {
+    let currentSprint = null;
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
+        if (sprintBacklog._array[i]._status === "In Progress") {
+            currentSprint = sprintBacklog._array[i]
+        }
+    }
     // display all team members
     for (let i = 0; i < teamBacklog._array.length; i++){
         let teamMember = document.createElement("li");
@@ -34,17 +40,25 @@ function showList() {
         let startDate = document.getElementById("startDate");
         let endDate = document.getElementById("endDate");
         if(startDate.value === "" || endDate.value === ""){
-            for (let j = 0; j < teamBacklog._array[i]._loggedTime.length; j++){
-                let loggedDate = teamBacklog._array[i]._loggedTime[j][0];
-                totalTime += teamBacklog._array[i]._loggedTime[j][1];
+            for (let j = 0; j < currentSprint._tasks.length; j++) {
+                if (currentSprint._tasks[j]._assigned._email === teamBacklog._array[i]._email){
+                    for (let k = 0; k < currentSprint._tasks[j]._timeTracking.length; k++) {
+                        totalTime += currentSprint._tasks[j]._assigned._loggedTime[k][1] * 4;
+                    }
+                }
             }
-        } else {
-            startDate = new Date(startDate.value);
-            endDate = new Date(endDate.value);
-            for (let j = 0; j < teamBacklog._array[i]._loggedTime.length; j++){
-                let loggedDate = teamBacklog._array[i]._loggedTime[j][0];
-                if (startDate >= loggedDate && loggedDate <= endDate){
-                    totalTime += teamBacklog._array[i]._loggedTime[j][1];
+        }
+        else {
+            startDate = new Date(startDate.value).setHours(0,0,0,0);
+            endDate = new Date(endDate.value).setHours(0,0,0,0);
+            for (let j = 0; j < currentSprint._tasks.length; j++) {
+                if (currentSprint._tasks[j]._assigned._email === teamBacklog._array[i]._email){
+                    for (let k = 0; k < currentSprint._tasks[j]._assigned._loggedTime.length; k++) {
+                        let loggedDate = currentSprint._tasks[j]._timeTracking[k][0];
+                        if(startDate >= loggedDate && loggedDate <= endDate) {
+                            totalTime += currentSprint._tasks[j]._assigned._loggedTime[k][1] * 4;
+                        }
+                    }
                 }
             }
         }
@@ -72,7 +86,7 @@ function displayPage() {
                     <span id="endDateError" class="mdl-textfield__error">End Date must be after start date.</span>
                 </div>
                 <div class="btn-holder">
-                    <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" onclick="showList()">Set</button>
+                    <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" onclick="showList()">Display</button>
                 </div>
             </div>
             <div style="margin: auto; text-align: center">
