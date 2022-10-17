@@ -176,7 +176,6 @@ div.dialog-buttons button.hover-red:hover{
 div.dialog-buttons button.hover-green:hover{
     background-color: #8cd9b3;
     transition: background-color ease-in-out 0.3s;
-
 }
 
 .container-title{
@@ -191,4 +190,34 @@ li[disabled]{
     pointer-events: none;
     opacity: 0.6;
     background: #e6e6e6;
+}
+
+.team-dates{
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    padding-top: 15px;
+}
+
+div.btn-holder{
+    display: inline-block;
+}
+
+div.btn-holder button.mdl-button{
+    margin-left: 10px;
+    margin-right: 10px;
+    min-width: 84px;
+    background-color: #FFFCF6;
+    border: 1px solid #006A6A;
+    border-radius: 6px;
+}
+
+div.btn-holder button.hover-grey:hover{
+    background-color: #e1eaea;
+    transition: background-color ease-in-out 0.3s;
+}
+
+div.team-column{
+    width: 50%;
+    float: left;
 }
