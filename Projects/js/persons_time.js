@@ -1,10 +1,22 @@
+/**
+ * File Name: persons_time.js
+ * Description: Contains the functionality for generating
+ *  a bar chart showing the work completed each day by the
+ *  chosen team member
+ * ID: Team 2
+ * Last Modified: 17/10/22
+ */
+
 "use strict";
 
+/**
+ * Shows the page content
+ */
 function displayPage() {
     // Getting person and the current sprint
     let currentSprint = null;
     for (let i = 0; i < sprintBacklog._array.length; i++) {
-        if (sprintBacklog._array[i]._status == "In Progress") {
+        if (sprintBacklog._array[i]._status === "In Progress") {
             currentSprint = sprintBacklog._array[i]
         }
     }
@@ -28,7 +40,7 @@ function displayPage() {
         xlabels.push('Day ' + day.toString());
         day += 1;
         for (let j = 0; j < teamBacklog._array[teamKey]._loggedTime.length; j++) {
-            if (teamBacklog._array[teamKey]._loggedTime[j][0] == i) {         // if (date of logged time == day within sprint)
+            if (new Date(teamBacklog._array[teamKey]._loggedTime[j][0]).setHours(0, 0, 0, 0) === i) {         // if (date of logged time == day within sprint)
                 dayEffort += teamBacklog._array[teamKey]._loggedTime[j][1] * 4;
                 total_effort += teamBacklog._array[teamKey]._loggedTime[j][1] * 4;
             }

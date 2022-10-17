@@ -1,14 +1,34 @@
+/**
+ * File Name: log_time.js
+ * Description: Contains the functionality for logging
+ *  the time a team member has worked.
+ * ID: Team 2
+ * Last Modified: 17/10/22
+ */
+
 "use strict";
 
+/**
+ * Adds time to a team member's list
+ */
 function addEffort() {
     // **Update task total time**
     let loggedTime = [document.getElementById("logDate").value, document.getElementById("loggedEffort").value]
     sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned.addLoggedTime(loggedTime)
     sprintBacklog._array[sprintKey]._tasks[taskKey].addTimeTracking(loggedTime);
+    for(let i = 0; i < teamBacklog._array.length; i++){
+        if(teamBacklog._array[i]._name === sprintBacklog._array[sprintKey]._tasks[taskKey]._assigned._name){
+            teamBacklog._array[i].addLoggedTime(loggedTime);
+        }
+    }
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+    updateLSData(TEAMBACKLOG_KEY, teamBacklog);
     displayPage();
 }
 
+/**
+ * Gets all the hours a team member has worked
+ */
 function getHours() {
     let hours = 0;
     let loggedTime = sprintBacklog._array[sprintKey]._tasks[taskKey]._timeTracking
@@ -18,6 +38,16 @@ function getHours() {
     return hours
 }
 
+/**
+ * Takes user back to My Team page
+ */
+function back(){
+    window.location.href = "manage_sprint_started.html";
+}
+
+/**
+ * Shows page content
+ */
 function displayPage() {
     let page = `
                 <div class="content-grid mdl-grid">
@@ -38,6 +68,7 @@ function displayPage() {
                                 </li>
                             </ul>
                         </div>
+                        <button type="button" class="hover-grey mdl-button mdl-js-button mdl-button--raised" onclick="back()">Back</button>
                     </div>
                     <div class="task-time mdl-cell mdl-cell--3-col">
                         <h3>Log Time</h3>
