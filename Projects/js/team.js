@@ -183,6 +183,13 @@ function total_time_between_time(start_date, end_date){
 }
 
 
+function teamHours(){
+    window.location.href = 'team_time_overview.html';
+}
+
+displayTeamBacklog();
+
+
 displayTeamBacklog();
 get_current_sprint();
 total_time_between_time();
