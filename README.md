@@ -32,7 +32,7 @@ The team is focusing on
 - creating base html and css for overall UI design
 - building page for product backlog page and team member page for ScrumMaster
 
-Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
+Link to [Trello](https://trello.com/b/NVMFoAuc/assignment)
 
 
 ### Sprint 2 Tasks
@@ -46,7 +46,7 @@ The team is focusing on
     - logging time for a specific member of the team
     - total logged time being displayed on screen
 
-Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
+Link to [Trello](https://trello.com/b/NVMFoAuc/assignment)
 
 ### Sprint 3 Tasks
 The team is focusing on
@@ -56,7 +56,7 @@ The team is focusing on
 - create bar chart to show individuals work hours
 - displaying total working hours for each individual's on the same page
 
-Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
+Link to [Trello](https://trello.com/b/NVMFoAuc/assignment)
     
 
 ### Test Plan
