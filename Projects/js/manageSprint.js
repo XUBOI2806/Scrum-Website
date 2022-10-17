@@ -25,9 +25,10 @@ function displayTasksInSprint() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="removeTask(${i})">
-                        <i class="material-icons">remove</i>
-                        </button>                        
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="rem-spr${i}" onclick="removeTask(${i})">
+                            <i class="material-icons">remove</i>
+                        </button>        
+                        <div class="mdl-tooltip" data-mdl-for="rem-spr${i}">Remove</div>                
                     </span>
               </li>`;
         output += item;
@@ -53,9 +54,10 @@ function displayProductBacklogInSprint() {
                     </span>
                     <span class="mdl-list__item-secondary-content">
                         <!-- Add to Sprint Backlog button -->
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="moveTaskToSB(${i})">
-                        <i class="material-icons">add</i>
-                        </button>                        
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="add-spr${i}" onclick="moveTaskToSB(${i})">
+                            <i class="material-icons">add</i>
+                        </button>  
+                        <div class="mdl-tooltip" data-mdl-for="add-spr${i}">Add</div>                      
                     </span>
               </li>`;
         output += item;
@@ -76,17 +78,20 @@ function displayProductBacklogInSprint() {
  * Delete a sprint
  */
 function deleteSprint() {
-    for (let i = 0; i < productBacklog._array.length; i++) {
-        for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++)
-        if (JSON.stringify(sprintBacklog._array[sprintKey]._tasks[j])===JSON.stringify(productBacklog._array[i])){
-            productBacklog._array[i]._status = "Not Assigned";
-            break;
+    if(confirm(`Are you sure want to delete ${sprintBacklog._array[sprintKey].title}?\nDeleted data cannot be recovered.`)) {
+        for (let i = 0; i < productBacklog._array.length; i++) {
+            for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++) {
+                if (JSON.stringify(sprintBacklog._array[sprintKey]._tasks[j]) === JSON.stringify(productBacklog._array[i])) {
+                    productBacklog._array[i]._status = "Not Assigned";
+                    break;
+                }
+            }
         }
+        updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+        sprintBacklog.delete(sprintKey);
+        updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
+        backToSprints();
     }
-    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
-    sprintBacklog.delete(sprintKey);
-    updateLSData(SPRINTBACKLOG_KEY,sprintBacklog);
-    backToSprints();
 }
 
 /**
@@ -120,6 +125,10 @@ function removeTask(index) {
 function refreshBacklog() {
     displayProductBacklogInSprint();
     displayTasksInSprint();
+    console.log(sprintInProgress)
+    if (sprintInProgress === true){
+        document.getElementById("save-button").disabled = true;
+    }
 }
 
 /**
@@ -144,6 +153,8 @@ function startInactiveSprint(){
         }
     }
     sprintBacklog._array[sprintKey].status = "In Progress";
+    sprintInProgress = true;
+    updateLSData(SPRINT_IN_PROGRESS, sprintInProgress)
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
     updateLSData(SPRINTBACKLOG_KEY, sprintBacklog);
     toManageStartedSprint();

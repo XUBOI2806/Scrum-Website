@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Page Title -->
-    <title>ScrumMaster - Manage Sprint</title>
+    <title>ScrumMaster - My Team Stats Overview</title>
     <!-- Linking MDL -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
@@ -23,12 +23,12 @@
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Log Time</span>
+            <span class="mdl-layout-title">My Team Stats</span>
         </div>
     </header>
     <!-- Navigation Drawer -->
     <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Log Time</span>
+        <span class="mdl-layout-title">My Team Stats</span>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="home.html">Home</a>
             <a class="mdl-navigation__link" href="product_backlog.html">Product Backlog</a>
@@ -40,12 +40,15 @@
 
     <main class="mdl-layout__content">
         <!-- PAGE CONTENT -->
-        <div class="page-content" id="log-time-content">
+        <div class="page-content" id="time_overview">
+
         </div>
+
     </main>
-    <script src="../js/shared.js"></script>
-    <script src="../js/log_time.js"></script>
 </div>
 
 </body>
+<script src="../js/shared.js"></script>
+<script src="../js/dialog-polyfill.js"></script>
+<script src="../js/team_time_overview.js"></script>
 </html>

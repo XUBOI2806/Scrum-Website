@@ -16,7 +16,8 @@ function createTask() {
   let name = document.getElementById("pbiName").value;
   let des = document.getElementById("pbiDesc").value;
   let taskType = document.getElementById("pbiType").value;
-  let person = document.getElementById("person").value;
+  let person_value = document.getElementById("person").value;
+  let person = teamBacklog._array[person_value - 1]
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
   let effort = document.getElementById("pbiEffort").value;
@@ -42,7 +43,7 @@ function createTask() {
   }
 
   // Check that all inputs are valid
-  if (validateInputs(name, des, taskType, person, priority, status, effort, tag)) {
+  if (validateInputs(name, des, taskType, person_value, priority, status, effort, tag)) {
     // Add to local storage
     productBacklog.add(task);
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
@@ -61,12 +62,14 @@ function createTask() {
  * Delete a task
  */
 function deleteTask(index) {
-  //using function to delete at index
-  productBacklog.delete(index);
-  //updating local storage
-  updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
-  //running the display function with changed PB
-  displayProductBacklog();
+  if(confirm(`Are you sure want to delete ${productBacklog._array[index].title}?\nDeleted data cannot be recovered.`)){
+    //using function to delete at index
+    productBacklog.delete(index);
+    //updating local storage
+    updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
+    //running the display function with changed PB
+    displayProductBacklog();
+  }
 }
 
 /**
@@ -81,8 +84,8 @@ function displayProductBacklog() {
     for (let i = 0; i < productBacklog._array.length; i++) {
       for (let j = i + 1; j < productBacklog._array.length; j++) {
         if (
-          parseInt(productBacklog._array[i]._timeTracking) <
-            parseInt(productBacklog._array[j]._timeTracking)
+          parseInt(productBacklog._array[i]._effort) <
+            parseInt(productBacklog._array[j]._effort)
         ) {
           temp = productBacklog._array[i];
           productBacklog._array[i] = productBacklog._array[j];
@@ -90,7 +93,6 @@ function displayProductBacklog() {
         }
       }
     }
-    console.log(productBacklog._array[i].tag)
     // Create html to display the task info
     let item = `
                 <li class="list-item mdl-list__item mdl-list__item--three-line" 
@@ -99,7 +101,7 @@ function displayProductBacklog() {
                         <span>${productBacklog._array[i].title}</span>
                         <span class="mdl-list__item-text-body">
                             <span style="padding-right: 15px">Priority: ${productBacklog._array[i].priority}</span>
-                            <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
+                            <span>Story Points: ${productBacklog._array[i].effort}</span><br>
                             <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
                     </span>`
@@ -107,18 +109,23 @@ function displayProductBacklog() {
       item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="edit_pbi(${i})">
-                          <i class="material-icons">edit</i>
+                          <i class="material-icons" id="edit-pbi${i}">edit</i>
+                          <div class="mdl-tooltip" data-mdl-for="edit-pbi${i}">Edit</div>
                         </button>
                     </span>`
     }
     item += `<span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTask(${i})">
-                          <i class="material-icons">delete</i>
+                          <i class="material-icons" id="del-pbi${i}">delete</i>
+                          <div class="mdl-tooltip" data-mdl-for="del-pbi${i}">Delete</div>
                         </button>
                     </span>
               </li>`;
     output += item;
+  }
+  if(output === ""){
+    output = `<span class="mdl-layout-title" style="color: white">No Product Backlog Items.<br>Use + button below to start adding.</span>`;
   }
   // Add to the UI list
   document.getElementById("pbi-list").innerHTML = output;
@@ -144,7 +151,11 @@ function editTask(index) {
 
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
-  assigned.value = productBacklog._array[index]._assigned;
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    if (JSON.stringify(teamBacklog._array[i] )=== JSON.stringify(productBacklog._array[index]._assigned)) {
+      assigned.value = i+1
+    }
+  }
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
@@ -157,7 +168,7 @@ function editTask(index) {
 
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
-  effort.value = productBacklog._array[index]._timeTracking;
+  effort.value = productBacklog._array[index]._effort;
 
   //getting user tag values and then only ticking the right ones present in LS
   let tag = document.querySelectorAll('input[name="tag"]');
@@ -183,7 +194,8 @@ function saveEditTask() {
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
   let priority = document.getElementById("priority").value;
-  let person = document.getElementById("person").value;
+  let person_value = document.getElementById("person").value;
+  let person = teamBacklog._array[person_value]
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
   let tag = document.querySelector('input[name="tag"]:checked');
@@ -209,7 +221,7 @@ function saveEditTask() {
   }
 
   // Check that all inputs are valid
-  if (validateInputs(name, description, taskType, person, priority, status, effort, tag)) {
+  if (validateInputs(name, description, taskType, person_value, priority, status, effort, tag)) {
     // Overwrite the old values by replacing it with the new values
     productBacklog._array[taskKey] = task;
     updateLSData(PRODUCTBACKLOG_KEY, productBacklog);
@@ -229,10 +241,9 @@ function saveEditTask() {
 function showTask(index) {
   //displaying necessary modal
   let dialog = document.querySelector("dialog");
-  if (!dialog.showModal()) {
-    dialogPolyfill.registerDialog(dialog);
-    document.getElementById("saveTask");
-  }
+  dialog.showModal();
+  dialogPolyfill.registerDialog(dialog);
+  document.getElementById("saveTask");
   //getting inputs from LS and displaying them, they cannot be manipulated
   let name = document.getElementById("pbiName");
   name.parentElement.classList.add("is-dirty");
@@ -249,10 +260,16 @@ function showTask(index) {
   taskType.disabled = true;
   taskType.value = productBacklog._array[index]._taskType;
 
+  list_members();
+
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
   assigned.disabled = true;
-  assigned.value = productBacklog._array[index]._assigned;
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    if (JSON.stringify(teamBacklog._array[i] )=== JSON.stringify(productBacklog._array[index]._assigned)) {
+      assigned.value = i+1
+    }
+  }
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
@@ -267,7 +284,7 @@ function showTask(index) {
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
   effort.disabled = true;
-  effort.value = productBacklog._array[index]._timeTracking;
+  effort.value = productBacklog._array[index]._effort;
 
   let tag = document.querySelectorAll('input[name="tag"]');
   let storedTag = productBacklog._array[index]._tag;
@@ -311,6 +328,12 @@ function validateInputs(name, desc, type, person, priority, status, effort, tag)
     document
       .getElementById("priority")
       .parentElement.classList.add("is-invalid");
+    retVal = false;
+  }
+  if (person === "0") {
+    document
+        .getElementById("person")
+        .parentElement.classList.add("is-invalid");
     retVal = false;
   }
   if (effort === "") {
@@ -361,7 +384,6 @@ function closeDialog() {
   clearInput("pbiName");
   clearInput("pbiDesc");
   clearInput("pbiType");
-  document.getElementById("person").value = "0";
   clearInput("pbiEffort");
   clearInput("person");
   document.getElementById("person").value = "0";
@@ -400,7 +422,7 @@ function edit_pbi(index) {
 function list_members() {
   let output = "<option value=\"0\" hidden></option>"
   for (let i = 0; i < teamBacklog._array.length; i++) {
-    output += `<option value="${i + 1}">${teamBacklog._array[i]._name}</option>`
+    output += `<option value="${i+1}">${teamBacklog._array[i]._name}</option>`
   }
   document.getElementById("person").innerHTML = output
 }

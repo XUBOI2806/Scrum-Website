@@ -3,7 +3,7 @@
  * Description: Contains the functionality for the teams page.
  *  Includes adding, deleting and displaying team members.
  * ID: Team 2
- * Last Modified: 29/09/22
+ * Last Modified: 17/10/22
  */
 
 "use strict";
@@ -55,9 +55,11 @@ function validateInputs(name, email) {
  * Delete a team member from local storage and remove it from the list
  */
 function deleteTeamMember(index){
-    teamBacklog.delete(index);
-    updateLSData(TEAMBACKLOG_KEY, teamBacklog);
-    displayTeamBacklog();
+    if(confirm(`Are you sure want to delete ${teamBacklog._array[index].name}?\nDeleted data cannot be recovered.`)) {
+        teamBacklog.delete(index);
+        updateLSData(TEAMBACKLOG_KEY, teamBacklog);
+        displayTeamBacklog();
+    }
 }
 
 /**
@@ -74,13 +76,23 @@ function displayTeamBacklog() {
                         <span class="mdl-list__item-text-body">${teamBacklog._array[i]._email}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="displayMemberHours(${i})">
+                            <i class="material-icons" id="stats-mem${i}">bar_chart</i>
+                            <div class="mdl-tooltip" data-mdl-for="stats-mem${i}">Show Hours</div>
+                        </button>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
                         <!-- Colored icon button -->
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="deleteTeamMember(${i})">
-                            <i class="material-icons">delete</i>
+                            <i class="material-icons" id="del-mem${i}">delete</i>
+                            <div class="mdl-tooltip" data-mdl-for="del-mem${i}">Delete</div>
                         </button>
                     </span>
                 </li>`;
         output += item;
+    }
+    if(output === ""){
+        output = `<span class="mdl-layout-title" style="color: white">No Team Members.<br>Use + button below to start adding.</span>`;
     }
     document.getElementById("team-list").innerHTML = output;
 }
@@ -140,4 +152,55 @@ function closeDialog(){
     document.getElementById("memberEmail").disabled = false;
 }
 
+function get_current_sprint(){
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
+        if(sprintBacklog._array[i]._status === "In Progress"){
+            sprintKey = i;
+            updateLSData(SPRINT_KEY, sprintKey)
+        }
+    }
+}
+
+function total_time_between_time(start_date, end_date){
+    let total_array = []
+    // runs through all team members
+    for (let i = 0; i < teamBacklog._array.length; i++) {
+        // sets the hours as 0
+        let value = 0
+        // runs through all tasks in sprint
+        for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++) {
+            // Checks if the task is equal to the member
+            if (sprintBacklog._array[sprintKey]._tasks[j]._assigned === teamBacklog._array[i]) {
+                // runs through all the time in the task logged
+                for (let k = 0; k < this._loggedTime.length; k++) {
+                    // checks if the logged time is in the start and end date wanted
+                    if (start_date <= sprintBacklog._array[sprintKey]._tasks[j]._assigned._loggedTime[k][0] <= end_date) {
+                        // adds the value of the time
+                        value += sprintBacklog._array[sprintKey]._tasks[j]._assigned._loggedTime[k][1]
+                    }
+                }
+            }
+        }
+        // adds the members name and hours
+        total_array.push([teamBacklog._array[i]._name, value])
+    }
+    console.log(total_array)
+    return total_array
+}
+
+
+function displayMemberHours(index){
+    updateLSData(TEAM_KEY, index);
+    window.location.href = 'persons_time.html';
+}
+
+function displayTeamHours(){
+    window.location.href = 'team_time_overview.html';
+}
+
 displayTeamBacklog();
+
+
+displayTeamBacklog();
+get_current_sprint();
+total_time_between_time();

@@ -117,6 +117,7 @@
                                     <option value="0" hidden></option>
                                 </select>
                                 <label class="mdl-textfield__label" for="person">Person</label>
+                                <span id="pbiAssigning" class="mdl-textfield__error">Assigned person required</span>
                             </div>
                             <!-- Priority Input -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 32%;">
@@ -178,6 +179,7 @@
                 <button id="add-pbi" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="add_pbi()">
                     <i class="material-icons">add</i>
                 </button>
+                <div class="mdl-tooltip" data-mdl-for="add-pbi">Add PBI</div>
 
             </div>
         </div>

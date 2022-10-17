@@ -27,7 +27,7 @@ function createSprint(){
     let endDate = document.getElementById("endDate").value;
     // If they are valid inputs, save sprint to LS
     if(validateSprintInputs(sprintName, startDate, endDate)){
-        let sprint = new Sprint(sprintName, new Date(startDate), new Date(endDate), "Not Started", [])
+        let sprint = new Sprint(sprintName, new Date(startDate), new Date(endDate))
         sprintBacklog.add(sprint);
         updateLSData(SPRINTBACKLOG_KEY, sprintBacklog)
         displaySprintBacklog();
@@ -45,9 +45,12 @@ function createSprint(){
 function validateSprintInputs(sprintName, startDateString, endDateString){
     let retVal = true;
     // Convert string dates to Date objects
-    let todaysDate = new Date();
-    let startDate = new Date(startDateString);
-    let endDate = new Date(endDateString);
+    let todaysDate = new Date().setHours(0,0,0,0);
+    let startDate = new Date(startDateString).setHours(0,0,0,0);
+    let endDate = new Date(endDateString).setHours(0,0,0,0);
+    console.log(todaysDate)
+    console.log(startDate)
+    console.log(endDate)
 
     // Check that name is not empty
     if(sprintName === ""){
@@ -56,13 +59,13 @@ function validateSprintInputs(sprintName, startDateString, endDateString){
     }
 
     // Check that start date is not empty and is after today
-    if((startDateString === "") || (startDate.getTime() < todaysDate.getTime())){
+    if((startDateString === "") || (startDate < todaysDate)){
         document.getElementById("startDate").parentElement.classList.add("is-invalid");
         retVal = false;
     }
 
     // Check that end date is not empty and always after start date
-    if(endDateString === "" || (endDate.getTime() < startDate.getTime())){
+    if(endDateString === "" || (endDate < startDate)){
         document.getElementById("endDate").parentElement.classList.add("is-invalid");
         retVal = false;
     }
@@ -89,8 +92,8 @@ function checkForCompletedSprints(){
     // Check whether in-progress sprints have reached their end date and need to change to completed
     let todaysDate = new Date();
     for (let i = 0; i < sprintBacklog._array.length; i++) {
-        if((sprintBacklog._array[i].status !== "Completed") && (sprintBacklog._array[i].endDate.getTime() < todaysDate.getTime())){
-            sprintBacklog._array[i].status = "Completed";
+        if((sprintBacklog._array[i]._status !== "Completed") && (sprintBacklog._array[i].endDate.getTime() < todaysDate.getTime())){
+            sprintBacklog._array[i]._status = "Completed";
             for (let j = 0; j < sprintBacklog._array[i]._tasks.length; j++){
                 sprintBacklog._array[i]._tasks[j]._status = "Done";
                 productBacklog.add(sprintBacklog._array[i]._tasks[j]);
@@ -123,6 +126,9 @@ function displaySprintBacklog() {
         </li>`;
       output += item;
     }
+    if(output === ""){
+        output = `<span class="mdl-layout-title" style="color: white">No Sprints.<br>Use + button below to start adding.</span>`;
+    }
     // Add to the UI list
     document.getElementById("sprint-list").innerHTML = output;
   }
@@ -154,6 +160,9 @@ function showManageSprint(index){
         window.location = 'manage_sprint_not_started.html';
     } else if(sprint._status === 'In Progress'){
         window.location = 'manage_sprint_started.html';
+    }
+    else{
+        window.location = 'burndown.html';
     }
 }
 

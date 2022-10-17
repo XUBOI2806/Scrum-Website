@@ -43,7 +43,7 @@
     <div class="page-content">
       <div class="content-grid mdl-grid">
         <!-- Not Started list -->
-        <div class="list-container mdl-cell mdl-cell--4-col">
+        <div class="list-container mdl-cell mdl-cell--4-col" style="background-color: #ff1a1a">
           <h3 class="container-title">Not Started</h3>
           <ul class="mdl-list" id="not-started-list">
             <!-- li is one PBI item -->
@@ -61,7 +61,7 @@
           </ul>
         </div>
         <!-- In Progress list -->
-        <div class="list-container mdl-cell mdl-cell--4-col">
+        <div class="list-container mdl-cell mdl-cell--4-col" style="background-color: #ffaa00">
           <h3 class="container-title">In Progress</h3>
           <ul class="mdl-list" id="in-progress-list">
             <!-- li is one PBI item -->
@@ -79,7 +79,7 @@
           </ul>
         </div>
         <!-- Done list -->
-        <div class="list-container mdl-cell mdl-cell--4-col">
+        <div class="list-container mdl-cell mdl-cell--4-col" style="background-color: #00b359">
           <h3 class="container-title">Done</h3>
           <ul class="mdl-list" id="done-list">
             <!-- li is one PBI item -->
@@ -102,7 +102,7 @@
         <button type="button" class="hover-red mdl-button mdl-js-button mdl-button--raised" onclick="backToSprints()">Back</button>
           <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="saveSprint()">Save</button>
         <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="completeSprint()">Complete</button>
-        <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="">Burndown Chart</button>
+        <button type="button" class="hover-green mdl-button mdl-js-button mdl-button--raised" onclick="displayBurndownChart()">Burndown Chart</button>
       </div>
     </div>
 
