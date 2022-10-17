@@ -14,7 +14,7 @@ const SPRINT_KEY = "currentSprintIndex";
 const PRODUCTBACKLOG_KEY = "productBacklogData";
 const SPRINTBACKLOG_KEY = "sprintBacklogData";
 const TEAMBACKLOG_KEY = "teamBacklogData";
-const TEAM_KEY = "currentTeamIndex"
+const SPRINT_IN_PROGRESS = "sprintInProgressData"
 
 
 class Task {
@@ -24,7 +24,7 @@ class Task {
      * @param {String} status
      * @param {String} priority
      * @param {Object} assigned
-     * @param {Number} timeTracking
+     * @param {Number} effort
      * @param {String} taskType
      */
     constructor(
@@ -33,7 +33,7 @@ class Task {
         status,
         priority,
         assigned,
-        timeTracking = 0,
+        effort,
         taskType
     ) {
         this._title = title;
@@ -42,7 +42,8 @@ class Task {
         this._priority = priority;
         this._assigned = assigned;
         this._tag = [];
-        this._timeTracking = timeTracking;
+        this._timeTracking = [];
+        this._effort = effort;
         this._taskType = taskType
     }
 
@@ -106,17 +107,26 @@ class Task {
         return this._timeTracking;
     }
 
-    set timeTracking(value) {
-        this._timeTracking = value;
+    set addTimeTracking(value) {
+        this._timeTracking.push(value);
     }
 
-    editTask(title, description, status, priority, assigned, tag, timeTracking, taskType) {
+    get effort(){
+        return this._effort;
+    }
+
+    set effort(value){
+        this._effort = value;
+    }
+
+    editTask(title, description, status, priority, assigned, tag, effort, timeTracking, taskType) {
         this._title = title;
         this._description = description;
         this._status = status;
         this._priority = priority;
         this._assigned = assigned;
         this._tag = tag;
+        this._effort = effort;
         this._timeTracking = timeTracking;
         this._taskType = taskType;
     }
@@ -126,11 +136,14 @@ class Task {
         this._description = data._description;
         this._status = data._status;
         this._priority = data._priority;
-        this._assigned = data._assigned;
+        let person = new Person();
+        person.fromData(data._assigned);
+        this._assigned = person;
         this._tag = [];
         for (let i = 0; i < data._tag.length; i++) {
             this._tag.push(data._tag[i]);
         }
+        this._effort = data._effort;
         this._timeTracking = data._timeTracking;
         this._taskType = data._taskType
     }
@@ -254,11 +267,16 @@ class Person {
         this._loggedTime.push(value);
     }
 
+    emptyLoggedTime(value){
+        this._loggedTime = []
+    }
+
     fromData(data) {
         this._name = data._name;
         this._email = data._email;
+        this._loggedTime = [];
         for (let i = 0; i < data._loggedTime.length; i++) {
-            this._loggedTime.push(data.loggedTime[i]);
+            this._loggedTime.push(data._loggedTime[i]);
         }
     }
 }
@@ -396,7 +414,7 @@ let productBacklog = new ProductBacklog();
 let sprintBacklog = new SprintBacklog();
 let sprintKey = 0;
 let taskKey = 0;
-let teamKey = 0;
+let sprintInProgress = false;
 
 if (checkLSData(PRODUCTBACKLOG_KEY)) {
     let data = retrieveLSData(PRODUCTBACKLOG_KEY);
@@ -426,7 +444,7 @@ if (checkLSData(TASK_KEY)) {
     taskKey = retrieveLSData(TASK_KEY);
 }
 
-if (checkLSData(TEAM_KEY)) {
+if (checkLSData(SPRINT_IN_PROGRESS)) {
     // Restore data into vacationList
-    teamKey = retrieveLSData(TEAM_KEY);
+    sprintInProgress = retrieveLSData(SPRINT_IN_PROGRESS);
 }

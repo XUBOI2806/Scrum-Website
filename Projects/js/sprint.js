@@ -27,7 +27,7 @@ function createSprint(){
     let endDate = document.getElementById("endDate").value;
     // If they are valid inputs, save sprint to LS
     if(validateSprintInputs(sprintName, startDate, endDate)){
-        let sprint = new Sprint(sprintName, new Date(startDate), new Date(endDate), "Not Started", [])
+        let sprint = new Sprint(sprintName, new Date(startDate), new Date(endDate))
         sprintBacklog.add(sprint);
         updateLSData(SPRINTBACKLOG_KEY, sprintBacklog)
         displaySprintBacklog();
@@ -92,8 +92,8 @@ function checkForCompletedSprints(){
     // Check whether in-progress sprints have reached their end date and need to change to completed
     let todaysDate = new Date();
     for (let i = 0; i < sprintBacklog._array.length; i++) {
-        if((sprintBacklog._array[i].status !== "Completed") && (sprintBacklog._array[i].endDate.getTime() < todaysDate.getTime())){
-            sprintBacklog._array[i].status = "Completed";
+        if((sprintBacklog._array[i]._status !== "Completed") && (sprintBacklog._array[i].endDate.getTime() < todaysDate.getTime())){
+            sprintBacklog._array[i]._status = "Completed";
             for (let j = 0; j < sprintBacklog._array[i]._tasks.length; j++){
                 sprintBacklog._array[i]._tasks[j]._status = "Done";
                 productBacklog.add(sprintBacklog._array[i]._tasks[j]);
