@@ -24,12 +24,10 @@ function displayTasks() {
         if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
             let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
-                    <span class="mdl-list__item-primary-content" onclick="toLogTime(${i})">
+                    <span class="mdl-list__item-primary-content">
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
                     </span>
-                    <span class="mdl-list__item-secondary-content">`
-        if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
-            item += `
+                    <span class="mdl-list__item-secondary-content">
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="move-ns${i}" onclick="moveTaskToInProgress(${i})">
                             <i class="material-icons">arrow_forward</i>
                         </button>
@@ -39,7 +37,12 @@ function displayTasks() {
             notStartedOutput += item;
         }
         else if(sprintBacklog._array[sprintKey]._tasks[i]._status === "In Progress"){
-            item += `
+            let item = `
+                <li class="list-item mdl-list__item mdl-list__item">
+                    <span class="mdl-list__item-primary-content" onclick="toLogTime(${i})">
+                        <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
                         <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="move-com${i}" onclick="moveTaskToDone(${i})">
                             <i class="material-icons">arrow_forward</i>
                         </button>
@@ -49,7 +52,17 @@ function displayTasks() {
             inProgressOutput += item;
         }
         else{
-            item += `<i class="material-icons">done</i></span></li>`
+            let item = `
+                <li class="list-item mdl-list__item mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="move-com${i}">
+                            <i class="material-icons">done</i>
+                        </button>
+                    </span>
+                </li>`
             doneOutput += item;
         }
     }
