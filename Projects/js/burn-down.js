@@ -92,7 +92,7 @@ new Chart(document.getElementById("bd-chart"), {
       },
       {
         data: dataER,
-        label: "Remaining Effort",
+        label: "Effort Accumulation",
         borderColor: "#7cc25e",
         fill: false,
         lineTension: 0,
