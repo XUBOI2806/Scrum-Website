@@ -21,7 +21,7 @@ function displayTasks() {
     // Iterate through saved tasks in the backlog
     for (let i = 0; i < sprintBacklog._array[sprintKey]._tasks.length; i++) {
         // Create html to display the task info
-        if(sprintBacklog._array[sprintKey]._tasks[i]._status === "In Progress"){
+        if(sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
             let item = `
                     <li class="list-item mdl-list__item mdl-list__item">
                         <span class="mdl-list__item-primary-content">
