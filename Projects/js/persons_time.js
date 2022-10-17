@@ -12,6 +12,7 @@
 /**
  * Shows the page content
  */
+
 function displayPage() {
     // Getting person and the current sprint
     let currentSprint = null;
@@ -39,10 +40,14 @@ function displayPage() {
         let dayEffort = 0;
         xlabels.push('Day ' + day.toString());
         day += 1;
-        for (let j = 0; j < teamBacklog._array[teamKey]._loggedTime.length; j++) {
-            if (new Date(teamBacklog._array[teamKey]._loggedTime[j][0]).setHours(0, 0, 0, 0) === i) {         // if (date of logged time == day within sprint)
-                dayEffort += teamBacklog._array[teamKey]._loggedTime[j][1] * 4;
-                total_effort += teamBacklog._array[teamKey]._loggedTime[j][1] * 4;
+        for (let j = 0; j < currentSprint._tasks.length; j++) {
+            if (currentSprint._tasks[j]._assigned._email === teamBacklog._array[teamKey]._email){
+                for (let k = 0; k < currentSprint._tasks[j]._timeTracking.length; k++) {
+                    if(currentSprint._tasks[j]._assigned._loggedTime[k][0] === i) {         // if (date of logged time == day within sprint
+                        dayEffort += currentSprint._tasks[j]._assigned._loggedTime[k][1] * 4;
+                        total_effort += currentSprint._tasks[j]._assigned._loggedTime[k][1] * 4;
+                    }
+                }
             }
         }
 
