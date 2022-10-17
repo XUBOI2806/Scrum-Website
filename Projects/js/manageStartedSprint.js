@@ -126,5 +126,13 @@ function toLogTime(index){
     window.location.href = 'log_time.html';
 }
 
+/**
+ * Goes to the Sprints page
+ */
+function displayBurndownChart(){
+    window.location.href = 'burndown.html';
+}
+
+
 displayTasks()
 

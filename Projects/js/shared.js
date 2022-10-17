@@ -108,7 +108,7 @@ class Task {
         return this._timeTracking;
     }
 
-    set addTimeTracking(value) {
+    addTimeTracking(value) {
         this._timeTracking.push(value);
     }
 
