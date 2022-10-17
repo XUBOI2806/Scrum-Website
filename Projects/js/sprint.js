@@ -126,6 +126,9 @@ function displaySprintBacklog() {
         </li>`;
       output += item;
     }
+    if(output === ""){
+        output = `<span class="mdl-layout-title" style="color: white">No Sprints.<br>Use + button below to start adding.</span>`;
+    }
     // Add to the UI list
     document.getElementById("sprint-list").innerHTML = output;
   }
