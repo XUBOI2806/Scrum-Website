@@ -76,7 +76,7 @@ function displayTeamBacklog() {
                         <span class="mdl-list__item-text-body">${teamBacklog._array[i]._email}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">
-                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="">
+                        <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" onclick="displayMemberHours(${i})">
                             <i class="material-icons" id="stats-mem${i}">bar_chart</i>
                             <div class="mdl-tooltip" data-mdl-for="stats-mem${i}">Show Hours</div>
                         </button>
@@ -189,7 +189,12 @@ function total_time_between_time(start_date, end_date){
 }
 
 
-function teamHours(){
+function displayMemberHours(index){
+    updateLSData(TEAM_KEY, index);
+    window.location.href = 'persons_time.html';
+}
+
+function displayTeamHours(){
     window.location.href = 'team_time_overview.html';
 }
 
