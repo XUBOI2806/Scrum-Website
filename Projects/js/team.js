@@ -146,8 +146,43 @@ function closeDialog(){
     document.getElementById("memberEmail").disabled = false;
 }
 
-function teamHours(){
-    window.location.href = 'team_time_overview.html';
+function get_current_sprint(){
+    for (let i = 0; i < sprintBacklog._array.length; i++) {
+        if(sprintBacklog._array[i]._status === "In Progress"){
+            sprintKey = i;
+            updateLSData(SPRINT_KEY, sprintKey)
+        }
+    }
 }
 
+function total_time_between_time(start_date, end_date){
+    let total_array = []
+    // runs through all team members
+    for (let i = 0; i < teamBacklog._array.length; i++) {
+        // sets the hours as 0
+        let value = 0
+        // runs through all tasks in sprint
+        for (let j = 0; j < sprintBacklog._array[sprintKey]._tasks.length; j++) {
+            // Checks if the task is equal to the member
+            if (sprintBacklog._array[sprintKey]._tasks[j]._assigned === teamBacklog._array[i]) {
+                // runs through all the time in the task logged
+                for (let k = 0; k < this._loggedTime.length; k++) {
+                    // checks if the logged time is in the start and end date wanted
+                    if (start_date <= sprintBacklog._array[sprintKey]._tasks[j]._assigned._loggedTime[k][0] <= end_date) {
+                        // adds the value of the time
+                        value += sprintBacklog._array[sprintKey]._tasks[j]._assigned._loggedTime[k][1]
+                    }
+                }
+            }
+        }
+        // adds the members name and hours
+        total_array.push([teamBacklog._array[i]._name, value])
+    }
+    console.log(total_array)
+    return total_array
+}
+
+
 displayTeamBacklog();
+get_current_sprint();
+total_time_between_time();

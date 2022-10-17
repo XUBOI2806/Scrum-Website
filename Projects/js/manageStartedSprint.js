@@ -24,7 +24,7 @@ function displayTasks() {
         if (sprintBacklog._array[sprintKey]._tasks[i]._status === "Not Started"){
             let item = `
                 <li class="list-item mdl-list__item mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
+                    <span class="mdl-list__item-primary-content" onclick="toLogTime(${i})">
                         <span>${sprintBacklog._array[sprintKey]._tasks[i]._title}</span>
                     </span>
                     <span class="mdl-list__item-secondary-content">`

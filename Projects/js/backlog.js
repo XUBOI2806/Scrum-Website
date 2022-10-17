@@ -16,7 +16,10 @@ function createTask() {
   let name = document.getElementById("pbiName").value;
   let des = document.getElementById("pbiDesc").value;
   let taskType = document.getElementById("pbiType").value;
-  let person = document.getElementById("person").value;
+  let person_value = document.getElementById("person").value;
+  console.log(document.getElementById("person").value)
+  let person = teamBacklog._array[person_value - 1]
+  console.log(person)
   let priority = document.getElementById("priority").value;
   let status = document.getElementById("status").value;
   let effort = document.getElementById("pbiEffort").value;
@@ -83,8 +86,8 @@ function displayProductBacklog() {
     for (let i = 0; i < productBacklog._array.length; i++) {
       for (let j = i + 1; j < productBacklog._array.length; j++) {
         if (
-          parseInt(productBacklog._array[i]._timeTracking) <
-            parseInt(productBacklog._array[j]._timeTracking)
+          parseInt(productBacklog._array[i]._effort) <
+            parseInt(productBacklog._array[j]._effort)
         ) {
           temp = productBacklog._array[i];
           productBacklog._array[i] = productBacklog._array[j];
@@ -100,7 +103,7 @@ function displayProductBacklog() {
                         <span>${productBacklog._array[i].title}</span>
                         <span class="mdl-list__item-text-body">
                             <span style="padding-right: 15px">Priority: ${productBacklog._array[i].priority}</span>
-                            <span>Story Points: ${productBacklog._array[i].timeTracking}</span><br>
+                            <span>Story Points: ${productBacklog._array[i].effort}</span><br>
                             <span>Tag: ${productBacklog._array[i].tag[0]}</span>
                         </span>
                     </span>`
@@ -150,7 +153,11 @@ function editTask(index) {
 
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
-  assigned.value = productBacklog._array[index]._assigned;
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    if (JSON.stringify(teamBacklog._array[i] )=== JSON.stringify(productBacklog._array[index]._assigned)) {
+      assigned.value = i+1
+    }
+  }
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
@@ -163,7 +170,7 @@ function editTask(index) {
 
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
-  effort.value = productBacklog._array[index]._timeTracking;
+  effort.value = productBacklog._array[index]._effort;
 
   //getting user tag values and then only ticking the right ones present in LS
   let tag = document.querySelectorAll('input[name="tag"]');
@@ -189,7 +196,8 @@ function saveEditTask() {
   let description = document.getElementById("pbiDesc").value;
   let status = document.getElementById("status").value;
   let priority = document.getElementById("priority").value;
-  let person = document.getElementById("person").value;
+  let person_value = document.getElementById("person").value;
+  let person = teamBacklog._array[person_value]
   let effort = document.getElementById("pbiEffort").value;
   let taskType = document.getElementById("pbiType").value;
   let tag = document.querySelector('input[name="tag"]:checked');
@@ -254,10 +262,16 @@ function showTask(index) {
   taskType.disabled = true;
   taskType.value = productBacklog._array[index]._taskType;
 
+  list_members();
+
   let assigned = document.getElementById("person");
   assigned.parentElement.classList.add("is-dirty");
   assigned.disabled = true;
-  assigned.value = productBacklog._array[index]._assigned;
+  for (let i = 0; i < teamBacklog._array.length; i++) {
+    if (JSON.stringify(teamBacklog._array[i] )=== JSON.stringify(productBacklog._array[index]._assigned)) {
+      assigned.value = i+1
+    }
+  }
 
   let priority = document.getElementById("priority");
   priority.parentElement.classList.add("is-dirty");
@@ -272,7 +286,7 @@ function showTask(index) {
   let effort = document.getElementById("pbiEffort");
   effort.parentElement.classList.add("is-dirty");
   effort.disabled = true;
-  effort.value = productBacklog._array[index]._timeTracking;
+  effort.value = productBacklog._array[index]._effort;
 
   let tag = document.querySelectorAll('input[name="tag"]');
   let storedTag = productBacklog._array[index]._tag;
@@ -366,7 +380,6 @@ function closeDialog() {
   clearInput("pbiName");
   clearInput("pbiDesc");
   clearInput("pbiType");
-  document.getElementById("person").value = "0";
   clearInput("pbiEffort");
   clearInput("person");
   document.getElementById("person").value = "0";
@@ -405,7 +418,7 @@ function edit_pbi(index) {
 function list_members() {
   let output = "<option value=\"0\" hidden></option>"
   for (let i = 0; i < teamBacklog._array.length; i++) {
-    output += `<option value="${i + 1}">${teamBacklog._array[i]._name}</option>`
+    output += `<option value="${i+1}">${teamBacklog._array[i]._name}</option>`
   }
   document.getElementById("person").innerHTML = output
 }
