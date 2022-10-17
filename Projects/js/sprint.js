@@ -45,9 +45,12 @@ function createSprint(){
 function validateSprintInputs(sprintName, startDateString, endDateString){
     let retVal = true;
     // Convert string dates to Date objects
-    let todaysDate = new Date();
-    let startDate = new Date(startDateString);
-    let endDate = new Date(endDateString);
+    let todaysDate = new Date().setHours(0,0,0,0);
+    let startDate = new Date(startDateString).setHours(0,0,0,0);
+    let endDate = new Date(endDateString).setHours(0,0,0,0);
+    console.log(todaysDate)
+    console.log(startDate)
+    console.log(endDate)
 
     // Check that name is not empty
     if(sprintName === ""){
@@ -56,13 +59,13 @@ function validateSprintInputs(sprintName, startDateString, endDateString){
     }
 
     // Check that start date is not empty and is after today
-    if((startDateString === "") || (startDate.getTime() < todaysDate.getTime())){
+    if((startDateString === "") || (startDate < todaysDate)){
         document.getElementById("startDate").parentElement.classList.add("is-invalid");
         retVal = false;
     }
 
     // Check that end date is not empty and always after start date
-    if(endDateString === "" || (endDate.getTime() < startDate.getTime())){
+    if(endDateString === "" || (endDate < startDate)){
         document.getElementById("endDate").parentElement.classList.add("is-invalid");
         retVal = false;
     }
