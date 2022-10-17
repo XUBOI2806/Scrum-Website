@@ -26,13 +26,16 @@ Link to [Google Drive](https://drive.google.com/drive/u/1/folders/0AMwyQkfk78-aU
 
 Link to [Updated Project Plan](https://docs.google.com/document/d/1-9FoIGbGiKlv4KYhkLaFQiYXAxyz7Rk3EfsCEfZF7oQ/edit#heading=h.7txmafw6qjnw)
 
-### First Sprint Task
-Please refer to the Trello board
+### Sprint 1 Task
+The team is focusing on
+- finalising the product backlog for this project
+- creating base html and css for overall UI design
+- building page for product backlog page and team member page for ScrumMaster
 
 Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
 
 
-### Second Sprint Tasks
+### Sprint 2 Tasks
 The team is focusing on 
 - creating the sprint board for the sprints
 - being able to create and delete a sprint  
@@ -44,8 +47,17 @@ The team is focusing on
     - total logged time being displayed on screen
 
 Link to [Trello](https://trello.com/b/NVMFoAuc/assignment-1)
+
+### Sprint 3 Tasks
+The team is focusing on
+- finalising the time logging page
+- recording time logged for both tasks and project member
+- create velocity Burn-down charts for sprints 
+- create bar chart to show individuals work hours
+- displaying total working hours for each individual's on the same page
     
 
 ### Test Plan
 - Link to [Sprint 1 Test Plan](https://docs.google.com/document/d/10NlgySfTZtD1rXSI2qNJbRQfrGwfpMnTDaPPL6zbtQY/edit)
 - Link to [Sprint 2 Test Plan](https://docs.google.com/document/d/1DtsDWe1ZIs6fOau9nZWQHLnNCToQ--w2So38oTOB-0Q/edit)
+- Link to [Sprint 3 Test Plan](https://docs.google.com/document/d/1apdFRa2Dt0SpIT60D8F67Gqo1xKx6i-gIdOGEP07cE0/edit)
