@@ -59,7 +59,7 @@ function actualV() {
             let date = new Date(currentTask[j][0]).setHours(0, 0, 0, 0)
             let timeDate = date - new Date(sprintBacklog._array[sprintKey]._startDate).setHours(0, 0, 0, 0);
             let numDate = (timeDate / (1000 * 3600 * 24))+1;
-            dataER[numDate] += parseInt(currentTask[j][1]);
+            dataER[numDate] += parseInt(currentTask[j][1])*4;
         }
     }
     let remainingE = totalHrs
